@@ -1,18 +1,44 @@
-# TLB UI Standards
+# TLB Design System
 
-The single source of truth for user-interface decisions across all internal applications at The Launch Box (TLB).
+The single source of truth for user-interface decisions across all internal applications at The Launch Box (TLB), and the home of the production component library that ships those decisions as code.
 
-This repository defines what UI library we use, how it is configured, how engineers and AI agents apply it, and how new internal tools stay visually and structurally consistent over time.
+## What This Is
 
-## Scope
+- **Standards** — what UI library we use, how it is configured, the tokens, the patterns, the do's and don'ts. Authored in `docs/`.
+- **Components** — 22 shadcn primitives + 6 TLB composites, re-styled with the TLB token system. Source lives in `src/components/`.
+- **Registry** — a shadcn custom registry hosted on GitHub Pages. Consumer repos install components via the shadcn CLI.
 
-These standards apply to every TLB-built internal application: financial tools, people-ops tools, marketing internal apps, IT internal apps, and any portfolio-company-facing internal tooling produced by TLB. Client-deployed software is out of scope unless explicitly adopted.
+## Stack
 
-## The Decision in One Line
+shadcn/ui on top of Radix primitives, Tailwind CSS v4, lucide-react icons, recharts, react-hook-form + zod, @tanstack/react-table. React 19, TypeScript, Vite. The full reasoning is in [docs/01-decision-record.md](./docs/01-decision-record.md).
 
-**TLB internal applications use [shadcn/ui](https://ui.shadcn.com) on top of Radix UI primitives, Tailwind CSS v4, and lucide-react icons. React 19 and TypeScript are the assumed runtime.**
+## Installing Components in a Consumer Repo
 
-The full reasoning is in [docs/01-decision-record.md](./docs/01-decision-record.md).
+Requires shadcn CLI 2.x (use `npx shadcn@latest`). The consumer repo must already have Tailwind v4 wired and a `components.json` (use the one in `starter-kit/`).
+
+```bash
+# Single component
+npx shadcn@latest add https://nikola-code-ai-tlb.github.io/tlb-design-system/r/button.json
+
+# Full baseline
+for c in button input label textarea select checkbox radio-group switch \
+         card dialog alert-dialog sheet tooltip popover dropdown-menu \
+         table tabs separator badge skeleton sonner form \
+         app-shell page-header data-table kpi-card empty-state status-badge; do
+  npx shadcn@latest add https://nikola-code-ai-tlb.github.io/tlb-design-system/r/$c.json --yes
+done
+```
+
+Composites pull their primitive dependencies automatically via `registryDependencies`.
+
+## Bootstrapping a New Repo
+
+If you are starting from zero, follow [docs/02-installation.md](./docs/02-installation.md). The `starter-kit/` folder is the drop-in:
+
+- `starter-kit/tailwind.css` — the `@theme` block with TLB tokens.
+- `starter-kit/lib-utils.ts` — the `cn()` helper.
+- `starter-kit/components.json` — shadcn CLI config.
+- `starter-kit/AGENTS.md.template`, `claude-md.template`, `.cursorrules.template` — drop these at the consumer repo root so AI agents follow TLB rules.
 
 ## How to Read This Repository
 
@@ -27,38 +53,53 @@ The full reasoning is in [docs/01-decision-record.md](./docs/01-decision-record.
 ## Folder Map
 
 ```
-tlb-ui-standards/
-├── README.md                  This file.
-├── AGENTS.md                  The primary instruction file for AI coding agents.
-├── CLAUDE.md                  Mirror of AGENTS.md for Claude Code.
-├── .cursorrules               Mirror of AGENTS.md for Cursor.
-├── docs/
-│   ├── 01-decision-record.md       Why shadcn/ui. ADR-style rationale.
-│   ├── 02-installation.md          How to bring this stack into any repo.
-│   ├── 03-tokens-and-theme.md      TLB brand tokens, Tailwind v4 theme, dark mode.
-│   ├── 04-component-catalog.md     Approved components and when to use each.
-│   ├── 05-patterns.md              Forms, tables, dashboards, dialogs, layouts.
-│   ├── 06-accessibility.md         WCAG 2.2 AA targets and how to hit them.
-│   ├── 07-icons-and-charts.md      lucide-react and recharts standards.
-│   ├── 08-file-structure.md        Where components live inside an app.
-│   ├── 09-do-and-dont.md           Fast-reference rules.
-│   ├── 10-ai-agent-workflow.md     How to brief AI tools to produce compliant code.
-│   └── 11-versioning-and-updates.md  How we upgrade shadcn and Tailwind.
-├── starter-kit/               Drop-in files for new or migrating repos.
-│   ├── README.md
-│   ├── components.json             shadcn CLI configuration.
-│   ├── tailwind.css                Tailwind v4 @theme block with TLB tokens.
-│   ├── lib-utils.ts                The cn() helper.
-│   ├── AGENTS.md.template          Template AGENTS.md to drop in a repo root.
-│   └── .cursorrules.template
-└── repo-audits/
-    ├── tlb-financial-tools.md      Current state, gaps, migration steps.
-    └── improv-procurement.md       Current state (Fluent UI), full migration plan.
+tlb-design-system/
+├── AGENTS.md                  Primary contract for AI agents.
+├── CLAUDE.md                  Claude Code entrypoint (mirrors AGENTS.md).
+├── .cursorrules               Cursor entrypoint.
+├── components.json            shadcn CLI config used by this repo.
+├── index.html                 Demo page entry.
+├── vite.config.ts             Vite + Tailwind v4 plugin.
+├── docs/                      11 markdown standards files.
+├── starter-kit/               Drop-in files for consumer repos.
+├── repo-audits/               Migration plans for existing repos.
+├── src/
+│   ├── styles/tailwind.css    TLB @theme tokens (light + dark).
+│   ├── lib/utils.ts           cn() helper.
+│   ├── components/ui/         22 shadcn primitives, TLB-themed.
+│   ├── components/composites/ 6 TLB composites.
+│   └── App.tsx, main.tsx      Demo site rendered on GitHub Pages.
+├── registry/
+│   ├── registry.json          Hand-authored manifest index.
+│   └── schema.ts              zod validator.
+├── scripts/build-registry.ts  Emits public/r/<name>.json from sources.
+├── public/r/                  Generated registry JSON (deployed to Pages).
+└── .github/workflows/         CI: build registry + deploy Pages.
 ```
+
+## Local Development
+
+```bash
+npm install
+npm run build:registry   # emit public/r/*.json from src/
+npm run dev              # demo site on http://localhost:5173
+npm run typecheck
+npm run build            # production build (registry + demo) into dist/
+```
+
+## Distribution
+
+Every push to `main` runs `.github/workflows/deploy-registry.yml`. The workflow:
+
+1. Builds `public/r/*.json` from `src/components/` via `scripts/build-registry.ts`.
+2. Builds the demo site with Vite.
+3. Deploys both to GitHub Pages at `https://nikola-code-ai-tlb.github.io/tlb-design-system/`.
+
+Registry endpoints under `/r/<name>.json` are stable URLs consumers depend on. Pages CDN cache is ~10 minutes; account for that after a release.
 
 ## Compliance Notes
 
-This repository contains no client data, no personal information, and no internal financials. It is design and engineering scaffolding only. Standard TLB AI Acceptable Use rules still apply when building features that touch financial, HR, or client data: redact before pasting into AI tools, never paste credentials, and route Echelon-related work past the Administrator.
+This repository contains no client data, no personal information, and no internal financials. Standard TLB AI Acceptable Use rules apply when building features that touch financial, HR, or client data: redact before pasting into AI tools, never paste credentials, and route Echelon-related work past the Administrator.
 
 Any UI work that ends up in a client-facing deliverable still requires Reviewer sign-off from Jonatan Hernandez Jr before it leaves TLB.
 
@@ -66,6 +107,6 @@ Any UI work that ends up in a client-facing deliverable still requires Reviewer 
 
 Owner: IT Director (Alam).  
 UI / Reviewer: Jonatan Hernandez Jr.  
-Author: TLB Engineering.
+Authors: TLB Engineering.
 
-Changes to these standards require a written note in `CHANGELOG.md` (to be added on first amendment) and a one-line summary in the relevant section's frontmatter.
+Changes to standards require a `CHANGELOG.md` entry and a one-line summary in the relevant section's frontmatter.
