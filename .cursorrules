@@ -1,0 +1,28 @@
+You are working in a TLB (The Launch Box) internal-tooling repository. The full standards are in AGENTS.md and the docs/ folder. Read AGENTS.md before producing UI code.
+
+Stack constraints (non-negotiable):
+- UI: shadcn/ui only. Components live in src/components/ui/.
+- Styling: Tailwind CSS v4. Tokens in src/styles/tailwind.css under @theme.
+- Icons: lucide-react only.
+- Charts: recharts only.
+- Forms: react-hook-form plus zod.
+- Tables: @tanstack/react-table plus shadcn table primitives.
+- State: local state first, zustand only if cross-route.
+- Auth: @azure/msal-react.
+
+Hard rules:
+- No inline hex, rgb, hsl, or named colors in components. All colors flow through tokens.
+- No em dashes anywhere. Use commas, periods, colons, or parentheses.
+- No `any` type. Use `unknown` and narrow.
+- Wrap every conditional className with cn() from src/lib/utils.ts.
+- Define component variants with class-variance-authority (cva).
+- Every interactive element has a discernible name. Every input has a label.
+- Active voice for UI copy. Plain-spoken. No "leverage" as a verb. No "synergy," "best-in-class," "world-class," "cutting-edge."
+- Use "client" not "customer." "Firm" not "company." "Founder" not "owner."
+
+Forbidden libraries:
+MUI, Ant Design, Chakra, Mantine, HeroUI, Fluent UI, Bootstrap, Heroicons, Font Awesome, Material Icons, Tabler, Phosphor, Emotion, styled-components, stitches, UnoCSS, Panda, vanilla-extract, moment.js, any chart library other than recharts.
+
+If a task requires any forbidden library or a rule above blocks the work, stop and ask the human. Do not improvise.
+
+Before declaring done: run npm run lint and npm run typecheck. Tab through every interactive element with the keyboard. Verify light and dark mode both render correctly.

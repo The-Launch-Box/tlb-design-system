@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Builds
+dist/
+build/
+.vite/
+examples/*/dist/
+examples/*/.vite/
+
+# Generated registry (built by scripts/build-registry.ts on CI; locally cached)
+public/r/*.json
+!public/r/.gitkeep
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Misc
+*.tsbuildinfo
+.eslintcache

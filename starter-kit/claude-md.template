@@ -1,0 +1,23 @@
+# CLAUDE.md
+
+Claude Code reads this file at session start. Treat it as the operating contract for any UI work in this repository.
+
+The full TLB UI standards live in `./AGENTS.md` and (canonically) in the `tlb-ui-standards` repository. Read `AGENTS.md` end to end before generating UI code.
+
+## Quick Constraints
+
+- UI: shadcn/ui only. Components live in `src/components/ui/`.
+- Styling: Tailwind v4. Tokens in `src/styles/tailwind.css` under `@theme`.
+- Icons: lucide-react only.
+- Charts: recharts only.
+- Forms: react-hook-form plus zod.
+- Tables: @tanstack/react-table plus shadcn Table.
+- No inline hex colors. No `any`. No em dashes. No competing UI libraries.
+
+## What to Do First
+
+1. Read `./AGENTS.md` end to end.
+2. If a shadcn component is needed and missing, install it with the shadcn CLI rather than re-implementing.
+3. Run lint and typecheck before declaring done.
+
+If a rule in `AGENTS.md` blocks the task, stop and ask the human. Do not improvise around it.

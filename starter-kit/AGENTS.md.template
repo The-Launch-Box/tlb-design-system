@@ -1,0 +1,90 @@
+# AGENTS.md
+
+This repository follows the TLB UI Standards. The canonical version lives in the `tlb-ui-standards` repository. This file is the in-repo copy that AI coding agents must read before producing UI code.
+
+If you are an AI agent (Claude Code, Cursor, Windsurf, v0, Cline, or any MCP-aware tool) working in this repository, treat this file as authoritative.
+
+## Stack You Are Allowed to Use
+
+| Layer | Choice |
+|---|---|
+| UI components | shadcn/ui in `src/components/ui/` |
+| Primitives | @radix-ui/react-* (transitive via shadcn) |
+| Styling | Tailwind CSS v4 with tokens in `src/styles/tailwind.css` |
+| Class merging | `cn()` from `src/lib/utils.ts` |
+| Icons | lucide-react |
+| Charts | recharts |
+| Forms | react-hook-form plus zod |
+| Tables | @tanstack/react-table plus shadcn Table |
+| State (local) | React state |
+| State (cross-route) | zustand |
+| Routing | react-router v7 |
+| Auth | @azure/msal-react |
+| Date / time | `Intl.DateTimeFormat` or `date-fns` |
+
+## Forbidden Libraries
+
+MUI, Ant Design, Chakra, Mantine, HeroUI, Fluent UI, Bootstrap, Heroicons, Font Awesome, Material Icons, Tabler, Phosphor, Emotion, styled-components, stitches, UnoCSS, Panda, vanilla-extract, moment.js, Chart.js, ApexCharts, Highcharts, Visx, Plotly, Nivo.
+
+Adding any of these requires written Administrator approval. If you believe a task requires one of them, stop and ask the human.
+
+## Hard Rules
+
+1. Use shadcn primitives from `src/components/ui/`. When a primitive is missing, run `npx shadcn@latest add <component>` rather than re-implementing.
+2. No inline hex, rgb, hsl, or named colors in JSX or CSS outside the `@theme` block in `src/styles/tailwind.css`.
+3. Wrap every conditional className with `cn()`.
+4. Define variants with `class-variance-authority` (`cva`).
+5. Every interactive element has a discernible name. Every form input has a Label.
+6. No `any`. Use `unknown` and narrow.
+7. No `style={{}}` for layout, spacing, color, or typography.
+8. No em dashes. Use commas, periods, colons, or parentheses.
+
+## Folder Conventions
+
+```
+src/
+├── components/
+│   ├── ui/            shadcn primitives
+│   ├── layout/        AppShell, Sidebar, TopBar, PageHeader
+│   ├── forms/         form composites
+│   ├── data/          DataTable, EmptyState, KpiTile, ChartCard
+│   └── feature/<name>/  feature-specific
+├── lib/
+│   ├── utils.ts       cn()
+│   └── ...
+├── hooks/             one per file, prefix `use-`
+├── schemas/           zod schemas, one per resource
+├── styles/
+│   └── tailwind.css   tokens via @theme
+└── routes/ or pages/  route components only
+```
+
+## Color and Typography (Quick Reference)
+
+- Primary: `bg-primary text-primary-foreground` (TLB Orange on white).
+- Destructive: `bg-destructive text-destructive-foreground` (TLB Dark Orange).
+- Body: `text-foreground` on `bg-background`.
+- Display headings: `font-display uppercase tracking-tight`.
+- Body: `font-sans` (Helvetica, Arial).
+
+## Copy Rules
+
+- Plain-spoken and active voice. Short.
+- Title case for primary actions and section headers. Sentence case for help text.
+- "Client" not "customer." "Firm" not "company." "Founder" not "owner."
+- No "leverage" as a verb. No "synergy", "best-in-class", "world-class", "cutting-edge".
+- No filler openers (basically, frankly, honestly).
+- No em dashes anywhere.
+
+## Before You Submit
+
+1. `npm run lint` and `npm run typecheck` pass.
+2. Light and dark mode both render correctly.
+3. Keyboard navigation works end to end with visible focus.
+4. Every interactive element has a discernible name.
+5. Every form input has a Label.
+6. No new dependencies, or new dependencies justified and on the approved list.
+
+## When You Are Stuck
+
+Stop and ask the human. Do not invent a pattern. Do not add a library. Do not silently violate any rule to make the task easier.
