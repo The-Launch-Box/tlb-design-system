@@ -98,10 +98,10 @@ type Demo = {
 };
 
 const DEMO_ROWS: Demo[] = [
-  { id: "INV-1042", client: "Echelon Capital", amount: "$12,400.00", status: "approved" },
-  { id: "INV-1043", client: "Greylock Partners", amount: "$8,900.00", status: "pending" },
-  { id: "INV-1044", client: "Founders Fund", amount: "$22,150.00", status: "draft" },
-  { id: "INV-1045", client: "Sequoia Capital", amount: "$5,300.00", status: "rejected" },
+  { id: "INV-1001", client: "Company A", amount: "$10,000.00", status: "approved" },
+  { id: "INV-1002", client: "Company B", amount: "$8,900.00", status: "pending" },
+  { id: "INV-1003", client: "Company C", amount: "$22,150.00", status: "draft" },
+  { id: "INV-1004", client: "Company D", amount: "$5,300.00", status: "rejected" },
 ];
 
 const COLUMNS: ColumnDef<Demo>[] = [
@@ -146,13 +146,13 @@ function TopBar() {
   return (
     <div className="flex items-center justify-between px-6 py-3">
       <p className="font-sans text-sm text-muted-foreground">
-        Welcome back, Nikola
+        Welcome back
       </p>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
             <User className="size-4" />
-            Nikola Markovic
+            Example User
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -229,7 +229,7 @@ export function App() {
           <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="client">Client name</Label>
-              <Input id="client" placeholder="Echelon Capital" />
+              <Input id="client" placeholder="Company A" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="memo">Memo</Label>
@@ -337,7 +337,7 @@ export function App() {
                   </DialogHeader>
                   <div className="grid gap-3">
                     <Label htmlFor="d-client">Client</Label>
-                    <Input id="d-client" placeholder="Echelon Capital" />
+                    <Input id="d-client" placeholder="Company A" />
                   </div>
                   <DialogFooter>
                     <Button variant="outline">Cancel</Button>
