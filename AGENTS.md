@@ -55,6 +55,7 @@ src/
 │   ├── layout/        AppShell, Sidebar, TopBar, PageHeader.
 │   ├── forms/         Field wrappers built on react-hook-form.
 │   ├── data/          DataTable, EmptyState, ChartCard, KpiTile.
+│   ├── portco/<name>/ Portco-scoped composites (Improv, Echelon). See docs/12-portco-themes.md.
 │   └── feature/<name>/  Feature-specific composites.
 ├── lib/
 │   ├── utils.ts       The cn() helper. Do not delete.

@@ -1,11 +1,18 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import {
+  Activity,
+  ArrowRight,
   CheckCircle,
   CircleDollarSign,
+  Compass,
+  Flame,
+  Hammer,
   Inbox,
   Loader2,
   Mail,
+  Search,
   Settings,
+  Sparkles,
   Trash2,
   TrendingUp,
   User,
@@ -89,6 +96,22 @@ import { EmptyState } from "@/components/composites/empty-state";
 import { KpiCard } from "@/components/composites/kpi-card";
 import { PageHeader } from "@/components/composites/page-header";
 import { StatusBadge } from "@/components/composites/status-badge";
+import { PortcoTheme } from "@/components/portco/portco-theme";
+import {
+  EchelonHero,
+  EchelonLogoStacked,
+  EchelonProcessStep,
+  EchelonQuoteCard,
+  EchelonStatCallout,
+} from "@/components/portco/echelon";
+import {
+  ImprovHero,
+  ImprovJourneyStep,
+  ImprovLogo,
+  ImprovPillButton,
+  ImprovQuoteCard,
+  ImprovStatCallout,
+} from "@/components/portco/improv";
 
 type Demo = {
   id: string;
@@ -166,13 +189,225 @@ function TopBar() {
   );
 }
 
+function EchelonShowcase() {
+  return (
+    <PortcoTheme portco="echelon" className="mt-6">
+      <div className="flex items-center justify-between px-6 pt-6 md:px-12">
+        <EchelonLogoStacked className="size-20 text-[var(--color-echelon-yellow)]" />
+        <span className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-echelon-yellow)]/80">
+          Portco preview
+        </span>
+      </div>
+      <EchelonHero
+        eyebrow="Cybersecurity consulting"
+        headline="Security and privacy are basic human rights."
+        highlight="We are built to protect them."
+        body={
+          <>
+            <p>
+              The threats we face are constantly evolving. We see this as our
+              calling: keep mid-market organizations safe across vCISO, MSSP,
+              and offensive testing engagements.
+            </p>
+            <p className="mt-4">We take this personally. We are all in.</p>
+          </>
+        }
+        actions={
+          <>
+            <Button size="lg">
+              Start the conversation
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="lg">
+              See services
+            </Button>
+          </>
+        }
+      />
+
+      <section className="px-6 py-12 md:px-12">
+        <div className="mb-8 max-w-2xl">
+          <p className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-echelon-yellow)] mb-3">
+            How we work
+          </p>
+          <h2 className="font-display text-3xl font-bold uppercase tracking-wider md:text-4xl">
+            Clear, actionable, people-led cybersecurity that delivers results.
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <EchelonProcessStep
+            step={1}
+            icon={Search}
+            title="Assess"
+            description="Custom risk assessments tailored to your specific business needs."
+          />
+          <EchelonProcessStep
+            step={2}
+            icon={Compass}
+            title="Strategize"
+            description="Practical security roadmaps that align with your long-term goals."
+          />
+          <EchelonProcessStep
+            step={3}
+            icon={Hammer}
+            title="Implement"
+            description="Hands-on execution, ensuring security measures are a reality."
+          />
+          <EchelonProcessStep
+            step={4}
+            icon={TrendingUp}
+            title="Level Up"
+            description="Continuous improvement and proactive threat mitigation."
+          />
+        </div>
+      </section>
+
+      <section className="px-6 pb-12 md:px-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <EchelonStatCallout value="500+" label="Mid-market clients" />
+          <EchelonStatCallout value="24/7" label="MSSP coverage" />
+          <EchelonStatCallout value="100%" label="Compliance focus" />
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:px-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <EchelonQuoteCard
+            quote="Echelon felt like an extension of our team. They moved quickly, communicated clearly, and delivered."
+            author="Security Leader"
+            role="Confidential partner, financial services"
+          />
+          <EchelonQuoteCard
+            quote="Their deep expertise modernized our detection capabilities and gave us better visibility across the environment."
+            author="Senior Manager, Information Security"
+            role="Confidential partner, consumer goods"
+          />
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--color-echelon-blue-light)] px-6 py-10 md:px-12">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-echelon-yellow)] mb-4">
+          Unmodified shadcn primitives, restyled by token cascade
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Badge>Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </div>
+      </section>
+    </PortcoTheme>
+  );
+}
+
+function ImprovShowcase() {
+  return (
+    <PortcoTheme portco="improv" className="mt-6">
+      <div className="flex items-center justify-between px-6 pt-6 md:px-12">
+        <ImprovLogo className="h-8 text-[var(--color-improv-off-white)]" />
+        <span className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-improv-teal)]">
+          Portco preview
+        </span>
+      </div>
+      <ImprovHero
+        eyebrow="WFM / HCM consulting"
+        headline="Elevating Possibilities. Inspiring Results."
+        body="Simplifying WFM/HCM transformation to evolve with clarity. Decades of proven success in workforce management, human capital management, and business transformation."
+        actions={
+          <>
+            <ImprovPillButton size="lg">
+              Contact us
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </ImprovPillButton>
+            <ImprovPillButton variant="outline" size="lg">
+              See solutions
+            </ImprovPillButton>
+          </>
+        }
+      />
+
+      <section className="px-6 py-12 md:px-12">
+        <div className="mb-8 max-w-2xl">
+          <p className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-improv-teal)] mb-3">
+            Mapping your journey
+          </p>
+          <h2 className="font-display text-3xl leading-tight md:text-4xl">
+            Every journey is different. Start anywhere and drive real value at scale.
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <ImprovJourneyStep
+            phase="Ignite"
+            icon={Sparkles}
+            tagline="Spark insight, alignment, and momentum"
+            description="Uncover challenges, align on opportunities, and set a clear journey forward."
+          />
+          <ImprovJourneyStep
+            phase="Forge"
+            icon={Flame}
+            tagline="Shape and launch with purpose"
+            description="Activate practical solutions, technology, and strategies that generate measurable outcomes."
+          />
+          <ImprovJourneyStep
+            phase="Evolve"
+            icon={Activity}
+            tagline="Optimize and sustain transformation"
+            description="Continuously improve by refining and scaling solutions for lasting value and adaptability."
+          />
+        </div>
+      </section>
+
+      <section className="px-6 pb-12 md:px-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <ImprovStatCallout value="5/5" label="Average partner rating" />
+          <ImprovStatCallout value="1,000+" label="Companies served" />
+          <ImprovStatCallout value="Millions" label="Employee lives impacted" />
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:px-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <ImprovQuoteCard
+            quote="We genuinely felt like more than just a client. There was a real sense of partnership."
+            author="Director of IT"
+            role="Confidential partner, energy sector"
+          />
+          <ImprovQuoteCard
+            quote="They took the time to understand our environment rather than applying a one-size-fits-all approach."
+            author="Security Leader"
+            role="Confidential partner, entertainment"
+          />
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--color-improv-muted)] px-6 py-10 md:px-12">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--color-improv-teal)] mb-4">
+          Unmodified shadcn primitives, restyled by token cascade
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Badge>Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </div>
+      </section>
+    </PortcoTheme>
+  );
+}
+
 export function App() {
   return (
     <TooltipProvider>
       <AppShell sidebar={<Sidebar />} topBar={<TopBar />}>
         <PageHeader
           title="Design System Showcase"
-          subtitle="Every component lands here. Use the catalog for picking primitives."
+          subtitle="TLB defaults plus portco previews for Improv and Echelon."
           actions={
             <>
               <Button variant="outline" size="sm">
@@ -184,6 +419,15 @@ export function App() {
             </>
           }
         />
+
+        <Tabs defaultValue="tlb" className="mt-6">
+          <TabsList>
+            <TabsTrigger value="tlb">TLB</TabsTrigger>
+            <TabsTrigger value="echelon">Echelon</TabsTrigger>
+            <TabsTrigger value="improv">Improv</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="tlb" className="mt-6">
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <KpiCard
@@ -456,6 +700,17 @@ export function App() {
             action={<Button size="sm">New request</Button>}
           />
         </div>
+
+          </TabsContent>
+
+          <TabsContent value="echelon">
+            <EchelonShowcase />
+          </TabsContent>
+
+          <TabsContent value="improv">
+            <ImprovShowcase />
+          </TabsContent>
+        </Tabs>
       </AppShell>
       <Toaster richColors closeButton />
     </TooltipProvider>

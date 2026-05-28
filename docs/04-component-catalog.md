@@ -53,6 +53,7 @@ These live in `src/components/` outside `ui/`. They wrap shadcn primitives with 
 | `FormField` | `src/components/forms/form-field.tsx` | Label plus input plus inline error. Wraps shadcn Form primitives. |
 | `ConfirmDialog` | `src/components/feedback/confirm-dialog.tsx` | Standardized AlertDialog for destructive actions. |
 | `Permission` | `src/components/auth/permission.tsx` | Children render only if the MSAL user has the required role. |
+| `PortcoTheme` | `src/components/portco/portco-theme.tsx` | Scoped theme wrapper for portfolio companies (Improv, Echelon). Subtree picks up the portco's tokens. See [docs/12-portco-themes.md](./12-portco-themes.md). |
 
 ## Picking the Right Primitive
 
