@@ -233,6 +233,22 @@
         { "path": "components/composites/status-badge.tsx", "type": "registry:ui", "target": "components/composites/status-badge.tsx" }
       ],
       "registryDependencies": ["badge"]
+    },
+    {
+      "name": "chart-tooltip",
+      "type": "registry:ui",
+      "description": "Themed recharts tooltip content: monospace card with one line per series. Accepts a format function for currency/percent rendering.",
+      "files": [
+        { "path": "components/composites/chart-tooltip.tsx", "type": "registry:ui", "target": "components/composites/chart-tooltip.tsx" }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:ui",
+      "description": "Drag-and-drop file dropzone with click-to-browse fallback. Reads selected file as text and forwards via onFile. Suits CSV imports.",
+      "files": [
+        { "path": "components/composites/file-upload.tsx", "type": "registry:ui", "target": "components/composites/file-upload.tsx" }
+      ]
     }
   ]
 }
