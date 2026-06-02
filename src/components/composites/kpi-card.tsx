@@ -2,8 +2,9 @@
  * KpiCard
  *
  * Headline metric for a dashboard. Displays an uppercase label, a large
- * value, an optional delta (positive in TLB orange, negative in destructive),
- * and an optional lucide icon in the top-right corner.
+ * value, an optional delta (rendered via the Delta composite when given a
+ * number, or as a plain string slot), an optional sparkline slot, and an
+ * optional lucide icon in the top-right corner.
  *
  * @example
  *   <KpiCard
@@ -12,7 +13,14 @@
  *     delta={{ value: "+4.3% MoM", positive: true }}
  *     icon={Wallet}
  *   />
+ *
+ *   <KpiCard
+ *     label="Net P&L (today)"
+ *     value="+$104.3K"
+ *     sparkline={<Sparkline values={[0.3,0.45,0.4,0.6,0.55,0.7,0.85]} />}
+ *   />
  */
+import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,6 +30,7 @@ interface KpiCardProps {
   label: string;
   value: string | number;
   delta?: { value: string; positive?: boolean };
+  sparkline?: React.ReactNode;
   icon?: LucideIcon;
   className?: string;
 }
@@ -30,6 +39,7 @@ function KpiCard({
   label,
   value,
   delta,
+  sparkline,
   icon: Icon,
   className,
 }: KpiCardProps) {
@@ -57,9 +67,11 @@ function KpiCard({
             {delta.value}
           </p>
         ) : null}
+        {sparkline ? <div className="mt-3">{sparkline}</div> : null}
       </CardContent>
     </Card>
   );
 }
 
 export { KpiCard };
+export type { KpiCardProps };
