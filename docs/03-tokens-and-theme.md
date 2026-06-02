@@ -118,6 +118,34 @@ Switch by toggling the `.dark` class on the `<html>` element. Persist the choice
 
 Hard rule: Bebas Neue Pro is uppercase by default. Headings using `font-display` always carry `uppercase tracking-tight`.
 
+## Data-Signal Tokens
+
+These are reserved for *financial / operational state*, not chrome. Use them in deltas, signal badges, live-sync chips, and chart series for direction. Never as UI fills for buttons or backgrounds.
+
+| Role | Token | Light | Dark | Use |
+|---|---|---|---|---|
+| Positive | `--color-positive` | `#4ade80` | `#4ade80` | Gains, success, up-trend. |
+| Positive dim | `--color-positive-dim` | `#1c3829` | `#1c3829` | Background fill for settled / positive cells. |
+| Negative | `--color-negative` | `#f87171` | `#f87171` | Losses, failure, down-trend. |
+| Negative dim | `--color-negative-dim` | `#3a2122` | `#3a2122` | Background fill for failed / negative cells. |
+| Warning | `--color-warning` | `#fbbf24` | `#fbbf24` | Caution, pending, stale data. |
+| Warning dim | `--color-warning-dim` | `#3a3320` | `#3a3320` | Background fill for warning / pending state. |
+| Info | `--color-info` | `#58a6ff` | `#58a6ff` | Links, references, informational. |
+| Info dim | `--color-info-dim` | `#16304d` | `#16304d` | Background fill for info callouts. |
+
+## Motion Tokens
+
+Restrained and fast. Use these for any hover, focus, and state-change transition. No springs, no bounces.
+
+| Token | Value | Use |
+|---|---|---|
+| `--duration-fast` | `120ms` | Hover background fades, dot pulses, icon swaps. |
+| `--duration-base` | `180ms` | Default state changes on inputs, buttons, rows. |
+| `--duration-slow` | `280ms` | Sheets, dialogs, layout shifts. |
+| `--ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` | Default ease for in-and-out transitions. |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Decelerate-only motion (panel reveals). |
+| `--shadow-focus-ring` | `0 0 0 3px rgba(255, 102, 0, 0.30)` | The TLB orange focus glow ring for keyboard focus. |
+
 ## Color Rules to Enforce
 
 These come straight from the TLB brand standards.

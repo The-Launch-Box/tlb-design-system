@@ -249,6 +249,54 @@
       "files": [
         { "path": "components/composites/file-upload.tsx", "type": "registry:ui", "target": "components/composites/file-upload.tsx" }
       ]
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "description": "Inline bar-chart sparkline for KPI cards and dense rows. Values normalized 0..1; trailing bar colored by trend direction.",
+      "files": [
+        { "path": "components/composites/sparkline.tsx", "type": "registry:ui", "target": "components/composites/sparkline.tsx" }
+      ]
+    },
+    {
+      "name": "delta",
+      "type": "registry:ui",
+      "description": "Formatted change indicator with directional marker, mono numerals, and pos/neg tokens. Derives sign from the numeric value.",
+      "files": [
+        { "path": "components/composites/delta.tsx", "type": "registry:ui", "target": "components/composites/delta.tsx" }
+      ]
+    },
+    {
+      "name": "signal-badge",
+      "type": "registry:ui",
+      "description": "Data-signal pill for financial transaction state (settled/pending/failed/draft) with a dot prefix. Distinct from workflow StatusBadge.",
+      "files": [
+        { "path": "components/composites/signal-badge.tsx", "type": "registry:ui", "target": "components/composites/signal-badge.tsx" }
+      ]
+    },
+    {
+      "name": "live-sync",
+      "type": "registry:ui",
+      "description": "Pulsing-dot status chip for live data freshness: ok (green), stale (amber), down (red), paired with a status label.",
+      "files": [
+        { "path": "components/composites/live-sync.tsx", "type": "registry:ui", "target": "components/composites/live-sync.tsx" }
+      ]
+    },
+    {
+      "name": "brand-mark",
+      "type": "registry:ui",
+      "description": "Official TLB wordmark inside a black lozenge. Three pre-sized variants for sidebar tile, header chip, and large branded surface.",
+      "files": [
+        { "path": "components/composites/brand-mark.tsx", "type": "registry:ui", "target": "components/composites/brand-mark.tsx" }
+      ]
+    },
+    {
+      "name": "tool-launcher",
+      "type": "registry:ui",
+      "description": "Card-style launcher tile for a dashboard tools grid: icon chip, title, description, meta line, arrow indicator on hover.",
+      "files": [
+        { "path": "components/composites/tool-launcher.tsx", "type": "registry:ui", "target": "components/composites/tool-launcher.tsx" }
+      ]
     }
   ]
 }

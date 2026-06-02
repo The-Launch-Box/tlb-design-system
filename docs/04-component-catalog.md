@@ -54,6 +54,12 @@ These live in `src/components/` outside `ui/`. They wrap shadcn primitives with 
 | `ConfirmDialog` | `src/components/feedback/confirm-dialog.tsx` | Standardized AlertDialog for destructive actions. |
 | `Permission` | `src/components/auth/permission.tsx` | Children render only if the MSAL user has the required role. |
 | `PortcoTheme` | `src/components/portco/portco-theme.tsx` | Scoped theme wrapper for portfolio companies (Improv, Echelon). Subtree picks up the portco's tokens. See [docs/12-portco-themes.md](./12-portco-themes.md). |
+| `Sparkline` | `src/components/composites/sparkline.tsx` | Inline bar-chart spark for KPI cards and dense table cells. Values normalized 0..1; trailing bar colored by trend. |
+| `Delta` | `src/components/composites/delta.tsx` | Formatted directional change indicator (▲ +1.24%, ▼ −0.83%). Mono numerals, tabular nums, derives sign from value. |
+| `SignalBadge` | `src/components/composites/signal-badge.tsx` | Financial data-signal pill with colored dot prefix (settled / pending / failed / draft). Distinct from workflow `StatusBadge`. |
+| `LiveSync` | `src/components/composites/live-sync.tsx` | Pulsing-dot freshness chip (ok / stale / down) with status label. Pairs with a topbar or panel header. |
+| `BrandMark` | `src/components/composites/brand-mark.tsx` | Official TLB wordmark inside a black lozenge. Three sizes (sm / md / lg). Renders `/tlb-logo.png` from `public/`. |
+| `ToolLauncher` | `src/components/composites/tool-launcher.tsx` | Card-style launcher tile (icon, title, description, meta) for dashboard tools grids. |
 
 ## Picking the Right Primitive
 

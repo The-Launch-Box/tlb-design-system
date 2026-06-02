@@ -1,17 +1,19 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import {
   Activity,
+  ArrowLeftRight,
   ArrowRight,
   CheckCircle,
   CircleDollarSign,
   Compass,
+  FileSpreadsheet,
   Flame,
   Hammer,
   Inbox,
   Loader2,
-  Mail,
   Search,
   Settings,
+  ShieldHalf,
   Sparkles,
   Trash2,
   TrendingUp,
@@ -91,11 +93,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { AppShell } from "@/components/composites/app-shell";
+import { BrandMark } from "@/components/composites/brand-mark";
 import { DataTable } from "@/components/composites/data-table";
+import { Delta } from "@/components/composites/delta";
 import { EmptyState } from "@/components/composites/empty-state";
 import { KpiCard } from "@/components/composites/kpi-card";
+import { LiveSync } from "@/components/composites/live-sync";
 import { PageHeader } from "@/components/composites/page-header";
+import { SignalBadge } from "@/components/composites/signal-badge";
+import { Sparkline } from "@/components/composites/sparkline";
 import { StatusBadge } from "@/components/composites/status-badge";
+import { ToolLauncher } from "@/components/composites/tool-launcher";
 import { PortcoTheme } from "@/components/portco/portco-theme";
 import {
   EchelonHero,
@@ -148,9 +156,12 @@ const SIDEBAR_LINKS = [
 function Sidebar() {
   return (
     <nav className="flex flex-col gap-1 p-4">
-      <p className="font-display mb-2 text-xs uppercase tracking-wide text-tlb-orange">
-        TLB Internal
-      </p>
+      <div className="mb-4 flex items-center gap-3">
+        <BrandMark size="sm" />
+        <p className="font-display text-xs uppercase tracking-wide text-tlb-orange">
+          TLB Internal
+        </p>
+      </div>
       {SIDEBAR_LINKS.map(({ label, icon: Icon }) => (
         <a
           key={label}
@@ -168,9 +179,7 @@ function Sidebar() {
 function TopBar() {
   return (
     <div className="flex items-center justify-between px-6 py-3">
-      <p className="font-sans text-sm text-muted-foreground">
-        Welcome back
-      </p>
+      <LiveSync>Live, synced 2m ago</LiveSync>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
@@ -443,10 +452,14 @@ export function App() {
             icon={Inbox}
           />
           <KpiCard
-            label="Overdue"
-            value="$31.2k"
-            delta={{ value: "-1 invoice this week", positive: false }}
-            icon={Mail}
+            label="Net P&amp;L (today)"
+            value="+$104.3K"
+            sparkline={
+              <Sparkline
+                values={[0.3, 0.45, 0.4, 0.6, 0.55, 0.7, 0.85]}
+                trend="up"
+              />
+            }
           />
           <KpiCard label="Approvals pending" value="3" icon={CheckCircle} />
         </div>
@@ -559,6 +572,88 @@ export function App() {
               <Loader2 className="size-4 animate-spin" />
               Saving
             </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Signal primitives</CardTitle>
+            <CardDescription>
+              Financial-signal building blocks: status pills, deltas, live-sync
+              chips, and inline sparklines.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <SignalBadge kind="settled" />
+              <SignalBadge kind="pending" />
+              <SignalBadge kind="failed" />
+              <SignalBadge kind="draft" />
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <Delta value={1.24} />
+              <Delta value={-0.83} />
+              <Delta value={4.7} suffix="bps" decimals={1} />
+              <LiveSync>Live, synced 2m ago</LiveSync>
+              <LiveSync state="stale">Last sync 14m ago</LiveSync>
+              <LiveSync state="down">Sync paused</LiveSync>
+            </div>
+            <div className="flex flex-wrap items-end gap-6">
+              <div className="flex items-center gap-3">
+                <span className="font-display text-xs uppercase tracking-wide text-muted-foreground">
+                  Trending up
+                </span>
+                <Sparkline
+                  values={[0.2, 0.3, 0.45, 0.4, 0.6, 0.55, 0.7, 0.85]}
+                  className="w-40"
+                  trend="up"
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-display text-xs uppercase tracking-wide text-muted-foreground">
+                  Trending down
+                </span>
+                <Sparkline
+                  values={[0.8, 0.7, 0.75, 0.55, 0.6, 0.4, 0.35, 0.2]}
+                  className="w-40"
+                  trend="down"
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Tool launchers</CardTitle>
+            <CardDescription>
+              Card-style launcher tiles for the dashboard tools grid.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <ToolLauncher
+                icon={FileSpreadsheet}
+                title="FX Settlement Sheet"
+                description="Live pricing workbook for the macro FX desk."
+                meta="Updated 2m ago"
+                onClick={() => toast.message("Opening FX Settlement Sheet.")}
+              />
+              <ToolLauncher
+                icon={ArrowLeftRight}
+                title="Daily Reconciliation"
+                description="Match custodian ledger against internal book."
+                meta="28 unmatched"
+                onClick={() => toast.message("Opening Reconciliation.")}
+              />
+              <ToolLauncher
+                icon={ShieldHalf}
+                title="Portfolio Risk Engine"
+                description="VaR, stress scenarios, and limit monitoring."
+                meta="2 limits breached"
+                onClick={() => toast.message("Opening Risk Engine.")}
+              />
+            </div>
           </CardContent>
         </Card>
 
