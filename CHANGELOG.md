@@ -8,6 +8,8 @@ Versioning uses a calendar scheme: `YYYY.Q.PATCH`.
 ## [Unreleased]
 
 ### Added
+- `docs/00-brand-and-voice.md`: product context, voice and copy rules, visual foundations (dark-first surface ladder, orange-only-for-action, green/red-only-for-data), iconography, and brand-mark spec. Lifted and adapted from the external Launch Box Design System reference; closes the gap where Manrope, JetBrains Mono, and the bg-0/1/2/3 ladder were declared as tokens but not documented.
+- `SKILL.md` at repo root: Claude Code skill manifest pointing AI agents at `AGENTS.md`, the docs set, and the production component sources.
 - Initial `tlb-design-system` scaffold migrated from `_tlb-ui-standards-STAGING/` in `tlb-financial-tools`.
 - 22 shadcn primitives re-styled with TLB tokens (`@theme` in `src/styles/tailwind.css`).
 - 6 TLB composites: `AppShell`, `PageHeader`, `DataTable`, `KpiCard`, `EmptyState`, `StatusBadge`.
