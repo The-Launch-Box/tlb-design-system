@@ -44,9 +44,10 @@ If you are starting from zero, follow [docs/02-installation.md](./docs/02-instal
 
 | If you are... | Start here |
 |---|---|
+| Getting product context, voice, and visual foundations | [docs/00-brand-and-voice.md](./docs/00-brand-and-voice.md) |
 | A human engineer setting up a new repo | [docs/02-installation.md](./docs/02-installation.md) |
 | A human engineer adding a feature | [docs/04-component-catalog.md](./docs/04-component-catalog.md), [docs/05-patterns.md](./docs/05-patterns.md) |
-| An AI coding agent (Claude Code, Cursor, Windsurf, v0) | [AGENTS.md](./AGENTS.md) |
+| An AI coding agent (Claude Code, Cursor, Windsurf, v0) | [AGENTS.md](./AGENTS.md), [SKILL.md](./SKILL.md) |
 | A reviewer auditing a PR | [docs/09-do-and-dont.md](./docs/09-do-and-dont.md) |
 | Migrating an existing repo | [repo-audits/](./repo-audits) |
 
