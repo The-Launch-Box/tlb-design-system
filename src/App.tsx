@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
+import { cn } from "@/lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -410,6 +411,126 @@ function ImprovShowcase() {
   );
 }
 
+/** Resolve a `public/` asset against the Vite base so it works on Pages too. */
+const brandAsset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+function LogoSwatch({
+  src,
+  label,
+  surface = "light",
+}: {
+  src: string;
+  label: string;
+  surface?: "light" | "dark";
+}) {
+  return (
+    <figure className="flex flex-col gap-2">
+      <div
+        className={cn(
+          "grid h-24 place-items-center rounded-md border p-5",
+          surface === "dark" ? "border-transparent bg-black" : "bg-white"
+        )}
+      >
+        <img
+          src={src}
+          alt={label}
+          loading="lazy"
+          className="max-h-full max-w-full object-contain"
+        />
+      </div>
+      <figcaption className="font-sans text-xs text-muted-foreground">
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
+
+function BrandLogoShowcase() {
+  return (
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Brand and portco logos</CardTitle>
+        <CardDescription>
+          Official brand assets served from <code>/brand/</code>. The Launch Box
+          is the house mark; Echelon and Improv are portco lockups. Reversed and
+          light variants sit on dark surfaces.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-8">
+        <div>
+          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            The Launch Box
+          </p>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <LogoSwatch
+              src={brandAsset("brand/tlb/tlb-square.png")}
+              label="Square"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/tlb/tlb-horizontal.png")}
+              label="Horizontal"
+            />
+          </div>
+        </div>
+
+        <div>
+          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Echelon Risk + Cyber
+          </p>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <LogoSwatch
+              src={brandAsset("brand/echelon/echelon-logo-long.svg")}
+              label="Logo, long"
+              surface="dark"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/echelon/echelon-logo-stacked.svg")}
+              label="Logo, stacked"
+              surface="dark"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/echelon/echelon-wordmark-light.svg")}
+              label="Wordmark"
+              surface="dark"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/echelon/echelon-glitch-yellow.svg")}
+              label="Glitch mark"
+              surface="dark"
+            />
+          </div>
+        </div>
+
+        <div>
+          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Improv
+          </p>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <LogoSwatch
+              src={brandAsset("brand/improv/improv-logo.png")}
+              label="Logo"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/improv/improv-icon.png")}
+              label="Icon"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/improv/improv-logo-reversed.png")}
+              label="Logo, reversed"
+              surface="dark"
+            />
+            <LogoSwatch
+              src={brandAsset("brand/improv/improv-icon-reversed.png")}
+              label="Icon, reversed"
+              surface="dark"
+            />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export function App() {
   return (
     <TooltipProvider>
@@ -463,6 +584,8 @@ export function App() {
           />
           <KpiCard label="Approvals pending" value="3" icon={CheckCircle} />
         </div>
+
+        <BrandLogoShowcase />
 
         <Card className="mt-8">
           <CardHeader>
