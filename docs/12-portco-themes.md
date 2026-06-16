@@ -106,6 +106,28 @@ Portco composites live in `src/components/portco/<name>/` and are exported from 
 | `ImprovPillButton` | Pill-shaped `Button` wrapper for primary CTAs. |
 | `ImprovLogo` | Improv wordmark SVG; uses `currentColor`. |
 
+## Brand and Portco Logo Assets
+
+The `currentColor` logo components above are themeable inline marks. For the *official* brand artwork (full color, fixed proportions), use the static files under `public/brand/`. They are deployed with the demo site and the registry, so consumers can pull them from the Pages URL or copy them into their own `public/`.
+
+| Brand | Files (`public/brand/<brand>/`) | Format | Surface |
+|---|---|---|---|
+| The Launch Box | `tlb/tlb-square.png`, `tlb/tlb-horizontal.png` | PNG | Light (black wordmark + orange mark) |
+| Echelon | `echelon/echelon-logo-long.svg`, `echelon-logo-stacked.svg`, `echelon-wordmark.svg`, `echelon-wordmark-light.svg`, `echelon-glitch.svg`, `echelon-glitch-light.svg`, `echelon-glitch-yellow.svg` | SVG | `*-light` variants for dark surfaces; others carry their own ink |
+| Improv | `improv/improv-logo.png`, `improv-icon.png`, `improv-logo-reversed.png`, `improv-icon-reversed.png` | PNG | Base files on light; `*-reversed` on dark |
+
+The root `public/tlb-logo.png` is the official TLB square mark, consumed by the `BrandMark` composite.
+
+Reference these from app code through the Vite base so they resolve on the project Pages path (`/tlb-design-system/`), not the domain root:
+
+```tsx
+const brandAsset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+<img src={brandAsset("brand/tlb/tlb-square.png")} alt="The Launch Box" />
+```
+
+A live gallery of every asset renders in the TLB tab of `src/App.tsx` (`BrandLogoShowcase`). This curated set omits redundant size duplicates, the large Improv favicon, and the full per-color Echelon palette; add more variants to `public/brand/<brand>/` if a surface needs them.
+
 ## Adding a Third Portco
 
 1. Append a `[data-portco="<name>"]` selector to `src/styles/tailwind.css`. Define brand tokens, then re-map every semantic shadcn token, plus `--font-display`, `--font-sans`, and the radius set.
