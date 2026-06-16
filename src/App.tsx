@@ -158,7 +158,7 @@ function Sidebar() {
   return (
     <nav className="flex flex-col gap-1 p-4">
       <div className="mb-4 flex items-center gap-3">
-        <BrandMark size="sm" />
+        <BrandMark size="md" className="size-12" />
         <p className="font-display text-xs uppercase tracking-wide text-tlb-orange">
           TLB Internal
         </p>
