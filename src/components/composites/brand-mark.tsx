@@ -1,17 +1,19 @@
 /**
  * BrandMark
  *
- * The official TLB wordmark inside a black lozenge. Used in the sidebar
- * brand slot, brand chips on light surfaces, and any place the brand needs
- * a deliberate container (the bare PNG has its own black field so it must
- * sit on black to read correctly).
+ * The official TLB wordmark inside a light lozenge. Used in the sidebar
+ * brand slot, brand chips, and any place the brand needs a deliberate
+ * container. The official mark is black-on-light, so the lozenge is a
+ * white field with a hairline border that reads on any surface.
  *
- * The lozenge enforces clear space and stays on a black background even
- * when the surrounding surface is lighter. Two pre-sized variants cover
- * the common needs (sidebar tile and inline header chip).
+ * The lozenge enforces clear space via inner padding. Two pre-sized
+ * variants cover the common needs (sidebar tile and inline header chip).
  *
- * The asset itself is `/tlb-logo.png` in the consumer app's `public/`
- * directory. Copy it over when installing this composite.
+ * The asset itself is `tlb-logo.png` in the consumer app's `public/`
+ * directory. Copy it over when installing this composite. The default
+ * `src` is resolved against the app's base URL so it works both at the
+ * domain root and when the app is served from a subpath (e.g. a GitHub
+ * Pages project site). Pass an explicit `src` to override.
  *
  * @example
  *   <BrandMark />              // 64px sidebar tile
@@ -32,9 +34,17 @@ const SIZE_CLASSES = {
   lg: "size-24 rounded-md",
 } as const;
 
+/**
+ * Default brand asset, resolved against the app base URL (Vite's
+ * `BASE_URL`, which always ends in a slash). Serves correctly from the
+ * domain root (`/tlb-logo.png`) and from a subpath project site
+ * (`/tlb-design-system/tlb-logo.png`).
+ */
+const DEFAULT_LOGO_SRC = `${import.meta.env.BASE_URL}tlb-logo.png`;
+
 function BrandMark({
   size = "md",
-  src = "/tlb-logo.png",
+  src = DEFAULT_LOGO_SRC,
   alt = "The Launch Box",
   className,
 }: BrandMarkProps) {
@@ -42,7 +52,7 @@ function BrandMark({
     <span
       data-slot="brand-mark"
       className={cn(
-        "inline-grid place-items-center overflow-hidden bg-black",
+        "inline-grid place-items-center overflow-hidden border border-border bg-white p-1.5",
         SIZE_CLASSES[size],
         className
       )}
