@@ -56,7 +56,7 @@ The wrapper renders a single `<div data-portco="<name>">` with `bg-background te
 | accent | `--color-accent` | `#FF0033` |
 | border | `--color-border` | `#2A3DA8` |
 | ring | `--color-ring` | `#E0FF00` |
-| display font | `--font-display` | Barlow Condensed / Oswald / Impact |
+| display font | `--font-display` | Barlow Condensed (self-hosted via `@fontsource`, see `src/main.tsx`); falls back to a non-condensed system grotesk, never Arial Narrow |
 | body font | `--font-sans` | Inter / system grotesk |
 | radii | `--radius`, `--radius-*` | `0` (sharp edges) |
 

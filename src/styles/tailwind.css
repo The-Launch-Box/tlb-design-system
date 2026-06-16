@@ -227,8 +227,12 @@
   --color-input: var(--color-echelon-blue-light);
   --color-ring: var(--color-echelon-yellow);
 
-  /* Typography: condensed grotesk for display, clean grotesk for body */
-  --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", Impact, sans-serif;
+  /* Typography: condensed grotesk for display, clean grotesk for body.
+   * Barlow Condensed is self-hosted via @fontsource (see src/main.tsx).
+   * Fallbacks are intentionally non-condensed system grotesks: if the
+   * brand font is ever unavailable, headings stay readable rather than
+   * collapsing into the squished Arial Narrow substitute. */
+  --font-display: "Barlow Condensed", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Sharp edges */
