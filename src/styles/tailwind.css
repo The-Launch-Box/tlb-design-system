@@ -250,6 +250,7 @@
   --color-improv-sienna: #D86A39;
   --color-improv-aqua: #9CD0D8;
   --color-improv-off-white: #F2F2F2;
+  --color-improv-paper: #FFFFFF;
 
   --color-background: var(--color-improv-obsidian);
   --color-foreground: var(--color-improv-off-white);
@@ -266,7 +267,7 @@
   --color-muted: var(--color-improv-strategic-blue);
   --color-muted-foreground: var(--color-improv-off-white);
   --color-accent: var(--color-improv-raspberry);
-  --color-accent-foreground: var(--color-improv-off-white);
+  --color-accent-foreground: var(--color-improv-paper);
   --color-border: var(--color-improv-strategic-blue);
   --color-input: var(--color-improv-strategic-blue);
   --color-ring: var(--color-improv-aqua);
@@ -290,6 +291,7 @@
   --color-hyper-green: #01F34F;
   --color-hyper-red: #FF3300;
   --color-hyper-off-white: #EAF0FF;
+  --color-hyper-ink: #07091F;
 
   --color-background: var(--color-hyper-foundation);
   --color-foreground: var(--color-hyper-off-white);
@@ -298,7 +300,7 @@
   --color-popover: var(--color-hyper-foundation-dark);
   --color-popover-foreground: var(--color-hyper-off-white);
   --color-primary: var(--color-hyper-pink);
-  --color-primary-foreground: var(--color-hyper-off-white);
+  --color-primary-foreground: var(--color-hyper-ink);
   --color-secondary: var(--color-hyper-blue);
   --color-secondary-foreground: var(--color-hyper-foundation);
   --color-destructive: var(--color-hyper-red);
@@ -338,7 +340,7 @@
   --color-popover: var(--color-vescape-blue-dark);
   --color-popover-foreground: var(--color-vescape-white);
   --color-primary: var(--color-vescape-magenta);
-  --color-primary-foreground: var(--color-vescape-white);
+  --color-primary-foreground: var(--color-vescape-blue-dark);
   --color-secondary: var(--color-vescape-purple);
   --color-secondary-foreground: var(--color-vescape-white);
   --color-destructive: var(--color-vescape-magenta);
@@ -385,7 +387,7 @@
   --color-muted: var(--color-trail-dirt);
   --color-muted-foreground: var(--color-trail-black);
   --color-accent: var(--color-blaze-magenta);
-  --color-accent-foreground: var(--color-trail-white);
+  --color-accent-foreground: var(--color-trail-black);
   --color-border: var(--color-trail-dirt);
   --color-input: var(--color-trail-dirt);
   --color-ring: var(--color-trail-blue);
@@ -419,7 +421,7 @@
   --color-popover: var(--color-dxf-horizon);
   --color-popover-foreground: var(--color-dxf-off-white);
   --color-primary: var(--color-dxf-nebula);
-  --color-primary-foreground: var(--color-dxf-off-white);
+  --color-primary-foreground: var(--color-dxf-black);
   --color-secondary: var(--color-dxf-violet);
   --color-secondary-foreground: var(--color-dxf-black);
   --color-destructive: var(--color-dxf-nebula);

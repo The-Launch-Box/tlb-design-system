@@ -160,7 +160,7 @@ function TopBar() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <User className="size-4" />
+            <User className="size-4" aria-hidden="true" />
             Example User
           </Button>
         </DropdownMenuTrigger>
@@ -440,13 +440,13 @@ export function ComponentsBoard() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Delete">
-                <Trash2 className="size-4" />
+                <Trash2 className="size-4" aria-hidden="true" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Delete record</TooltipContent>
           </Tooltip>
           <Button disabled>
-            <Loader2 className="size-4 animate-spin" />
+            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
             Saving
           </Button>
         </CardContent>
