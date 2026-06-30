@@ -13,7 +13,7 @@
  *
  * @example
  *   <PortcoTheme portco="echelon">
- *     <EchelonHero ... />
+ *     <Hero ... />
  *     <Button>Get in touch</Button>
  *   </PortcoTheme>
  */
