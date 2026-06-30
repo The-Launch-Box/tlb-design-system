@@ -297,6 +297,15 @@
       "files": [
         { "path": "components/composites/tool-launcher.tsx", "type": "registry:ui", "target": "components/composites/tool-launcher.tsx" }
       ]
-    }
+    },
+    { "name": "hero", "type": "registry:ui", "description": "Token-driven marketing hero. Eyebrow, headline, optional highlight clause, body, actions.", "files": [ { "path": "components/marketing/hero.tsx", "type": "registry:ui", "target": "components/marketing/hero.tsx" } ] },
+    { "name": "section-header", "type": "registry:ui", "description": "Section opener: eyebrow, heading, optional intro.", "files": [ { "path": "components/marketing/section-header.tsx", "type": "registry:ui", "target": "components/marketing/section-header.tsx" } ] },
+    { "name": "stat-callout", "type": "registry:ui", "description": "Display figure plus label on a card surface.", "files": [ { "path": "components/marketing/stat-callout.tsx", "type": "registry:ui", "target": "components/marketing/stat-callout.tsx" } ] },
+    { "name": "quote-card", "type": "registry:ui", "description": "Testimonial card: quote, author, role.", "files": [ { "path": "components/marketing/quote-card.tsx", "type": "registry:ui", "target": "components/marketing/quote-card.tsx" } ] },
+    { "name": "process-step", "type": "registry:ui", "description": "Numbered or phase-labeled step: index, icon, title, description.", "files": [ { "path": "components/marketing/process-step.tsx", "type": "registry:ui", "target": "components/marketing/process-step.tsx" } ] },
+    { "name": "feature-card", "type": "registry:ui", "description": "Icon, title, description card for capability grids.", "files": [ { "path": "components/marketing/feature-card.tsx", "type": "registry:ui", "target": "components/marketing/feature-card.tsx" } ] },
+    { "name": "cta-banner", "type": "registry:ui", "description": "Closing call to action on an accent surface.", "files": [ { "path": "components/marketing/cta-banner.tsx", "type": "registry:ui", "target": "components/marketing/cta-banner.tsx" } ] },
+    { "name": "logo-cloud", "type": "registry:ui", "description": "Row of partner or client marks.", "files": [ { "path": "components/marketing/logo-cloud.tsx", "type": "registry:ui", "target": "components/marketing/logo-cloud.tsx" } ] },
+    { "name": "primitives-strip", "type": "registry:ui", "description": "Buttons plus badges row proving token cascade.", "registryDependencies": ["button", "badge"], "files": [ { "path": "components/marketing/primitives-strip.tsx", "type": "registry:ui", "target": "components/marketing/primitives-strip.tsx" } ] }
   ]
 }
