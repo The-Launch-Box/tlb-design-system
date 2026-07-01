@@ -13,7 +13,7 @@
  *
  * @example
  *   <PortcoTheme portco="echelon">
- *     <EchelonHero ... />
+ *     <Hero ... />
  *     <Button>Get in touch</Button>
  *   </PortcoTheme>
  */
@@ -21,7 +21,13 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-type Portco = "improv" | "echelon";
+type Portco =
+  | "improv"
+  | "echelon"
+  | "hyperscayle"
+  | "vescape"
+  | "bluetrail"
+  | "dxfoundation";
 
 interface PortcoThemeProps extends React.ComponentProps<"div"> {
   portco: Portco;

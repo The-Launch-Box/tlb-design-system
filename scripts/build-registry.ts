@@ -11,7 +11,7 @@
  *   npm run build:registry
  *
  * Output is consumed by the shadcn CLI in consumer repos:
- *   npx shadcn@latest add https://nikola-code-ai-tlb.github.io/tlb-design-system/r/button.json
+ *   npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/button.json
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
@@ -28,7 +28,7 @@ const ROOT = resolve(__dirname, "..");
 const INDEX_PATH = join(ROOT, "registry", "registry.json");
 const OUT_DIR = join(ROOT, "public", "r");
 const PAGES_BASE =
-  "https://nikola-code-ai-tlb.github.io/tlb-design-system/r/";
+  "https://the-launch-box.github.io/tlb-design-system/r/";
 
 /**
  * Packages we never declare as dependencies on a registry manifest, because
