@@ -6,9 +6,9 @@
   "description": "TLB Design System — shadcn/ui primitives + composites + token system, distributed as a shadcn custom registry.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nikola-code-ai-tlb/tlb-design-system.git"
+    "url": "https://github.com/The-Launch-Box/tlb-design-system.git"
   },
-  "homepage": "https://nikola-code-ai-tlb.github.io/tlb-design-system/",
+  "homepage": "https://the-launch-box.github.io/tlb-design-system/",
   "license": "UNLICENSED",
   "scripts": {
     "dev": "vite",

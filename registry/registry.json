@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "tlb-design-system",
-  "homepage": "https://nikola-code-ai-tlb.github.io/tlb-design-system/",
+  "homepage": "https://the-launch-box.github.io/tlb-design-system/",
   "items": [
     {
       "name": "button",

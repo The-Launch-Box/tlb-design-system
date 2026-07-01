@@ -8,6 +8,23 @@ The single source of truth for user-interface decisions across all internal appl
 - **Components** — 22 shadcn primitives + 6 TLB composites, re-styled with the TLB token system. Source lives in `src/components/`.
 - **Registry** — a shadcn custom registry hosted on GitHub Pages. Consumer repos install components via the shadcn CLI.
 
+## Live Demo and Brand Pages
+
+The design system ships a live demo board on GitHub Pages: **https://the-launch-box.github.io/tlb-design-system/**
+
+The board uses hash routing, so every surface has a stable deep link. Each portfolio company page is themed to its own brand palette and typography, composed from the shared marketing composites in `src/components/marketing/`.
+
+| Surface | Link |
+|---|---|
+| Board home | https://the-launch-box.github.io/tlb-design-system/#/ |
+| Component catalog | https://the-launch-box.github.io/tlb-design-system/#/components |
+| Echelon Risk + Cyber | https://the-launch-box.github.io/tlb-design-system/#/echelon |
+| Improv | https://the-launch-box.github.io/tlb-design-system/#/improv |
+| Hyperscayle | https://the-launch-box.github.io/tlb-design-system/#/hyperscayle |
+| VEscape | https://the-launch-box.github.io/tlb-design-system/#/vescape |
+| Blue Trail Digital | https://the-launch-box.github.io/tlb-design-system/#/bluetrail |
+| DX Foundation | https://the-launch-box.github.io/tlb-design-system/#/dxfoundation |
+
 ## Stack
 
 shadcn/ui on top of Radix primitives, Tailwind CSS v4, lucide-react icons, recharts, react-hook-form + zod, @tanstack/react-table. React 19, TypeScript, Vite. The full reasoning is in [docs/01-decision-record.md](./docs/01-decision-record.md).
@@ -18,14 +35,14 @@ Requires shadcn CLI 2.x (use `npx shadcn@latest`). The consumer repo must alread
 
 ```bash
 # Single component
-npx shadcn@latest add https://nikola-code-ai-tlb.github.io/tlb-design-system/r/button.json
+npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/button.json
 
 # Full baseline
 for c in button input label textarea select checkbox radio-group switch \
          card dialog alert-dialog sheet tooltip popover dropdown-menu \
          table tabs separator badge skeleton sonner form \
          app-shell page-header data-table kpi-card empty-state status-badge; do
-  npx shadcn@latest add https://nikola-code-ai-tlb.github.io/tlb-design-system/r/$c.json --yes
+  npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/$c.json --yes
 done
 ```
 
@@ -94,7 +111,7 @@ Every push to `main` runs `.github/workflows/deploy-registry.yml`. The workflow:
 
 1. Builds `public/r/*.json` from `src/components/` via `scripts/build-registry.ts`.
 2. Builds the demo site with Vite.
-3. Deploys both to GitHub Pages at `https://nikola-code-ai-tlb.github.io/tlb-design-system/`.
+3. Deploys both to GitHub Pages at `https://the-launch-box.github.io/tlb-design-system/`.
 
 Registry endpoints under `/r/<name>.json` are stable URLs consumers depend on. Pages CDN cache is ~10 minutes; account for that after a release.
 
