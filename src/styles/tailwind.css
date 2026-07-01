@@ -241,53 +241,207 @@
 
 /* ===== Improv (Improvizations, LLC) ===== */
 [data-portco="improv"] {
-  /* Brand */
-  --color-improv-navy: #000B23;
-  --color-improv-navy-dark: #00050F;
-  --color-improv-teal: #9CD0D8;
-  --color-improv-teal-soft: rgba(156, 208, 216, 0.15);
+  /* Brand (official guideline palette) */
+  --color-improv-obsidian: #090B0C;
+  --color-improv-surface: #11181B;
+  --color-improv-strategic-blue: #003B59;
+  --color-improv-noir-plum: #590341;
+  --color-improv-raspberry: #CC3366;
+  --color-improv-sienna: #D86A39;
+  --color-improv-aqua: #9CD0D8;
   --color-improv-off-white: #F2F2F2;
-  --color-improv-muted: #1A2238;
+  --color-improv-paper: #FFFFFF;
 
-  /* Semantic remap */
-  --color-background: var(--color-improv-navy);
+  --color-background: var(--color-improv-obsidian);
   --color-foreground: var(--color-improv-off-white);
-
-  --color-card: var(--color-improv-navy-dark);
+  --color-card: var(--color-improv-surface);
   --color-card-foreground: var(--color-improv-off-white);
-
-  --color-popover: var(--color-improv-navy-dark);
+  --color-popover: var(--color-improv-surface);
   --color-popover-foreground: var(--color-improv-off-white);
-
-  --color-primary: var(--color-improv-teal);
-  --color-primary-foreground: var(--color-improv-navy);
-
-  --color-secondary: var(--color-improv-muted);
+  --color-primary: var(--color-improv-aqua);
+  --color-primary-foreground: var(--color-improv-obsidian);
+  --color-secondary: var(--color-improv-strategic-blue);
   --color-secondary-foreground: var(--color-improv-off-white);
-
-  --color-destructive: var(--color-tlb-dark-orange);
+  --color-destructive: var(--color-improv-raspberry);
   --color-destructive-foreground: var(--color-improv-off-white);
-
-  --color-muted: var(--color-improv-muted);
+  --color-muted: var(--color-improv-strategic-blue);
   --color-muted-foreground: var(--color-improv-off-white);
+  --color-accent: var(--color-improv-raspberry);
+  --color-accent-foreground: var(--color-improv-paper);
+  --color-border: var(--color-improv-strategic-blue);
+  --color-input: var(--color-improv-strategic-blue);
+  --color-ring: var(--color-improv-aqua);
 
-  --color-accent: var(--color-improv-teal-soft);
-  --color-accent-foreground: var(--color-improv-teal);
-
-  --color-border: var(--color-improv-muted);
-  --color-input: var(--color-improv-muted);
-  --color-ring: var(--color-improv-teal);
-
-  /* Typography: Work Sans body, Lustria for display moments */
   --font-display: "Lustria", "Iowan Old Style", Georgia, "Times New Roman", serif;
   --font-sans: "Work Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  /* Subtle radii */
   --radius: 0.125rem;
   --radius-sm: 0.125rem;
   --radius-md: 0.125rem;
   --radius-lg: 0.25rem;
   --radius-xl: 0.375rem;
+}
+
+/* ===== Hyperscayle ===== */
+[data-portco="hyperscayle"] {
+  --color-hyper-foundation: #0B105B;
+  --color-hyper-foundation-dark: #070A3D;
+  --color-hyper-pink: #F2055C;
+  --color-hyper-blue: #11EAFB;
+  --color-hyper-green: #01F34F;
+  --color-hyper-red: #FF3300;
+  --color-hyper-off-white: #EAF0FF;
+  --color-hyper-ink: #07091F;
+
+  --color-background: var(--color-hyper-foundation);
+  --color-foreground: var(--color-hyper-off-white);
+  --color-card: var(--color-hyper-foundation-dark);
+  --color-card-foreground: var(--color-hyper-off-white);
+  --color-popover: var(--color-hyper-foundation-dark);
+  --color-popover-foreground: var(--color-hyper-off-white);
+  --color-primary: var(--color-hyper-pink);
+  --color-primary-foreground: var(--color-hyper-ink);
+  --color-secondary: var(--color-hyper-blue);
+  --color-secondary-foreground: var(--color-hyper-foundation);
+  --color-destructive: var(--color-hyper-red);
+  --color-destructive-foreground: var(--color-hyper-off-white);
+  --color-muted: var(--color-hyper-foundation-dark);
+  --color-muted-foreground: var(--color-hyper-blue);
+  --color-accent: var(--color-hyper-green);
+  --color-accent-foreground: var(--color-hyper-foundation);
+  --color-border: var(--color-hyper-blue);
+  --color-input: var(--color-hyper-foundation-dark);
+  --color-ring: var(--color-hyper-blue);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 0.25rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+}
+
+/* ===== VEscape ===== */
+[data-portco="vescape"] {
+  --color-vescape-blue: #330066;
+  --color-vescape-blue-dark: #1A0033;
+  --color-vescape-magenta: #FF0066;
+  --color-vescape-yellow: #FFFF00;
+  --color-vescape-purple: #660099;
+  --color-vescape-gray: #E8E8E8;
+  --color-vescape-white: #FFFFFF;
+
+  --color-background: var(--color-vescape-blue);
+  --color-foreground: var(--color-vescape-white);
+  --color-card: var(--color-vescape-blue-dark);
+  --color-card-foreground: var(--color-vescape-white);
+  --color-popover: var(--color-vescape-blue-dark);
+  --color-popover-foreground: var(--color-vescape-white);
+  --color-primary: var(--color-vescape-magenta);
+  --color-primary-foreground: var(--color-vescape-blue-dark);
+  --color-secondary: var(--color-vescape-purple);
+  --color-secondary-foreground: var(--color-vescape-white);
+  --color-destructive: var(--color-vescape-magenta);
+  --color-destructive-foreground: var(--color-vescape-white);
+  --color-muted: var(--color-vescape-blue-dark);
+  --color-muted-foreground: var(--color-vescape-gray);
+  --color-accent: var(--color-vescape-yellow);
+  --color-accent-foreground: var(--color-vescape-blue);
+  --color-border: var(--color-vescape-purple);
+  --color-input: var(--color-vescape-blue-dark);
+  --color-ring: var(--color-vescape-yellow);
+
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
+/* ===== Blue Trail (light brand) ===== */
+[data-portco="bluetrail"] {
+  --color-trail-blue: #074E75;
+  --color-blaze-magenta: #FF2E78;
+  --color-blaze-blue: #00DBFF;
+  --color-trail-dirt: #D9DDCA;
+  --color-trail-white: #F1F1EC;
+  --color-trail-black: #161615;
+
+  --color-background: var(--color-trail-white);
+  --color-foreground: var(--color-trail-black);
+  --color-card: #FFFFFF;
+  --color-card-foreground: var(--color-trail-black);
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: var(--color-trail-black);
+  --color-primary: var(--color-trail-blue);
+  --color-primary-foreground: var(--color-trail-white);
+  --color-secondary: var(--color-blaze-blue);
+  --color-secondary-foreground: var(--color-trail-black);
+  --color-destructive: var(--color-blaze-magenta);
+  --color-destructive-foreground: var(--color-trail-white);
+  --color-muted: var(--color-trail-dirt);
+  --color-muted-foreground: var(--color-trail-black);
+  --color-accent: var(--color-blaze-magenta);
+  --color-accent-foreground: var(--color-trail-black);
+  --color-border: var(--color-trail-dirt);
+  --color-input: var(--color-trail-dirt);
+  --color-ring: var(--color-trail-blue);
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* ===== DX Foundation ===== */
+[data-portco="dxfoundation"] {
+  --color-dxf-black: #05010B;
+  --color-dxf-horizon: #163259;
+  --color-dxf-nebula: #F02D57;
+  --color-dxf-violet: #8585CB;
+  --color-dxf-discovery: #F9DFCA;
+  --color-dxf-aero: #C0D4EA;
+  --color-dxf-nova: #E9C3CD;
+  --color-dxf-exploration: #C2C2E9;
+  --color-dxf-off-white: #FDF6F3;
+
+  --color-background: var(--color-dxf-black);
+  --color-foreground: var(--color-dxf-off-white);
+  --color-card: var(--color-dxf-horizon);
+  --color-card-foreground: var(--color-dxf-off-white);
+  --color-popover: var(--color-dxf-horizon);
+  --color-popover-foreground: var(--color-dxf-off-white);
+  --color-primary: var(--color-dxf-nebula);
+  --color-primary-foreground: var(--color-dxf-black);
+  --color-secondary: var(--color-dxf-violet);
+  --color-secondary-foreground: var(--color-dxf-black);
+  --color-destructive: var(--color-dxf-nebula);
+  --color-destructive-foreground: var(--color-dxf-off-white);
+  --color-muted: var(--color-dxf-horizon);
+  --color-muted-foreground: var(--color-dxf-aero);
+  --color-accent: var(--color-dxf-aero);
+  --color-accent-foreground: var(--color-dxf-black);
+  --color-border: var(--color-dxf-violet);
+  --color-input: var(--color-dxf-horizon);
+  --color-ring: var(--color-dxf-nebula);
+
+  --font-display: "Chivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
 /* Portco scopes drop the default uppercase + tight tracking on headings.
