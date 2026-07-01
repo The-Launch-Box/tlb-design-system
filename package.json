@@ -20,6 +20,7 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
+    "@fontsource/barlow-condensed": "^5.2.8",
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-checkbox": "^1.1.6",
     "@radix-ui/react-dialog": "^1.1.7",

@@ -188,10 +188,10 @@ function LogoSwatch({
   surface?: "light" | "dark";
 }) {
   return (
-    <figure className="flex flex-col gap-2">
+    <figure className="flex min-w-0 flex-col gap-2">
       <div
         className={cn(
-          "grid h-24 place-items-center rounded-md border p-5",
+          "flex h-24 items-center justify-center overflow-hidden rounded-md border p-5",
           surface === "dark" ? "border-transparent bg-black" : "bg-white"
         )}
       >
@@ -199,7 +199,7 @@ function LogoSwatch({
           src={src}
           alt={label}
           loading="lazy"
-          className="max-h-full max-w-full object-contain"
+          className="h-full w-full object-contain"
         />
       </div>
       <figcaption className="font-sans text-xs text-muted-foreground">
