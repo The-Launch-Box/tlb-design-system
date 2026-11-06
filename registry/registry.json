@@ -211,7 +211,7 @@
     {
       "name": "kpi-card",
       "type": "registry:ui",
-      "description": "Headline dashboard metric: label, value, optional delta, optional lucide icon.",
+      "description": "Headline dashboard metric: label, value, optional delta, sparkline, lucide icon, tone pip, and emphasis.",
       "files": [
         { "path": "components/composites/kpi-card.tsx", "type": "registry:ui", "target": "components/composites/kpi-card.tsx" }
       ],
@@ -228,7 +228,7 @@
     {
       "name": "status-badge",
       "type": "registry:ui",
-      "description": "Status pill with paired lucide icon. Statuses: draft, pending, approved, rejected.",
+      "description": "Status pill with paired lucide icon. Review statuses (draft, pending, approved, rejected) plus workflow statuses (received through expired) for propose-approve-execute automations.",
       "files": [
         { "path": "components/composites/status-badge.tsx", "type": "registry:ui", "target": "components/composites/status-badge.tsx" }
       ],
@@ -306,6 +306,17 @@
     { "name": "feature-card", "type": "registry:ui", "description": "Icon, title, description card for capability grids.", "files": [ { "path": "components/marketing/feature-card.tsx", "type": "registry:ui", "target": "components/marketing/feature-card.tsx" } ] },
     { "name": "cta-banner", "type": "registry:ui", "description": "Closing call to action on an accent surface.", "files": [ { "path": "components/marketing/cta-banner.tsx", "type": "registry:ui", "target": "components/marketing/cta-banner.tsx" } ] },
     { "name": "logo-cloud", "type": "registry:ui", "description": "Row of partner or client marks.", "files": [ { "path": "components/marketing/logo-cloud.tsx", "type": "registry:ui", "target": "components/marketing/logo-cloud.tsx" } ] },
-    { "name": "primitives-strip", "type": "registry:ui", "description": "Buttons plus badges row proving token cascade.", "registryDependencies": ["button", "badge"], "files": [ { "path": "components/marketing/primitives-strip.tsx", "type": "registry:ui", "target": "components/marketing/primitives-strip.tsx" } ] }
+    { "name": "primitives-strip", "type": "registry:ui", "description": "Buttons plus badges row proving token cascade.", "registryDependencies": ["button", "badge"], "files": [ { "path": "components/marketing/primitives-strip.tsx", "type": "registry:ui", "target": "components/marketing/primitives-strip.tsx" } ] },
+    { "name": "notice", "type": "registry:ui", "description": "Inline tool-page message (info, error, sample) with icon and optional action, plus LoadingState spinner line. From tlb-financial-tools.", "files": [ { "path": "components/composites/notice.tsx", "type": "registry:ui", "target": "components/composites/notice.tsx" } ] },
+    { "name": "tool-page", "type": "registry:ui", "description": "Root of a tool page hosted in a portal: display title, description, actions slot, vertical rhythm. From tlb-financial-tools.", "files": [ { "path": "components/composites/tool-page.tsx", "type": "registry:ui", "target": "components/composites/tool-page.tsx" } ] },
+    { "name": "tool-tabs", "type": "registry:ui", "description": "Line-variant tab strip for tool pages with count pills and a right-hand slot; caller renders content. From tlb-financial-tools.", "registryDependencies": ["tabs"], "files": [ { "path": "components/composites/tool-tabs.tsx", "type": "registry:ui", "target": "components/composites/tool-tabs.tsx" } ] },
+    { "name": "filter-bar", "type": "registry:ui", "description": "Period segmented buttons plus an optional labelled select for a second dimension. From tlb-financial-tools.", "registryDependencies": ["button", "select"], "files": [ { "path": "components/composites/filter-bar.tsx", "type": "registry:ui", "target": "components/composites/filter-bar.tsx" } ] },
+    { "name": "app-switcher", "type": "registry:ui", "description": "Portal header Apps menu: grid of tools, external-link markers, All apps footer. Router-agnostic. From tlb-financial-tools.", "registryDependencies": ["dropdown-menu"], "files": [ { "path": "components/composites/app-switcher.tsx", "type": "registry:ui", "target": "components/composites/app-switcher.tsx" } ] },
+    { "name": "flapboard", "type": "registry:ui", "description": "Split-flap word board for a dashboard hero; cycles words on h1 hover, reduced-motion safe. Needs the Flapboard CSS from tailwind.css. From tlb-financial-tools.", "files": [ { "path": "components/composites/flapboard.tsx", "type": "registry:ui", "target": "components/composites/flapboard.tsx" } ] },
+    { "name": "actor-badge", "type": "registry:ui", "description": "Who did it: system component, AI model, or named human, distinct by icon, text and color. From Echelon Automation Hub.", "registryDependencies": ["badge"], "files": [ { "path": "components/composites/actor-badge.tsx", "type": "registry:ui", "target": "components/composites/actor-badge.tsx" } ] },
+    { "name": "payload-list", "type": "registry:ui", "description": "Definition-list view of an unknown record with RawJson disclosure for nested values. From Echelon Automation Hub.", "files": [ { "path": "components/composites/payload-list.tsx", "type": "registry:ui", "target": "components/composites/payload-list.tsx" } ] },
+    { "name": "field-diff", "type": "registry:ui", "description": "Field-level before/after diff of any two values, one line per changed path. From Echelon Automation Hub.", "files": [ { "path": "components/composites/field-diff.tsx", "type": "registry:ui", "target": "components/composites/field-diff.tsx" } ] },
+    { "name": "audit-timeline", "type": "registry:ui", "description": "Append-only event history: title, ActorBadge, timestamp, body, raw payload. From Echelon Automation Hub.", "registryDependencies": ["actor-badge", "payload-list"], "files": [ { "path": "components/composites/audit-timeline.tsx", "type": "registry:ui", "target": "components/composites/audit-timeline.tsx" } ] },
+    { "name": "review-item-card", "type": "registry:ui", "description": "Numbered approve-before-write line item: label, reference, status slot, Exclude control, result id, failure panel. From Echelon Automation Hub.", "registryDependencies": ["card", "badge", "checkbox", "label"], "files": [ { "path": "components/composites/review-item-card.tsx", "type": "registry:ui", "target": "components/composites/review-item-card.tsx" } ] }
   ]
 }

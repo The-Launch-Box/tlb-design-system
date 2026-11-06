@@ -1,0 +1,12 @@
+{
+  "name": "tlb-design-system",
+  "description": "The Launch Box design system for Claude Code: UI rules, tokens, and the component library, readable by any TLB repo's agent.",
+  "owner": { "name": "The Launch Box" },
+  "plugins": [
+    {
+      "name": "tlb-design-system",
+      "source": "./",
+      "description": "Gives Claude the TLB design system (AGENTS.md rules, docs, tokens, component source, shadcn registry) when building or changing UI in any TLB repo."
+    }
+  ]
+}

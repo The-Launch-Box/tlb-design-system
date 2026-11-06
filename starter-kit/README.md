@@ -12,5 +12,6 @@ Drop-in files for any TLB internal repository adopting the UI standards. Copy th
 | `AGENTS.md.template` | `AGENTS.md` at repo root | Tells AI agents how to behave in this repo. |
 | `.cursorrules.template` | `.cursorrules` at repo root | Cursor-specific compact rules. |
 | `claude-md.template` | `CLAUDE.md` at repo root | Claude Code entry pointer. |
+| `claude-settings.json` | `.claude/settings.json` (merge if it exists) | Enables the `tlb-design-system` Claude Code plugin for every teammate. See [docs/13-agent-access.md](../docs/13-agent-access.md). |
 
 The starter assumes Vite plus React 19 plus TypeScript plus Tailwind v4. For other stacks (Next.js, Remix), the same tokens apply but the installation steps differ. Open an issue rather than improvising.

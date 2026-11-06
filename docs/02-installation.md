@@ -28,7 +28,7 @@ For state shared across routes, add `zustand`. Do not add it preemptively.
 
 ## 2. Drop in the Starter Kit
 
-Copy the following from `tlb-ui-standards/starter-kit/` into the new repo:
+Copy the following from `tlb-design-system/starter-kit/` into the new repo:
 
 | Source | Destination |
 |---|---|
@@ -38,7 +38,7 @@ Copy the following from `tlb-ui-standards/starter-kit/` into the new repo:
 | `starter-kit/AGENTS.md.template` | `AGENTS.md` at repo root |
 | `starter-kit/.cursorrules.template` | `.cursorrules` at repo root |
 
-Also copy `tlb-ui-standards/CLAUDE.md` to the repo root as `CLAUDE.md`.
+Also copy `tlb-design-system/starter-kit/claude-md.template` to the repo root as `CLAUDE.md`.
 
 ## 3. Wire Tailwind v4 into Vite
 

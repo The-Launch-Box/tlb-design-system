@@ -26,7 +26,7 @@ A scheduled task runs quarterly:
 
 - Bump `lucide-react` and `react-hook-form` to latest minor.
 - Run `npx shadcn@latest diff` against every TLB repo. Apply non-breaking diffs.
-- Snapshot the `tlb-ui-standards` repo on the cadence. Tag the release `v2026.Q2`, `v2026.Q3`, etc.
+- Snapshot the `tlb-design-system` repo on the cadence. Tag the release `v2026.Q2`, `v2026.Q3`, etc.
 - Open a follow-up PR per repo to absorb the snapshot.
 
 Out-of-cycle updates are reserved for security advisories.
@@ -70,7 +70,7 @@ Deprecation needs a stated reason and a replacement. We do not deprecate things 
 
 ## Snapshot Versioning Scheme
 
-`tlb-ui-standards` releases use a calendar-major scheme:
+`tlb-design-system` releases use a calendar-major scheme:
 
 - `v2026.Q2` is the second-quarter 2026 snapshot.
 - Patches inside a quarter: `v2026.Q2.1`, `v2026.Q2.2`.
@@ -80,7 +80,7 @@ Each release is tagged in git and noted in `CHANGELOG.md` (added on first amendm
 
 ## How to Propose a Change to the Standards
 
-1. Open a PR against `tlb-ui-standards`.
+1. Open a PR against `tlb-design-system`.
 2. State the change, the reason, and the affected repos.
 3. Include a migration note if the change is not backward compatible.
 4. Reviewer: Jonatan Hernandez Jr. Approver: Administrator (Alam) for breaking changes.

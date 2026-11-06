@@ -82,6 +82,7 @@
    * block remaps them to the GitHub-dark ladder.
    */
   --color-bg-canvas: var(--color-tlb-white);
+  --color-bg-sunken: var(--color-tlb-gray-50);
   --color-bg-surface: var(--color-tlb-white);
   --color-bg-raised: var(--color-tlb-gray-50);
   --color-bg-overlay: var(--color-tlb-white);
@@ -161,6 +162,7 @@
 
   /* dark surface ladder + data signal */
   --color-bg-canvas: var(--color-tlb-bg-0);
+  --color-bg-sunken: var(--color-tlb-bg-0);
   --color-bg-surface: var(--color-tlb-bg-1);
   --color-bg-raised: var(--color-tlb-bg-2);
   --color-bg-overlay: var(--color-tlb-bg-3);
@@ -486,4 +488,113 @@
     outline-offset: 2px;
   }
 }
-   
+
+/* =================================================================
+ * Console utilities
+ * Lifted from the Echelon Automation Hub console (2026-11) and the
+ * tlb-financial-tools portal so composites in both read the same way.
+ * Brand-neutral: every color comes from a semantic token.
+ * ================================================================= */
+
+/* Uppercase monospace label: eyebrows, column heads, field labels. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+/* Figures: tabular monospace numerals that line up in columns. */
+@utility figures {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* A 2px lift on hover, for cards a reviewer scans and points at. */
+@utility lift {
+  transition:
+    transform var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+/* A status pip with a soft ring in its own color. Set the color with a
+   text utility (text-warning, text-info, ...). Always pair it with text. */
+@utility pip {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 22%, transparent);
+}
+
+/* =================================================================
+ * Flapboard (split-flap word board). Used by the Flapboard composite,
+ * lifted from the tlb-financial-tools dashboard hero.
+ * ================================================================= */
+.flapboard {
+  display: inline-flex;
+  align-items: flex-end;
+  vertical-align: baseline;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0;
+  perspective: 700px;
+  color: var(--color-primary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.flap-cell {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0.5em;
+  height: 1em;
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 260ms var(--ease-standard),
+    opacity 200ms var(--ease-standard);
+}
+.flap-cell.blank {
+  width: 0;
+  opacity: 0;
+}
+.flap-char {
+  display: block;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  /* One fold per half-flip (FOLD_MS in flapboard.tsx). */
+  transition: transform 90ms cubic-bezier(0.4, 0, 1, 1);
+  will-change: transform;
+}
+.flapboard.live .flap-cell::after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 50%;
+  height: 1px;
+  background: color-mix(in oklab, var(--color-foreground) 14%, transparent);
+  transform: translateY(-0.5px);
+  pointer-events: none;
+}
+.dark .flapboard.live .flap-cell::after {
+  background: color-mix(in oklab, var(--color-background) 70%, transparent);
+}

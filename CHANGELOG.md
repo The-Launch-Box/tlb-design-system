@@ -8,6 +8,16 @@ Versioning uses a calendar scheme: `YYYY.Q.PATCH`.
 ## [Unreleased]
 
 ### Added
+- Claude Code plugin marketplace (`.claude-plugin/`, `skills/tlb-design-system/SKILL.md`) so any TLB repo's agents load the design system; `docs/13-agent-access.md`, `starter-kit/claude-settings.json`, `public/llms.txt`.
+- Tool-page composites from tlb-financial-tools: `ToolPage`, `ToolTabs`, `FilterBar`, `Notice`/`LoadingState`, `AppSwitcher`, `Flapboard`.
+- Review-flow composites from the Echelon Automation Hub: `ReviewItemCard`, `PayloadList`/`RawJson`, `FieldDiff`, `AuditTimeline`, `ActorBadge`.
+- `StatusBadge` workflow statuses; `KpiCard` `tone` and `emphasis`; `bg-bg-sunken` token; `eyebrow`, `figures`, `pip`, `lift` utilities.
+
+### Fixed
+- Three stray NUL bytes at the end of `src/styles/tailwind.css` that made Tailwind drop the next rule.
+- Stale `tlb-ui-standards` references in docs and starter-kit templates.
+
+### Added (earlier)
 - `docs/00-brand-and-voice.md`: product context, voice and copy rules, visual foundations (dark-first surface ladder, orange-only-for-action, green/red-only-for-data), iconography, and brand-mark spec. Lifted and adapted from the external Launch Box Design System reference; closes the gap where Manrope, JetBrains Mono, and the bg-0/1/2/3 ladder were declared as tokens but not documented.
 - `SKILL.md` at repo root: Claude Code skill manifest pointing AI agents at `AGENTS.md`, the docs set, and the production component sources.
 - Initial `tlb-design-system` scaffold migrated from `_tlb-ui-standards-STAGING/` in `tlb-financial-tools`.

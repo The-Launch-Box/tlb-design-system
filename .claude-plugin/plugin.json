@@ -1,0 +1,7 @@
+{
+  "name": "tlb-design-system",
+  "description": "TLB design system: UI rules, tokens, component library and shadcn registry, as a Claude Code skill.",
+  "author": { "name": "The Launch Box" },
+  "homepage": "https://the-launch-box.github.io/tlb-design-system/",
+  "repository": "https://github.com/The-Launch-Box/tlb-design-system"
+}

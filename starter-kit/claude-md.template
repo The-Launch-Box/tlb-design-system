@@ -2,7 +2,7 @@
 
 Claude Code reads this file at session start. Treat it as the operating contract for any UI work in this repository.
 
-The full TLB UI standards live in `./AGENTS.md` and (canonically) in the `tlb-ui-standards` repository. Read `AGENTS.md` end to end before generating UI code.
+The full TLB UI standards live in `./AGENTS.md` and (canonically) in the `tlb-design-system` repository. Read `AGENTS.md` end to end before generating UI code.
 
 ## Quick Constraints
 

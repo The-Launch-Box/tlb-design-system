@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "tlb-design-system": {
+      "source": { "source": "github", "repo": "The-Launch-Box/tlb-design-system" }
+    }
+  },
+  "enabledPlugins": {
+    "tlb-design-system@tlb-design-system": true
+  }
+}

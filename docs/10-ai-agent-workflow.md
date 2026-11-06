@@ -11,6 +11,7 @@ Every TLB repository carries three files at the root that tell agents how to beh
 | `AGENTS.md` | Most modern agents (industry convention) | Full standards, libraries, hard rules |
 | `CLAUDE.md` | Claude Code specifically | Pointer to AGENTS.md plus quick constraints |
 | `.cursorrules` | Cursor specifically | Compact constraint list |
+| `.claude/settings.json` | Claude Code specifically | Enables the `tlb-design-system` plugin, so the agent has the full docs and component source locally. See [13-agent-access.md](./13-agent-access.md). |
 
 Without these files at the repo root, agents fall back to generic React patterns and the output diverges from TLB standards within the first few responses. Drop the templates from `starter-kit/` into every repo before the first AI-assisted PR.
 
