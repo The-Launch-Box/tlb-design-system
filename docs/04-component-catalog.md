@@ -61,6 +61,33 @@ These live in `src/components/` outside `ui/`. They wrap shadcn primitives with 
 | `BrandMark` | `src/components/composites/brand-mark.tsx` | Official TLB wordmark inside a black lozenge. Three sizes (sm / md / lg). Renders `/tlb-logo.png` from `public/`. |
 | `ToolLauncher` | `src/components/composites/tool-launcher.tsx` | Card-style launcher tile (icon, title, description, meta) for dashboard tools grids. |
 
+### Tool-page composites (from tlb-financial-tools, 2026-11)
+
+For a tool hosted inside a portal shell. Demo: `src/pages/tool-and-review-showcase.tsx`.
+
+| Composite | Location | Purpose |
+|---|---|---|
+| `ToolPage` | `src/components/composites/tool-page.tsx` | Root of a hosted tool page: display title, one-line description, actions slot, vertical rhythm. Use `PageHeader` for a standalone app instead. |
+| `ToolTabs` | `src/components/composites/tool-tabs.tsx` | Line-variant tab strip with count pills and a right-hand slot. Caller owns the active value and renders the content. |
+| `FilterBar` | `src/components/composites/filter-bar.tsx` | Period segmented buttons plus an optional labelled select (resource, owner). |
+| `Notice`, `LoadingState` | `src/components/composites/notice.tsx` | The one inline message on a tool page (info, error, sample data) with optional action; spinner line for loading. |
+| `AppSwitcher` | `src/components/composites/app-switcher.tsx` | Portal header "Apps" menu: grid of tools, external markers, "All apps" link. Router-agnostic via `renderLink`. |
+| `Flapboard` | `src/components/composites/flapboard.tsx` | Split-flap word board for a dashboard hero. Needs the Flapboard CSS block from `tailwind.css`. |
+
+### Review-flow composites (from Echelon Automation Hub, 2026-11)
+
+For human-in-the-loop automations: the system proposes, a person approves item by item, then it executes and keeps an audit trail.
+
+| Composite | Location | Purpose |
+|---|---|---|
+| `ReviewItemCard` | `src/components/composites/review-item-card.tsx` | One numbered line item to approve: label, reference, status slot, Exclude control, result id, failure panel. |
+| `PayloadList`, `RawJson` | `src/components/composites/payload-list.tsx` | Readable definition list for an unknown record; nested values behind a "View JSON" disclosure. |
+| `FieldDiff` | `src/components/composites/field-diff.tsx` | Field-level before/after of any two values. `fieldChanges()` exported for summaries. |
+| `AuditTimeline` | `src/components/composites/audit-timeline.tsx` | Append-only event history with actor, timestamp, body, raw payload. |
+| `ActorBadge` | `src/components/composites/actor-badge.tsx` | System, model, or named human; distinct by icon, text and color. |
+
+`StatusBadge` now also covers the workflow statuses (`received` through `expired`), and `KpiCard` takes `tone` (status pip) and `emphasis` (primary-color figure). Console utilities `eyebrow`, `figures`, `pip`, `lift` and the `bg-bg-sunken` token live in `tailwind.css`.
+
 ## Picking the Right Primitive
 
 When unsure between similar primitives:

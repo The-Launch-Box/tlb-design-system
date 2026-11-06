@@ -41,12 +41,31 @@ npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/butto
 for c in button input label textarea select checkbox radio-group switch \
          card dialog alert-dialog sheet tooltip popover dropdown-menu \
          table tabs separator badge skeleton sonner form \
-         app-shell page-header data-table kpi-card empty-state status-badge; do
+         app-shell page-header data-table kpi-card empty-state status-badge \
+         tool-page tool-tabs notice; do
   npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/$c.json --yes
 done
 ```
 
 Composites pull their primitive dependencies automatically via `registryDependencies`.
+
+## Using This Design System From Another Repo's AI Agent
+
+This repo is also a **Claude Code plugin marketplace**. Any TLB repo can give every teammate's Claude agent the `tlb-design-system` skill (rules, docs, tokens, and the component source, read locally) by committing one file. Full guide: [docs/13-agent-access.md](./docs/13-agent-access.md).
+
+```bash
+# One-time per consumer repo, run at its root, then commit .claude/settings.json
+claude plugin marketplace add The-Launch-Box/tlb-design-system --scope project
+claude plugin install tlb-design-system@tlb-design-system --scope project
+```
+
+Or install it for yourself, in any session:
+
+```
+/plugin install tlb-design-system --marketplace The-Launch-Box/tlb-design-system
+```
+
+Non-Claude agents (Cursor, Codex, Windsurf, v0) read [`llms.txt`](https://the-launch-box.github.io/tlb-design-system/llms.txt) plus the consumer repo's `AGENTS.md`.
 
 ## Bootstrapping a New Repo
 
@@ -73,6 +92,8 @@ If you are starting from zero, follow [docs/02-installation.md](./docs/02-instal
 ```
 tlb-design-system/
 ├── AGENTS.md                  Primary contract for AI agents.
+├── .claude-plugin/            Claude Code marketplace + plugin manifests.
+├── skills/tlb-design-system/  The skill other repos' Claude agents load.
 ├── CLAUDE.md                  Claude Code entrypoint (mirrors AGENTS.md).
 ├── .cursorrules               Cursor entrypoint.
 ├── components.json            shadcn CLI config used by this repo.
@@ -85,7 +106,7 @@ tlb-design-system/
 │   ├── styles/tailwind.css    TLB @theme tokens (light + dark).
 │   ├── lib/utils.ts           cn() helper.
 │   ├── components/ui/         22 shadcn primitives, TLB-themed.
-│   ├── components/composites/ 6 TLB composites.
+│   ├── components/composites/ TLB app composites (shell, data, tool-page, review flow).
 │   └── App.tsx, main.tsx      Demo site rendered on GitHub Pages.
 ├── registry/
 │   ├── registry.json          Hand-authored manifest index.

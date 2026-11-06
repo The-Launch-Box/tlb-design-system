@@ -97,6 +97,7 @@ import { SignalBadge } from "@/components/composites/signal-badge";
 import { Sparkline } from "@/components/composites/sparkline";
 import { StatusBadge } from "@/components/composites/status-badge";
 import { ToolLauncher } from "@/components/composites/tool-launcher";
+import { ToolAndReviewShowcase } from "@/pages/tool-and-review-showcase";
 
 type Demo = {
   id: string;
@@ -672,6 +673,7 @@ export function ComponentsBoard() {
           action={<Button size="sm">New request</Button>}
         />
       </div>
+      <ToolAndReviewShowcase />
     </AppShell>
   );
 }

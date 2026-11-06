@@ -1,8 +1,17 @@
 # AGENTS.md
 
-This repository follows the TLB UI Standards. The canonical version lives in the `tlb-ui-standards` repository. This file is the in-repo copy that AI coding agents must read before producing UI code.
+This repository follows the TLB UI Standards. The canonical version lives in the `tlb-design-system` repository. This file is the in-repo copy that AI coding agents must read before producing UI code.
 
 If you are an AI agent (Claude Code, Cursor, Windsurf, v0, Cline, or any MCP-aware tool) working in this repository, treat this file as authoritative.
+
+## Design System Access
+
+Before building any UI component, check whether the TLB design system already has it.
+
+- **Claude Code:** this repo enables the `tlb-design-system` plugin in `.claude/settings.json`. Use the `tlb-design-system` skill; it carries the full docs and component source locally.
+- **Any other agent:** read https://the-launch-box.github.io/tlb-design-system/llms.txt and the component index at https://the-launch-box.github.io/tlb-design-system/r/registry.json.
+- **Install** a component with `npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/<name>.json`.
+- This file wins over the design system for anything specific to this repo (token file location, path aliases, restricted brand assets).
 
 ## Stack You Are Allowed to Use
 

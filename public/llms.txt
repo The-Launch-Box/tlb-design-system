@@ -1,0 +1,33 @@
+# TLB Design System
+
+> The Launch Box design system: shadcn/ui primitives, TLB composites, Tailwind v4 tokens, and UI rules for every TLB internal app (tlb-financial-tools, Echelon Automation Hub, tlb-workspace, and new repos). AI agents: read AGENTS.md before writing UI, check the registry before building a component, and install components with the shadcn CLI.
+
+Source repo (public): https://github.com/The-Launch-Box/tlb-design-system
+Claude Code users: install the plugin instead of reading this file (see docs/13-agent-access.md).
+
+## Rules (read first)
+
+- [AGENTS.md](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/AGENTS.md): stack, hard rules, banned libraries, folder conventions, copy rules.
+- [Do and don't](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/09-do-and-dont.md): review checklist.
+
+## Components
+
+- [Registry index](https://the-launch-box.github.io/tlb-design-system/r/registry.json): every installable component with a one-line description.
+- Install one: `npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/<name>.json`
+- [Component catalog](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/04-component-catalog.md): which component to pick and why.
+- [Live component board](https://the-launch-box.github.io/tlb-design-system/#/components)
+
+## Tokens and patterns
+
+- [Tokens and theme](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/03-tokens-and-theme.md)
+- [Token source (tailwind.css)](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/src/styles/tailwind.css)
+- [Patterns](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/05-patterns.md): page layout, forms, tables, empty states, destructive actions, toasts.
+- [Accessibility](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/06-accessibility.md)
+- [Icons and charts](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/07-icons-and-charts.md)
+- [Portco themes](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/12-portco-themes.md)
+- [Brand and voice](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/00-brand-and-voice.md)
+
+## Optional
+
+- [Installation for a new repo](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/02-installation.md)
+- [AI agent workflow](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/10-ai-agent-workflow.md)
