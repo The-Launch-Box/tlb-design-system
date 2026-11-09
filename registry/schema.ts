@@ -63,14 +63,14 @@ export type RegistryItemFile = z.infer<typeof RegistryItemFileSchema>;
  */
 export const RegistryIndexEntrySchema = z.object({
   name: z.string(),
-  type: z.literal("registry:ui"),
+  type: z.enum(["registry:ui", "registry:lib"]),
   description: z.string(),
   dependencies: z.array(z.string()).optional(),
   registryDependencies: z.array(z.string()).optional(),
   files: z.array(
     z.object({
       path: z.string(),
-      type: z.literal("registry:ui"),
+      type: z.enum(["registry:ui", "registry:lib"]),
       target: z.string().optional(),
     })
   ),

@@ -1,170 +1,163 @@
 # Tokens and Theme
 
-TLB visual identity flows into apps through CSS custom properties declared inside Tailwind v4's `@theme` block. No component file should ever hardcode a hex value. Every color, radius, shadow, and font family resolves from a token.
+Every colour, font, radius and motion value the TLB apps use, and the rules that keep them consistent.
 
-## TLB Brand Tokens
+**Source of truth: tlb-financial-tools `apps/web/src/index.css`.** [`src/styles/tailwind.css`](../src/styles/tailwind.css) is a copy of that file. When a value changes, change the portal first and copy it here. Never fork a value. The one block here that the portal does not have is [Design-system additions](#design-system-additions).
 
-These are the source of truth. They mirror the TLB brand standards document.
+## Files
 
-| Role | Name | Hex | Token |
-|---|---|---|---|
-| Primary | TLB Orange | `#FF6600` | `--color-tlb-orange` |
-| Secondary | TLB Dark Orange | `#FF3300` | `--color-tlb-dark-orange` |
-| Base Dark | TLB Black | `#000000` | `--color-tlb-black` |
-| Near-Black | TLB Charcoal | `#1A1A1A` | `--color-tlb-charcoal` |
-| Base Light | TLB White | `#FFFFFF` | `--color-tlb-white` |
-| Subtle | Light Gray | `#F5F5F5` | `--color-tlb-gray-50` |
-| Accent Tint | Pale Orange | `#FFF8F4` | `--color-tlb-orange-tint` |
+| File | Holds |
+|---|---|
+| `src/styles/tailwind.css` | The whole token set: `@property` slots, `:root` runtime and firm slots, the `@theme` palette and semantic tokens, `@theme static` blocks, the `.dark` track, the base layer, the flapboard and tool-card motion, then the design-system additions. |
+| `index.html` | The Google Fonts link and the pre-paint theme script. See [Fonts](#fonts). |
+| `src/lib/firm-themes.ts` | The firm list and `applyFirmTheme()`. See [12-firm-themes.md](./12-firm-themes.md). |
+| `starter-kit/tailwind.css`, `starter-kit/index.html` | The same two files, ready to drop into a new app. |
 
-## Semantic Mapping to shadcn
+## Fonts
 
-shadcn expects a small set of semantic names. We map TLB tokens onto them.
+Three Google Fonts faces, loaded in `index.html` with `media="print"` and an `onload` swap so they never block first paint:
 
-| shadcn role | Light theme | Dark theme |
-|---|---|---|
-| `background` | TLB White | TLB Black |
-| `foreground` | TLB Black | TLB White |
-| `primary` | TLB Orange | TLB Orange |
-| `primary-foreground` | TLB White | TLB White |
-| `secondary` | TLB Charcoal | TLB Gray-50 |
-| `secondary-foreground` | TLB White | TLB Black |
-| `destructive` | TLB Dark Orange | TLB Dark Orange |
-| `destructive-foreground` | TLB White | TLB White |
-| `muted` | `#F5F5F5` | TLB Charcoal |
-| `muted-foreground` | TLB Charcoal | TLB Gray-50 |
-| `accent` | TLB Orange Tint | TLB Charcoal |
-| `accent-foreground` | TLB Black | TLB White |
-| `border` | `#E5E5E5` | TLB Charcoal |
-| `input` | `#E5E5E5` | TLB Charcoal |
-| `ring` | TLB Orange | TLB Orange |
-
-## The `@theme` Block (Tailwind v4)
-
-The full token definition lives in `src/styles/tailwind.css`. Reference implementation is in `starter-kit/tailwind.css`. The structure:
-
-```css
-@import "tailwindcss";
-
-@theme {
-  /* Brand colors */
-  --color-tlb-orange: #FF6600;
-  --color-tlb-dark-orange: #FF3300;
-  --color-tlb-black: #000000;
-  --color-tlb-charcoal: #1A1A1A;
-  --color-tlb-white: #FFFFFF;
-  --color-tlb-gray-50: #F5F5F5;
-  --color-tlb-orange-tint: #FFF8F4;
-
-  /* Semantic (light theme defaults) */
-  --color-background: var(--color-tlb-white);
-  --color-foreground: var(--color-tlb-black);
-  --color-primary: var(--color-tlb-orange);
-  --color-primary-foreground: var(--color-tlb-white);
-  --color-destructive: var(--color-tlb-dark-orange);
-  --color-destructive-foreground: var(--color-tlb-white);
-  --color-muted: var(--color-tlb-gray-50);
-  --color-muted-foreground: var(--color-tlb-charcoal);
-  --color-accent: var(--color-tlb-orange-tint);
-  --color-accent-foreground: var(--color-tlb-black);
-  --color-border: #E5E5E5;
-  --color-input: #E5E5E5;
-  --color-ring: var(--color-tlb-orange);
-
-  /* Typography */
-  --font-display: "Bebas Neue Pro", "Arial Black", Impact, sans-serif;
-  --font-sans: Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
-
-  /* Radii */
-  --radius: 0.375rem; /* 6px, slightly less round than shadcn default */
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 2px);
-}
-
-/* Dark theme override */
-.dark {
-  --color-background: var(--color-tlb-black);
-  --color-foreground: var(--color-tlb-white);
-  --color-muted: var(--color-tlb-charcoal);
-  --color-muted-foreground: var(--color-tlb-gray-50);
-  --color-accent: var(--color-tlb-charcoal);
-  --color-accent-foreground: var(--color-tlb-white);
-  --color-border: var(--color-tlb-charcoal);
-  --color-input: var(--color-tlb-charcoal);
-}
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+  rel="stylesheet" media="print" onload="this.media='all'"
+/>
 ```
 
-## Light Theme vs Dark Theme
-
-TLB brand guidance splits theme usage by document type. The same logic applies to internal apps:
-
-- **Light theme (default).** Most internal tools: financial dashboards, procurement, people-ops apps, marketing tools.
-- **Dark theme (opt-in).** Security and IT tools where dark is preferred for long sessions, or audit-style report views inside an app.
-
-Switch by toggling the `.dark` class on the `<html>` element. Persist the choice in `localStorage` under the key `tlb-theme`. A standard `ThemeToggle` component lives in `src/components/layout/theme-toggle.tsx`. Do not roll your own.
-
-## Typography Rules
-
-| Use | Class |
-|---|---|
-| Page H1 / hero | `font-display uppercase tracking-tight text-4xl text-tlb-orange` |
-| Section header | `font-display uppercase tracking-tight text-2xl text-tlb-orange` |
-| Card / dialog title | `font-display uppercase tracking-tight text-lg text-foreground` |
-| Body | `font-sans text-base text-foreground` |
-| Help text | `font-sans text-sm text-muted-foreground` |
-| Metadata / footnote | `font-sans text-xs text-muted-foreground` |
-| Inline code / values | `font-mono text-sm` |
-
-Hard rule: Bebas Neue Pro is uppercase by default. Headings using `font-display` always carry `uppercase tracking-tight`.
-
-## Data-Signal Tokens
-
-These are reserved for *financial / operational state*, not chrome. Use them in deltas, signal badges, live-sync chips, and chart series for direction. Never as UI fills for buttons or backgrounds.
-
-| Role | Token | Light | Dark | Use |
-|---|---|---|---|---|
-| Positive | `--color-positive` | `#4ade80` | `#4ade80` | Gains, success, up-trend. |
-| Positive dim | `--color-positive-dim` | `#1c3829` | `#1c3829` | Background fill for settled / positive cells. |
-| Negative | `--color-negative` | `#f87171` | `#f87171` | Losses, failure, down-trend. |
-| Negative dim | `--color-negative-dim` | `#3a2122` | `#3a2122` | Background fill for failed / negative cells. |
-| Warning | `--color-warning` | `#fbbf24` | `#fbbf24` | Caution, pending, stale data. |
-| Warning dim | `--color-warning-dim` | `#3a3320` | `#3a3320` | Background fill for warning / pending state. |
-| Info | `--color-info` | `#58a6ff` | `#58a6ff` | Links, references, informational. |
-| Info dim | `--color-info-dim` | `#16304d` | `#16304d` | Background fill for info callouts. |
-
-## Motion Tokens
-
-Restrained and fast. Use these for any hover, focus, and state-change transition. No springs, no bounces.
-
-| Token | Value | Use |
+| Token | Value | Used for |
 |---|---|---|
-| `--duration-fast` | `120ms` | Hover background fades, dot pulses, icon swaps. |
-| `--duration-base` | `180ms` | Default state changes on inputs, buttons, rows. |
-| `--duration-slow` | `280ms` | Sheets, dialogs, layout shifts. |
-| `--ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` | Default ease for in-and-out transitions. |
-| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Decelerate-only motion (panel reveals). |
-| `--shadow-focus-ring` | `0 0 0 3px rgba(255, 102, 0, 0.30)` | The TLB orange focus glow ring for keyboard focus. |
+| `--font-display` | `"Bebas Neue", "Arial Narrow", Impact, sans-serif` | Page titles (`font-display text-2xl uppercase`), card titles, uppercase labels, KPI values. |
+| `--font-brand` | `"Bebas Neue Pro", "Bebas Neue", ...` | The header wordmark and the flapboard only. Bold italic. |
+| `--font-sans` | `"Inter", ui-sans-serif, system-ui, ...` | Body text. The `body` base rule sets it at `0.875rem`, `line-height: 1.5`. |
+| `--font-mono` | `"JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, ...` | Figures, identifiers, header controls, anything tabular. |
 
-## Color Rules to Enforce
+**Bebas Neue Pro is licensed.** The portal self-hosts one cut, `public/fonts/BebasNeuePro-BoldItalic.otf`, declared with `@font-face` in the token file and preloaded in `index.html`. This public repo does not ship the file, so here `--font-brand` falls back to Bebas Neue. A TLB app copies the file from the portal repo.
 
-These come straight from the TLB brand standards.
+Every weight in the link is used. Do not add Manrope, Helvetica, Arial Black or any other face: older copies of this doc named them, and five tools still declare them standalone. The portal never loaded them.
 
-1. Never render small orange (`#FF6600`) text on white. Body copy is `#000000`. Orange is for headers, buttons, accent bars, links, and badges.
-2. The destructive variant uses TLB Dark Orange (`#FF3300`), not red. TLB does not have a red in its palette.
-3. Do not introduce new colors. If a client palette is referenced inside a tool that surfaces a portco's branded data, scope those colors to the data view, not to the app shell.
+## TLB brand palette
 
-## Spacing, Radii, and Elevation
+Literal colour lives only inside `@theme`. Everything else references a token.
 
-| Token | Value | Use |
+| Token | Value | Notes |
 |---|---|---|
-| `--radius` | 6px | Default for buttons, inputs, cards. |
-| `--radius-lg` | 8px | Dialogs, large cards. |
-| `--radius-sm` | 4px | Badges, chips. |
-| Shadows | shadcn defaults | Do not customize per component. |
+| `--color-tlb-orange` | `#FF6400` | The brand orange. Also the default `--accent`. Older docs said `#FF6600`; the portal is `#FF6400`. |
+| `--color-tlb-dark-orange` | `#FF3300` | `--color-destructive`. |
+| `--color-tlb-black` / `-white` | `#000000` / `#FFFFFF` | |
+| `--color-tlb-charcoal` | `#1A1A1A` | Light-theme `secondary`. |
+| `--color-tlb-gray-50` / `-100` | `#F5F5F5` / `#E5E5E5` | |
+| `--color-tlb-orange-tint` | `#FFF8F4` | Light-theme `accent` (hover wash). |
+| `--color-tlb-green` | `#1F9D55` | Approved / success status. |
 
-Spacing follows Tailwind's default scale. Do not introduce custom spacing tokens.
+## Semantic tokens
 
-## What to Do If You Need a New Token
+These are the only colour names valid in JSX: `bg-background`, `bg-card`, `bg-muted`, `bg-popover`, `bg-primary`, `bg-secondary`, `bg-accent`, `bg-destructive`, `text-foreground`, `text-muted-foreground`, `text-primary`, `text-destructive`, `border-border`, `border-input`, `ring-ring`, each `-foreground` pair, plus the surface and signal families below.
 
-Open a PR against this repository, not against the consuming app. The token gets added in `starter-kit/tailwind.css` and propagated to every TLB app on the next sync. This keeps the source of truth single.
+| Token | Light | Dark |
+|---|---|---|
+| `background` | `#F6F8FA` | `#0d1117` |
+| `foreground` | `#1F2328` | `#f0f6fc` |
+| `card` | `#FFFFFF` | `bg-1 #161b22` mixed 7% with the firm's primary |
+| `popover` | `#FFFFFF` | `#161b22` |
+| `primary` / `-foreground` | `var(--accent)` / `var(--accent-foreground)` | same (the firm accent) |
+| `secondary` | `#1A1A1A` on white | `#1c2128` |
+| `muted` / `-foreground` | `#EFF2F6` / `#57606A` | `#1c2128` / `#8b949e` |
+| `accent` / `-foreground` | `#FFF8F4` / black | `#1c2128` / `#f0f6fc` |
+| `destructive` | `#FF3300` | `#FF3300` |
+| `border` | `#CCD4DB` | `#30363d` |
+| `input` | `#CCD4DB` | `#1c2128` |
+| `ring` | `var(--accent)` | `var(--accent)` |
+
+`primary` and `ring` follow the active firm: they read `--accent`, which `applyFirmTheme()` rewrites. `--accent-foreground` is the label colour chosen to sit on that firm's fill (black for TLB orange).
+
+### Surface ladder
+
+| Utility | Light | Dark | Use |
+|---|---|---|---|
+| `bg-bg-canvas` | `#F6F8FA` | `#0d1117` + 5% firm primary | Page canvas (the `AppShell` root). |
+| `bg-bg-surface` | `#FFFFFF` | `#161b22` + 7% firm primary | Panels. |
+| `bg-bg-raised` | `#EFF2F6` | `#1c2128` | Hover rows, wells, icon tiles. |
+| `bg-bg-overlay` | `#FFFFFF` | `#262c36` | Menus, popovers. |
+| `bg-bg-header` | 10% accent into white | 32% firm primary into `#0d1117` | The sticky portal header (`bg-bg-header/90` + 10px blur). |
+| `border-border-soft` | `#E4E8ED` | `#21262d` | Inner dividers. |
+| `text-fg-faint` | `#6E7781` | `#6e7681` | Tertiary text. |
+| `bg-accent-wash` | 14% accent | 15% accent into `#0d1117` | Selected or active control (Admin link, open app switcher). |
+| `bg-accent-soft` | 74% accent into white | same | |
+| `text-accent-ink` | `var(--accent-ink)` | same | The accent used as text: tuned per theme so acid brands stay legible on white. |
+| `bg-mark` / `bg-mark-hover` | accent ink | accent soft / accent | Chart bars and sparkline fills. Light marks use ink; dark keeps the bright fill. |
+
+## Light theme vs dark theme
+
+Both themes are real products, gated by tests in the portal (contrast for light, a token baseline for dark). Neither is the afterthought.
+
+- **Default is dark.** `<html class="dark">` ships in `index.html`; a pre-paint script reads `localStorage.theme` and swaps to `light` before React mounts, so a light-mode user never sees a dark flash. `next-themes` (`attribute="class"`, `storageKey="theme"`) takes over after mount. The `ThemeToggle` composite flips it.
+- **Two tracks, not one colour dimmed.** `:root` and `@theme` hold the light track; `.dark` holds the dark one. Any palette you add needs both.
+- **Contrast gates.** Light colours are derived against **4.5:1** when used as text and **3:1** when used as a graphical mark. A colour derived for a chart mark is not automatically legible as ink. The portal derives light tracks with a per-colour OKLCH lightness clamp (`scripts/derive-chart-light-tracks.mjs` there): hue and chroma stay, lightness drops until the gate clears.
+- **Re-run the firm theme on theme flip.** The accent, ink and chart slots are theme-specific, so `applyFirmTheme(firm, isDark)` runs on firm change **and** on theme change.
+
+## Data-signal tokens
+
+| Utility | Light | Dark | Meaning |
+|---|---|---|---|
+| `text-positive` | `#00A147` | `#4ade80` | Gain, pass, up. |
+| `text-negative` | `#E56062` | `#f87171` | Loss, fail, down. |
+| `bg-positive-dim` / `bg-negative-dim` | `#1c3829` / `#3a2122` | same | Dark wells for tinted cells. |
+| `text-warning` | `#C27C18` | `#f6ad55` | Aging, caution. Not a loss. |
+| `bg-warning-dim` | warning at 14% | `#3a3320` | Fill behind warning text. |
+| `text-info` | `#2369B9` | `#58a6ff` | Neutral references, in-progress states. 5.5:1 on the light card, 6.9:1 on the dark. |
+| `bg-info-dim` | info at 12% | `#16304d` | Fill behind info text. |
+| `bg-bg-sunken` | `#EFF2F6` | `#0d1117` | A well below the surface: code, raw payloads. |
+
+Status colours are **never firm-tinted**: the colour is the meaning, and firm tinting would paint a warning in Echelon's acid yellow. Colour is never the only carrier of meaning: every status pairs colour with an icon and its written name.
+
+## Chart series
+
+| Token | Resolves to | Notes |
+|---|---|---|
+| `--color-chart-1..4` | `var(--firm-chart-1..4)` | Follow the active firm. TLB: orange, dark orange, cyan (`#33FFFF` dark, `#009B9D` light), slate. |
+| `--color-chart-5` | `#4A4A4A` | Fixed. |
+| `--color-chart-1..4-ink` | `var(--firm-chart-N-ink)` | The series colour used as **text** (legend values, labels). In a `@theme static` block. |
+
+In recharts, pass the variable: `fill="var(--color-chart-1)"`. recharts is the only chart library. A tool that hardcodes its own chart hex is only correct standalone.
+
+## Tool palettes
+
+App-specific palettes from the portal, kept so a rebuilt app matches it exactly. All have light and dark tracks and are never firm-tinted. They sit in `@theme static` so Tailwind keeps them even before a utility uses them.
+
+| Prefix | Owner | Contract |
+|---|---|---|
+| `--color-inv-*` | Invoicing | Seven statuses: drafted, scheduled, sent, partial, paid, unsent, cancelled. Pill text, so 4.5:1. |
+| `--color-cat-1..14` | Expense Tracker | 14 spend categories. **The order is the contract**: cat-N is category N. |
+| `--color-po-slot-1..5`, `--color-po-tooltip` | People Ops | Breakdown slots assigned in fixed order by the API. |
+| `--color-rc-*` | Rate Comparison | Cost and bill series; within / above / below target. |
+| `--color-cp-*` | Capacity Planner | Utilization bands under / healthy / hot / over, plus soft, run rate, pipeline. |
+
+## Radii
+
+`--radius: 0.375rem` (6px). `sm` 4px, `md` 6px, `lg` 8px, `xl` 10px.
+
+## The `@theme static` gotcha
+
+Tailwind v4 only emits theme variables it sees used. A token nothing references yet is tree-shaken out and resolves to **transparent at runtime**, failing silently as a colour. Tokens consumed only through `var()` (chart inks, tool palettes) therefore live in `@theme static`. Drop `static` only once a utility uses the token.
+
+## Design-system additions
+
+Not in the portal. They support composites only this repo ships (`ReviewItemCard`, `AuditTimeline`, `LiveSync`, `SignalBadge`):
+
+- Motion: `--duration-fast|base|slow` (120 / 180 / 280ms), `--ease-standard` `cubic-bezier(0.2, 0, 0, 1)`. (`--ease-out` is deliberately not redefined: it would change Tailwind's `ease-out` utility across the portal.)
+- Utilities: `eyebrow` (uppercase mono label), `figures` (tabular mono numerals), `lift` (2px hover lift), `pip` (status dot).
+
+**A consumer that installs one of those composites must copy this block into its own token file.** The info, warning-dim and bg-sunken colours they also use are in the portal's token file itself since tlb-financial-tools#366.
+
+## Color rules to enforce
+
+1. No hex, `rgb()` or `hsl()` outside an `@theme` block (or `:root` / `.dark` slot definitions in the token file).
+2. Semantic utilities only in JSX. Never `bg-tlb-orange` for an action: use `bg-primary`, so the firm theme applies.
+3. Any token a tool's components use must exist in the **host** CSS (the portal's `index.css`), or it renders unstyled in production. A tool's own `index.css` never loads in the portal.
+4. New palettes get both tracks, derived, not hand-picked.
+
+## What to do if you need a new token
+
+Add it to tlb-financial-tools `apps/web/src/index.css` (both tracks, `static` if nothing uses it yet), then copy the file here and update this table. If only a design-system composite needs it, add it to the additions block and say so in its comment.

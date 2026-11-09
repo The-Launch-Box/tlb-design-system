@@ -70,11 +70,12 @@ src/
 
 ## Color and Typography (Quick Reference)
 
-- Primary: `bg-primary text-primary-foreground` (TLB Orange on white).
+- Primary: `bg-primary text-primary-foreground` (TLB Orange `#FF6400` with a black label; follows the active firm).
 - Destructive: `bg-destructive text-destructive-foreground` (TLB Dark Orange).
 - Body: `text-foreground` on `bg-background`.
-- Display headings: `font-display uppercase tracking-tight`.
-- Body: `font-sans` (Helvetica, Arial).
+- Display headings: `font-display uppercase` (Bebas Neue).
+- Body: `font-sans` (Inter). Figures and identifiers: `font-mono` (JetBrains Mono).
+- Firms differ by colour tokens only (`applyFirmTheme`); never add a per-firm component, font or logo.
 
 ## Copy Rules
 

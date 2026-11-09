@@ -1,120 +1,99 @@
 # Component Catalog
 
-The approved component set for TLB internal apps. Use this table to choose the right primitive before writing any JSX. If a need is not covered here, raise it in PR review rather than inventing a new pattern.
+Every component this repo ships, where it came from, and when to use it. Install any of them with:
 
-## shadcn Primitives (Always Available)
+```bash
+npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/<name>.json
+```
 
-These are installed via the shadcn CLI and live in `src/components/ui/`.
+**Source of truth: tlb-financial-tools.** Where a component exists there, the copy here is that file with its import paths rewritten to `@/components/ui/*` and `@/lib/utils`. Primitives and composites come from `packages/ui` (`@tlb/ui`, the "tool lineage" every tool imports); `dropdown-menu`, `label`, `separator` and `textarea` come from `apps/web/src/components/ui`. Change the portal first, then copy.
 
-| Primitive | When to use | Source |
+Live demo: the component board (`src/pages/components-board.tsx`) and the tool showcase (`src/pages/tool-and-review-showcase.tsx`).
+
+## Primitives (shadcn, `src/components/ui/`)
+
+| Primitive | Origin | When to use |
 |---|---|---|
-| `Button` | Any clickable action. Variants: default, secondary, destructive, outline, ghost, link. | `src/components/ui/button.tsx` |
-| `Input` | Single-line text. Always paired with `Label`. | `src/components/ui/input.tsx` |
-| `Textarea` | Multi-line text. Min 3 rows. | `src/components/ui/textarea.tsx` |
-| `Label` | Every form field has one. Non-negotiable. | `src/components/ui/label.tsx` |
-| `Select` | Single choice from a small known set (under 12 options). | `src/components/ui/select.tsx` |
-| `Combobox` | Single choice from a long or async list. | Built from `Command` + `Popover`. |
-| `Checkbox` | Boolean or multi-select. | `src/components/ui/checkbox.tsx` |
-| `RadioGroup` | Single choice from 2 to 5 visible options. | `src/components/ui/radio-group.tsx` |
-| `Switch` | Boolean toggle. Use over checkbox when the state has an immediate effect. | `src/components/ui/switch.tsx` |
-| `Card` | Default container for a block of content. | `src/components/ui/card.tsx` |
-| `Dialog` | Non-destructive modal interactions. | `src/components/ui/dialog.tsx` |
-| `AlertDialog` | Destructive confirmations. Always. | `src/components/ui/alert-dialog.tsx` |
-| `Sheet` | Side panel for secondary detail or quick edit. | `src/components/ui/sheet.tsx` |
-| `Tooltip` | Short label or shortcut hint on hover or focus. Never for required info. | `src/components/ui/tooltip.tsx` |
-| `Popover` | Compact UI floating off a trigger. Filter pickers, color pickers, inline edit. | `src/components/ui/popover.tsx` |
-| `DropdownMenu` | Action menu attached to a button or row. | `src/components/ui/dropdown-menu.tsx` |
-| `Table` | Static or simple tables. For sortable, filterable, paginated: see DataTable composite. | `src/components/ui/table.tsx` |
-| `Tabs` | Top-level switching inside a page. Never inside a card. | `src/components/ui/tabs.tsx` |
-| `Separator` | Visual divider. Replaces `<hr>`. | `src/components/ui/separator.tsx` |
-| `Badge` | Status label. Variants: default, secondary, destructive, outline. | `src/components/ui/badge.tsx` |
-| `Skeleton` | Loading placeholder. Use one per visible block. | `src/components/ui/skeleton.tsx` |
-| `Sonner` (toast) | Transient confirmation or error. One toast per user action. | `src/components/ui/sonner.tsx` |
-| `Form` | react-hook-form integration. | `src/components/ui/form.tsx` |
-| `Accordion` | Collapsible content groups. Avoid for primary navigation. | `src/components/ui/accordion.tsx` |
-| `Calendar` | Date selection. Pair with `Popover` for date pickers. | `src/components/ui/calendar.tsx` |
-| `Progress` | Determinate progress. For indeterminate, use `Loader2` icon. | `src/components/ui/progress.tsx` |
+| `Button` | `@tlb/ui` | Any clickable action. Variants: default, secondary, destructive, outline, ghost, link. |
+| `Input` | `@tlb/ui` | Single-line text. Always paired with `Label` or `aria-label`. |
+| `Textarea` | portal | Multi-line text. |
+| `Label` | portal | Every form field has one. |
+| `Select` | `@tlb/ui` | Single choice from a short known list. |
+| `Card` | `@tlb/ui` | Default container. `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, `CardFooter`. |
+| `Dialog` | `@tlb/ui` | Non-destructive modal. |
+| `Tooltip` | `@tlb/ui` | Short label on hover or focus. Never for required information. |
+| `DropdownMenu` | portal | Action menu on a button or row; the account menu and `AppSwitcher`. |
+| `Table` | `@tlb/ui` | Simple tables. Sortable or paginated: `DataTable`. |
+| `Tabs` | `@tlb/ui` | Includes the `line` variant `ToolTabs` uses (`tabsListVariants`). |
+| `Separator` | portal | Divider. |
+| `Badge` | `@tlb/ui` | Non-interactive status label. |
+| `Checkbox`, `RadioGroup`, `Switch`, `AlertDialog`, `Sheet`, `Popover`, `Skeleton`, `Sonner`, `Form` | design system | Standard shadcn, restyled with the tokens. Not yet used by the portal. Destructive confirmation is always `AlertDialog`. |
 
-## TLB Composites (Built on shadcn)
+**Two lineages in the portal.** `apps/web/src/components/ui` still holds an older copy of button, badge, dialog, tabs and input (variants in separate `*-variants.ts` files). The tools use `@tlb/ui`, which is what ships here. New code uses this copy.
 
-These live in `src/components/` outside `ui/`. They wrap shadcn primitives with TLB-specific defaults. Every internal app should have these:
+## Tool page (from `@tlb/ui`)
 
-| Composite | Location | Purpose |
-|---|---|---|
-| `AppShell` | `src/components/layout/app-shell.tsx` | Sidebar plus top bar plus content. Holds the route outlet. |
-| `Sidebar` | `src/components/layout/sidebar.tsx` | Left nav. Collapsible. Shows TLB stacked logo at top. |
-| `TopBar` | `src/components/layout/top-bar.tsx` | User menu, theme toggle, environment badge. |
-| `PageHeader` | `src/components/layout/page-header.tsx` | Page title, subtitle, primary action slot. |
-| `ThemeToggle` | `src/components/layout/theme-toggle.tsx` | Light or dark switch with localStorage persistence. |
-| `DataTable` | `src/components/data/data-table.tsx` | @tanstack/react-table plus shadcn Table primitives. Includes pagination, sort, column visibility. |
-| `EmptyState` | `src/components/data/empty-state.tsx` | Icon plus message plus primary action. |
-| `KpiTile` | `src/components/data/kpi-tile.tsx` | Stat card. Label, value, optional delta, optional icon. |
-| `ChartCard` | `src/components/data/chart-card.tsx` | Card with a header slot and a recharts container. |
-| `FormField` | `src/components/forms/form-field.tsx` | Label plus input plus inline error. Wraps shadcn Form primitives. |
-| `ConfirmDialog` | `src/components/feedback/confirm-dialog.tsx` | Standardized AlertDialog for destructive actions. |
-| `Permission` | `src/components/auth/permission.tsx` | Children render only if the MSAL user has the required role. |
-| `PortcoTheme` | `src/components/portco/portco-theme.tsx` | Scoped theme wrapper for portfolio companies (Improv, Echelon). Subtree picks up the portco's tokens. See [docs/12-portco-themes.md](./12-portco-themes.md). |
-| `Sparkline` | `src/components/composites/sparkline.tsx` | Inline bar-chart spark for KPI cards and dense table cells. Values normalized 0..1; trailing bar colored by trend. |
-| `Delta` | `src/components/composites/delta.tsx` | Formatted directional change indicator (▲ +1.24%, ▼ −0.83%). Mono numerals, tabular nums, derives sign from value. |
-| `SignalBadge` | `src/components/composites/signal-badge.tsx` | Financial data-signal pill with colored dot prefix (settled / pending / failed / draft). Distinct from workflow `StatusBadge`. |
-| `LiveSync` | `src/components/composites/live-sync.tsx` | Pulsing-dot freshness chip (ok / stale / down) with status label. Pairs with a topbar or panel header. |
-| `BrandMark` | `src/components/composites/brand-mark.tsx` | Official TLB wordmark inside a black lozenge. Three sizes (sm / md / lg). Renders `/tlb-logo.png` from `public/`. |
-| `ToolLauncher` | `src/components/composites/tool-launcher.tsx` | Card-style launcher tile (icon, title, description, meta) for dashboard tools grids. |
+The pieces every tool is built from. See [14-tlb-financial-tools-blueprint.md](./14-tlb-financial-tools-blueprint.md#6-a-tool-page) for the full contract.
 
-### Tool-page composites (from tlb-financial-tools, 2026-11)
+| Composite | Purpose |
+|---|---|
+| `ToolPage` | Page root and header: `flex flex-col gap-5 py-6`, `h1` in `font-display text-2xl uppercase`, one muted description line, `actions` on the right. |
+| `ToolTabs` | One tab strip under the header: line variant, items `{ value, label, count?, icon? }`, optional right-hand children. You own the active value and render the content. |
+| `Notice`, `LoadingState` | The inline message (`tone`: `info`, `error` with `role="alert"`, `sample`) with optional `action`; a spinner and label with `role="status"`. |
+| `KpiCard` | THE tile: label `text-xs` (never smaller), value, optional `delta` `{ value, positive }`, optional lucide `icon`. |
+| `FilterBar` | Period segmented buttons plus an optional user select. |
+| `DataTable` | @tanstack/react-table + `Table`, sort and paginate built in. |
+| `EmptyState` | Icon, title, description, action. |
+| `FileUpload` | Drop zone and file picker that reads the chosen file as text (CSV imports): `onFile(content, file)`. |
+| `ChartTooltip` | recharts tooltip body in the token colours. |
 
-For a tool hosted inside a portal shell. Demo: `src/pages/tool-and-review-showcase.tsx`.
+## Portal shell (from `apps/web`)
 
-| Composite | Location | Purpose |
-|---|---|---|
-| `ToolPage` | `src/components/composites/tool-page.tsx` | Root of a hosted tool page: display title, one-line description, actions slot, vertical rhythm. Use `PageHeader` for a standalone app instead. |
-| `ToolTabs` | `src/components/composites/tool-tabs.tsx` | Line-variant tab strip with count pills and a right-hand slot. Caller owns the active value and renders the content. |
-| `FilterBar` | `src/components/composites/filter-bar.tsx` | Period segmented buttons plus an optional labelled select (resource, owner). |
-| `Notice`, `LoadingState` | `src/components/composites/notice.tsx` | The one inline message on a tool page (info, error, sample data) with optional action; spinner line for loading. |
-| `AppSwitcher` | `src/components/composites/app-switcher.tsx` | Portal header "Apps" menu: grid of tools, external markers, "All apps" link. Router-agnostic via `renderLink`. |
-| `Flapboard` | `src/components/composites/flapboard.tsx` | Split-flap word board for a dashboard hero. Needs the Flapboard CSS block from `tailwind.css`. |
+| Composite | Purpose |
+|---|---|
+| `AppShell` | Sticky 56px header tinted to the firm, TLB arrow + "ACCELERATED BY THE LAUNCH BOX" wordmark, section label, controls slot; 1280px main column or `fullWidth`; footer line. Auth-free: the portal passes its pickers and account menu as `actions`. |
+| `AppSwitcher` | The header "Apps" menu: two-column tool grid, external-link marker, "All apps" link. Router-agnostic via `renderLink`. |
+| `ThemeToggle` | Light/dark switch (next-themes). |
+| `Flapboard` | Split-flap word board from the dashboard hero. Needs the flapboard CSS in the token file. |
+| `firm-themes` (lib) | `FIRM_THEMES`, `firmThemeByKey()`, `applyFirmTheme()`. Colours-only firm branding. See [12-firm-themes.md](./12-firm-themes.md). |
 
-### Review-flow composites (from Echelon Automation Hub, 2026-11)
+## Design-system composites (not in the portal)
 
-For human-in-the-loop automations: the system proposes, a person approves item by item, then it executes and keeps an audit trail.
+Built on the same tokens; some need the [design-system additions](./03-tokens-and-theme.md#design-system-additions) block.
 
-| Composite | Location | Purpose |
-|---|---|---|
-| `ReviewItemCard` | `src/components/composites/review-item-card.tsx` | One numbered line item to approve: label, reference, status slot, Exclude control, result id, failure panel. |
-| `PayloadList`, `RawJson` | `src/components/composites/payload-list.tsx` | Readable definition list for an unknown record; nested values behind a "View JSON" disclosure. |
-| `FieldDiff` | `src/components/composites/field-diff.tsx` | Field-level before/after of any two values. `fieldChanges()` exported for summaries. |
-| `AuditTimeline` | `src/components/composites/audit-timeline.tsx` | Append-only event history with actor, timestamp, body, raw payload. |
-| `ActorBadge` | `src/components/composites/actor-badge.tsx` | System, model, or named human; distinct by icon, text and color. |
+| Composite | Purpose |
+|---|---|
+| `PageHeader` | Title, subtitle and actions for a standalone app. A tool inside the portal uses `ToolPage`. |
+| `StatusBadge` | Status pill with paired icon: review and workflow statuses. |
+| `Sparkline`, `Delta` | Inline spark bars; signed directional change in mono. |
+| `SignalBadge`, `LiveSync` | Data-signal pill; data-freshness chip. |
+| `BrandMark` | The TLB logo in a black lozenge. |
+| `ToolLauncher` | Launcher tile for a tools grid. The portal dashboard uses its own pinned-tool cards; see the blueprint. |
+| `ReviewItemCard`, `PayloadList`, `FieldDiff`, `AuditTimeline`, `ActorBadge` | Human-in-the-loop review flows (from the Echelon Automation Hub). |
+| Marketing set (`Hero`, `SectionHeader`, `StatCallout`, `QuoteCard`, `ProcessStep`, `FeatureCard`, `CTABanner`, `LogoCloud`, `PrimitivesStrip`) | Token-driven sections for TLB-branded pages. Never per-firm. |
 
-`StatusBadge` now also covers the workflow statuses (`received` through `expired`), and `KpiCard` takes `tone` (status pip) and `emphasis` (primary-color figure). Console utilities `eyebrow`, `figures`, `pip`, `lift` and the `bg-bg-sunken` token live in `tailwind.css`.
+## Picking the right primitive
 
-## Picking the Right Primitive
+- **`Dialog` vs `AlertDialog`:** destructive or irreversible, always `AlertDialog`.
+- **`Dialog` vs `Sheet`:** the action is the focus, `Dialog`; a contextual edit of a row, `Sheet`.
+- **`Tooltip` vs `Popover`:** read-only label, `Tooltip`; anything interactive, `Popover`.
+- **`Badge` vs `Button`:** non-interactive status, `Badge`.
+- **Tabs:** one `ToolTabs` strip per page, directly under the header. No hand-rolled `border-b-2` button rows.
+- **Messages:** `Notice` for every inline error, info or sample-data line; `LoadingState` while the first load is in flight. A reload that fails after data is on screen shows `Notice tone="error"` above the content.
 
-When unsure between similar primitives:
+## Banned component patterns
 
-- **`Select` vs `Combobox`:** under 12 options that fit on screen, use `Select`. Long or async list, use `Combobox`.
-- **`Dialog` vs `Sheet`:** the action is the focus, use `Dialog`. The action is a contextual edit of a list item, use `Sheet`.
-- **`Dialog` vs `AlertDialog`:** destructive or irreversible, always `AlertDialog`. Otherwise `Dialog`.
-- **`Tooltip` vs `Popover`:** label-only and read-only, use `Tooltip`. Anything interactive (filter, picker), use `Popover`.
-- **`Badge` vs `Button`:** non-interactive status, use `Badge`. Interactive, use `Button variant="ghost"` or `Button variant="outline"`.
-- **`Tabs` vs `Sheet`:** tabs are page-level navigation. A side detail panel is a `Sheet`.
+- Custom modals with `position: fixed`; use `Dialog` or `Sheet`.
+- Custom dropdowns with outside-click detection; use `DropdownMenu`.
+- Tooltips via the `title` attribute alone; use `Tooltip`.
+- Native `<select>` styled by hand; use `Select`.
+- Hand-styled `<button>` where `Button` fits.
+- Labels smaller than `text-xs` (`text-[9px]`, `text-[10px]`).
+- Any per-firm component, font or logo. Firms differ by colour tokens only.
 
-## Banned Component Patterns
+## Adding a new composite
 
-- Custom modal implementations using `position: fixed`. Use `Dialog` or `Sheet`.
-- Custom dropdown menus using outside-click detection. Use `DropdownMenu`.
-- Custom tooltips using `title` attribute or hover-only `aria-label`. Use `Tooltip`.
-- Untyped HTML `<select>`. Use shadcn `Select`.
-- `<button>` with hand-rolled styling. Use `Button`.
-- HTML `<dialog>` element. Use `Dialog`.
-
-## Adding a New Composite
-
-A new composite enters `src/components/` only if it meets all of the following:
-
-1. It is or will be used in two or more screens.
-2. It is composed of shadcn primitives and conforms to the TLB tokens.
-3. It is documented with a JSDoc block at the top of the file: purpose, props, example.
-4. It carries a Storybook entry, if the app uses Storybook, or a runnable demo in `src/pages/_internal/components/`.
-
-One-off compositions stay in the feature folder.
+1. Build it in the consumer app first. If two TLB apps will use it, upstream it.
+2. Add it under `src/components/composites/`, register it in `registry/registry.json`, demo it on the component board, list it here.
+3. If it came from tlb-financial-tools, keep that file the source of truth and say so in the JSDoc header.
+4. Any token it needs goes in the portal's `index.css` first, or in the design-system additions block if the portal does not use it.

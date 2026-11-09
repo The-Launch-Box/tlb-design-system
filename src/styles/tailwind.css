@@ -1,19 +1,256 @@
 /*
- * TLB UI Standards: Tailwind v4 entry
+ * TLB Design System: Tailwind v4 entry and the single source of truth for tokens.
  *
- * Drop this file into src/styles/tailwind.css and import it once from src/main.tsx:
+ * SOURCE OF TRUTH: tlb-financial-tools `apps/web/src/index.css`. Everything from
+ * the @property block down to the tool-card motion is that file verbatim, minus
+ * its @source list (which names the portal's sibling workspaces). Change it
+ * there first, then copy it here; never fork the values. See
+ * docs/03-tokens-and-theme.md and docs/14-tlb-financial-tools-blueprint.md.
  *
- *   import "@/styles/tailwind.css";
+ * The one block that is NOT in the portal is "Design-system additions" at the
+ * bottom: tokens and utilities that composites only this repo ships rely on
+ * (info, warning-dim, bg-sunken, motion, eyebrow/figures/lift/pip). A consumer
+ * that installs one of those composites must copy that block too.
  *
- * Tokens here are the single source of truth for TLB visual identity.
- * Do not declare new colors elsewhere. Add new tokens to this file only.
+ * Firm (portco) branding is colours only: each firm is a --firm-<key>-* token
+ * set below, applied at runtime by applyFirmTheme() (src/lib/firm-themes.ts).
+ * There are no per-firm components, fonts or logos.
  */
 
 @import "tailwindcss";
 
+/*
+ * A consumer app must @source every sibling workspace it renders, or Tailwind
+ * never generates their classes. The portal's list, for reference:
+ *   @source "../../<tool>/src";            one per tool workspace
+ *   @source "../../../packages/auth/src";
+ *   @source "../../../packages/ui/src";
+ */
+
+/*
+ * Multi-tenant accent. applyFirmTheme() (firm-themes.ts) copies the active
+ * firm's full token set (accent, accent-foreground, primary, chart-1..4)
+ * into the runtime firm slots below whenever the signed-in/selected firm
+ * changes, retinting controls, header, surfaces, and chart series in one
+ * call. --accent stays a registered @property so its transition still
+ * animates smoothly, e.g. on the dashboard flapboard hover.
+ */
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #FF6400;
+}
+
+/*
+ * Accent as text. Registered so the hero flapboard and firm name animate in
+ * lockstep with --accent on firm change. Tuned per theme (light vs dark) so
+ * bright brands stay legible on white and dark brands stay legible on black.
+ */
+@property --accent-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #E35C00;
+}
+
+:root {
+  --accent: #FF6400;
+  --accent-ink: #E35C00;
+
+  /*
+   * Runtime firm slots. applyFirmTheme() (firm-themes.ts) copies the active
+   * firm's --firm-<key>-* set into these; the semantic tokens chain off them,
+   * so one call retints controls, header, surfaces, and chart series.
+   * Defaults are the TLB brand. --accent is the brand fill (paired with
+   * --accent-foreground); --accent-ink is the accent used as text, tuned per
+   * theme so it reads on both the light and dark canvas.
+   */
+  --accent-foreground: #000000;
+  --firm-primary: #0d1117;
+  /*
+   * Runtime chart slots. applyFirmTheme() overwrites these for a mapped firm and
+   * REMOVES them for TLB, so TLB resolves through this :root / .dark pair. :root
+   * is the light track, .dark the dark one, exactly as --accent-ink does above.
+   */
+  --firm-chart-1: #F35800;
+  --firm-chart-2: #FF3300;
+  --firm-chart-3: #009B9D;
+  --firm-chart-4: #6C808B;
+  --firm-chart-1-ink: #C42800;
+  --firm-chart-2-ink: #C6005A;
+  --firm-chart-3-ink: #007376;
+  --firm-chart-4-ink: #586C77;
+
+  /*
+   * Per-firm brand token sets (source: "Brand Guidelines - Visual 1.xlsx",
+   * 2026-07). Keys match the entity `key` from /api/me/workspace EXACTLY
+   * (note vescape-labs and dx-foundation). bluetrail has no seeded entity
+   * yet; its set activates automatically once one exists. Dark base hexes
+   * that would vanish on the dark canvas are lightened via color-mix, with
+   * the true brand hex kept as the mix input.
+   * chart-N is the dark track. chart-N-light and chart-N-ink-light are the light
+   * tracks, derived by scripts/derive-chart-light-tracks.mjs (per-color OKLCH
+   * lightness clamp). Regenerate with that script rather than editing by hand.
+   */
+  --firm-tlb-accent: #FF6400;
+  --firm-tlb-accent-light: #FF6400;
+  --firm-tlb-ink: #FF6400;
+  --firm-tlb-ink-light: #E35C00;
+  --firm-tlb-accent-foreground: #000000;
+  --firm-tlb-primary: #0d1117;
+  --firm-tlb-chart-1: #FF6400;
+  --firm-tlb-chart-2: #FF3300;
+  --firm-tlb-chart-3: #33FFFF;
+  --firm-tlb-chart-4: #6C808B;
+  --firm-tlb-chart-1-light: #F35800;
+  --firm-tlb-chart-2-light: #FF3300;
+  --firm-tlb-chart-3-light: #009B9D;
+  --firm-tlb-chart-4-light: #6C808B;
+  --firm-tlb-chart-1-ink-light: #C42800;
+  /*
+   * Override, not derived. TLB chart-1 (#FF6400) and chart-2 (#FF3300) are ~10
+   * degrees of hue apart and survive on the dark canvas only on gamut headroom.
+   * At the 4.5:1 ink gate both clamp into near-identical deep reds (ΔE 2.6), so
+   * the pair reads as one series. chart-2's ink hue is rotated -30 degrees away
+   * from chart-1 and re-clamped: ΔE 9.9, still 4.5:1. Light ink only; the mark
+   * track and all of dark keep the brand hue.
+   */
+  --firm-tlb-chart-2-ink-light: #C6005A;
+  --firm-tlb-chart-3-ink-light: #007376;
+  --firm-tlb-chart-4-ink-light: #586C77;
+
+  --firm-echelon-accent: #E0FF00;
+  --firm-echelon-accent-light: #E0FF00;
+  --firm-echelon-ink: #E0FF00;
+  --firm-echelon-ink-light: #6F7D00;
+  --firm-echelon-accent-foreground: #000033;
+  --firm-echelon-primary: #000066;
+  --firm-echelon-chart-1: #E0FF00;
+  --firm-echelon-chart-2: color-mix(in srgb, #0000CC 55%, #FFFFFF);
+  --firm-echelon-chart-3: #F21D1D;
+  --firm-echelon-chart-4: #F2F2F2;
+  --firm-echelon-chart-1-light: #7E9500;
+  --firm-echelon-chart-2-light: #7373E3;
+  --firm-echelon-chart-3-light: #F21D1D;
+  --firm-echelon-chart-4-light: #8B8B8B;
+  --firm-echelon-chart-1-ink-light: #5C7000;
+  --firm-echelon-chart-2-ink-light: #5D5AC8;
+  --firm-echelon-chart-3-ink-light: #CA0000;
+  --firm-echelon-chart-4-ink-light: #696969;
+
+  --firm-improv-accent: #C13C86;
+  --firm-improv-accent-light: #590341;
+  --firm-improv-ink: #C13C86;
+  --firm-improv-ink-light: #590341;
+  --firm-improv-accent-foreground: #FFFFFF;
+  --firm-improv-primary: #003B59;
+  --firm-improv-chart-1: #CC3366;
+  --firm-improv-chart-2: #D86A39;
+  --firm-improv-chart-3: #9CD0D8;
+  --firm-improv-chart-4: color-mix(in srgb, #590341 60%, #FFFFFF);
+  --firm-improv-chart-1-light: #CC3366;
+  --firm-improv-chart-2-light: #D86A39;
+  --firm-improv-chart-3-light: #61949B;
+  --firm-improv-chart-4-light: #9B688D;
+  --firm-improv-chart-1-ink-light: #C0255C;
+  --firm-improv-chart-2-ink-light: #B0460B;
+  --firm-improv-chart-3-ink-light: #3F7078;
+  --firm-improv-chart-4-ink-light: #8A587D;
+
+  --firm-hyperscayle-accent: #01F34F;
+  --firm-hyperscayle-accent-light: #01F34F;
+  --firm-hyperscayle-ink: #01F34F;
+  --firm-hyperscayle-ink-light: #08933D;
+  --firm-hyperscayle-accent-foreground: #000000;
+  --firm-hyperscayle-primary: #0B105B;
+  --firm-hyperscayle-chart-1: #F2055C;
+  --firm-hyperscayle-chart-2: #11EAFB;
+  --firm-hyperscayle-chart-3: #01F34F;
+  --firm-hyperscayle-chart-4: color-mix(in srgb, #0B105B 45%, #FFFFFF);
+  --firm-hyperscayle-chart-1-light: #F2055C;
+  --firm-hyperscayle-chart-2-light: #009AAB;
+  --firm-hyperscayle-chart-3-light: #00A200;
+  --firm-hyperscayle-chart-4-light: #8789AB;
+  --firm-hyperscayle-chart-1-ink-light: #C8003D;
+  --firm-hyperscayle-chart-2-ink-light: #007283;
+  --firm-hyperscayle-chart-3-ink-light: #007900;
+  --firm-hyperscayle-chart-4-ink-light: #656686;
+
+  --firm-vescape-labs-accent: #FF0066;
+  --firm-vescape-labs-accent-light: #FF0066;
+  --firm-vescape-labs-ink: #FF0066;
+  --firm-vescape-labs-ink-light: #D6004F;
+  --firm-vescape-labs-accent-foreground: #000000;
+  --firm-vescape-labs-primary: #330066;
+  --firm-vescape-labs-chart-1: #FF0066;
+  --firm-vescape-labs-chart-2: #FFFF00;
+  --firm-vescape-labs-chart-3: color-mix(in srgb, #660099 65%, #FFFFFF);
+  --firm-vescape-labs-chart-4: #E8E8E8;
+  --firm-vescape-labs-chart-1-light: #FF0066;
+  --firm-vescape-labs-chart-2-light: #948F00;
+  --firm-vescape-labs-chart-3-light: #9C59BD;
+  --firm-vescape-labs-chart-4-light: #8B8B8B;
+  --firm-vescape-labs-chart-1-ink-light: #C8003D;
+  --firm-vescape-labs-chart-2-ink-light: #716B00;
+  --firm-vescape-labs-chart-3-ink-light: #8E4BAE;
+  --firm-vescape-labs-chart-4-ink-light: #696969;
+
+  --firm-dx-foundation-accent: #8585CB;
+  --firm-dx-foundation-accent-light: #8585CB;
+  --firm-dx-foundation-ink: #8585CB;
+  --firm-dx-foundation-ink-light: #5757A8;
+  --firm-dx-foundation-accent-foreground: #000000;
+  --firm-dx-foundation-primary: #163259;
+  --firm-dx-foundation-chart-1: #F02D57;
+  --firm-dx-foundation-chart-2: #8585CB;
+  --firm-dx-foundation-chart-3: #C0D4EA;
+  --firm-dx-foundation-chart-4: #F9DFCA;
+  --firm-dx-foundation-chart-1-light: #F02D57;
+  --firm-dx-foundation-chart-2-light: #8585CB;
+  --firm-dx-foundation-chart-3-light: #7B8EA2;
+  --firm-dx-foundation-chart-4-light: #9F8774;
+  --firm-dx-foundation-chart-1-ink-light: #C90039;
+  --firm-dx-foundation-chart-2-ink-light: #6361A4;
+  --firm-dx-foundation-chart-3-ink-light: #596B7E;
+  --firm-dx-foundation-chart-4-ink-light: #7B6452;
+
+  --firm-bluetrail-accent: #00DBFF;
+  --firm-bluetrail-accent-light: #00DBFF;
+  --firm-bluetrail-ink: #00DBFF;
+  --firm-bluetrail-ink-light: #0092B2;
+  --firm-bluetrail-accent-foreground: #000000;
+  --firm-bluetrail-primary: #074E75;
+  --firm-bluetrail-chart-1: #FF2E78;
+  --firm-bluetrail-chart-2: #00DBFF;
+  --firm-bluetrail-chart-3: #D9DDCA;
+  --firm-bluetrail-chart-4: color-mix(in srgb, #074E75 50%, #FFFFFF);
+  --firm-bluetrail-chart-1-light: #FF2E78;
+  --firm-bluetrail-chart-2-light: #0098BB;
+  --firm-bluetrail-chart-3-light: #8A8D7C;
+  --firm-bluetrail-chart-4-light: #6D91A3;
+  --firm-bluetrail-chart-1-ink-light: #C7004D;
+  --firm-bluetrail-chart-2-ink-light: #007092;
+  --firm-bluetrail-chart-3-ink-light: #676B5A;
+  --firm-bluetrail-chart-4-ink-light: #4B6D7F;
+}
+
+/* Self-hosted brand wordmark face. Single cut: bold italic only. */
+@font-face {
+  font-family: "Bebas Neue Pro";
+  src: url("/fonts/BebasNeuePro-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  transition:
+    --accent 650ms cubic-bezier(0.2, 0, 0, 1),
+    --accent-ink 650ms cubic-bezier(0.2, 0, 0, 1);
+}
+
 @theme {
   /* ===== TLB Brand Palette ===== */
-  --color-tlb-orange: #FF6600;
+  --color-tlb-orange: #FF6400;
   --color-tlb-dark-orange: #FF3300;
   --color-tlb-black: #000000;
   --color-tlb-charcoal: #1A1A1A;
@@ -21,44 +258,58 @@
   --color-tlb-gray-50: #F5F5F5;
   --color-tlb-gray-100: #E5E5E5;
   --color-tlb-orange-tint: #FFF8F4;
+  /* Status accent: approved/success green. One value for both tracks, as
+     apps/reimbursements/src/index.css defines it (StatusBadge "approved"). */
+  --color-tlb-green: #1F9D55;
 
-  /* ===== MVP Dark Surface Palette =====
-   * Used by dark-default internal tools (financial-tools, ops dashboards).
-   * Mirrors the original MVP look: GitHub-dark backgrounds, soft borders,
-   * MONO-led typography. Light theme apps ignore these.
-   */
-  --color-tlb-bg-0: #0d1117;        /* page */
-  --color-tlb-bg-1: #161b22;        /* card */
-  --color-tlb-bg-2: #1c2128;        /* elevated / control */
-  --color-tlb-bg-3: #262c36;        /* highest: menus, popovers, active */
+  /* MVP light surface ladder. Neutral with a faint cool bias so it stays a
+     stage for all seven firm accents, six of which are cold or acid. */
+  --color-tlb-bg-light-0: #F6F8FA;
+  --color-tlb-bg-light-1: #FFFFFF;
+  --color-tlb-bg-light-2: #EFF2F6;
+  /* Data signal, light track. The dark marks below are tuned for the dark
+     canvas and measure 1.74:1 (positive) and 2.77:1 (negative) on a white card,
+     so light needs its own. Derived by the same per-color OKLCH lightness clamp
+     as the chart tracks: L drops only until the mark clears 3:1 vs both the card
+     (#FFFFFF) and the well (#EFF2F6), hue and chroma untouched. The dims are
+     wells rather than marks, so they are not part of this. */
+  --color-tlb-positive-light: #00A147;
+  --color-tlb-negative-light: #E56062;
+  --color-tlb-border-light: #CCD4DB;
+  --color-tlb-border-light-soft: #E4E8ED;
+  --color-tlb-text-light: #1F2328;
+  --color-tlb-muted-light: #57606A;
+  --color-tlb-faint-light: #6E7781;
+
+  /* MVP dark surface palette (mirrors tlb-design-system). */
+  --color-tlb-bg-0: #0d1117;
+  --color-tlb-bg-1: #161b22;
+  --color-tlb-bg-2: #1c2128;
+  --color-tlb-bg-3: #262c36;
   --color-tlb-border-dark: #30363d;
   --color-tlb-border-muted: #21262d;
   --color-tlb-text-dark: #f0f6fc;
   --color-tlb-muted-dark: #8b949e;
-  --color-tlb-faint-dark: #6e7681;  /* tertiary / disabled / placeholder */
-  --color-tlb-positive: #4ade80;    /* green delta / income */
+  --color-tlb-faint-dark: #6e7681;
+  --color-tlb-positive: #4ade80;
   --color-tlb-positive-dim: #1c3829;
-  --color-tlb-negative: #f87171;    /* red delta / expense */
+  --color-tlb-negative: #f87171;
   --color-tlb-negative-dim: #3a2122;
-  --color-tlb-warning: #fbbf24;     /* amber: caution, pending, stale data */
-  --color-tlb-warning-dim: #3a3320;
-  --color-tlb-info: #58a6ff;        /* blue: links, info, references */
-  --color-tlb-info-dim: #16304d;
-  --color-tlb-orange-soft: #ff844d; /* hover-lighten of orange on dark */
-  --color-tlb-orange-dim: #2b1a0f;  /* orange wash on dark (selected/active) */
+  --color-tlb-orange-soft: #ff844d;
+  --color-tlb-orange-dim: #2b1a0f;
 
   /* ===== Semantic Tokens (Light Theme Defaults) ===== */
-  --color-background: var(--color-tlb-white);
-  --color-foreground: var(--color-tlb-black);
+  --color-background: var(--color-tlb-bg-light-0);
+  --color-foreground: var(--color-tlb-text-light);
 
-  --color-card: var(--color-tlb-white);
-  --color-card-foreground: var(--color-tlb-black);
+  --color-card: var(--color-tlb-bg-light-1);
+  --color-card-foreground: var(--color-tlb-text-light);
 
-  --color-popover: var(--color-tlb-white);
-  --color-popover-foreground: var(--color-tlb-black);
+  --color-popover: var(--color-tlb-bg-light-1);
+  --color-popover-foreground: var(--color-tlb-text-light);
 
-  --color-primary: var(--color-tlb-orange);
-  --color-primary-foreground: var(--color-tlb-white);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
 
   --color-secondary: var(--color-tlb-charcoal);
   --color-secondary-foreground: var(--color-tlb-white);
@@ -66,50 +317,81 @@
   --color-destructive: var(--color-tlb-dark-orange);
   --color-destructive-foreground: var(--color-tlb-white);
 
-  --color-muted: var(--color-tlb-gray-50);
-  --color-muted-foreground: var(--color-tlb-charcoal);
+  --color-muted: var(--color-tlb-bg-light-2);
+  --color-muted-foreground: var(--color-tlb-muted-light);
 
   --color-accent: var(--color-tlb-orange-tint);
   --color-accent-foreground: var(--color-tlb-black);
 
-  --color-border: var(--color-tlb-gray-100);
-  --color-input: var(--color-tlb-gray-100);
-  --color-ring: var(--color-tlb-orange);
+  --color-border: var(--color-tlb-border-light);
+  --color-input: var(--color-tlb-border-light);
+  --color-ring: var(--accent);
 
-  /* ===== Dark surface ladder + data signal (semantic) =====
+  /* ===== Surface ladder + data signal (semantic) =====
    * Generated as utilities (bg-bg-raised, text-fg-faint, bg-accent-wash,
-   * text-positive, border-border-soft). Light defaults here; the .dark
+   * text-positive, border-border-soft). Light defaults below; the .dark
    * block remaps them to the GitHub-dark ladder.
+   *
+   * This comment used to end "Dashboard runs dark", and that assumption is
+   * why light mode was never designed: these were shadcn defaults nobody
+   * could reach until the theme toggle shipped. Both themes are now real and
+   * both are gated by tests/e2e (contrast for light, a token baseline for
+   * dark). Do not treat either as the afterthought.
    */
-  --color-bg-canvas: var(--color-tlb-white);
-  --color-bg-sunken: var(--color-tlb-gray-50);
-  --color-bg-surface: var(--color-tlb-white);
-  --color-bg-raised: var(--color-tlb-gray-50);
-  --color-bg-overlay: var(--color-tlb-white);
-  --color-border-soft: var(--color-tlb-gray-100);
-  --color-fg-faint: var(--color-tlb-charcoal);
-  --color-accent-wash: var(--color-tlb-orange-tint);
-  --color-accent-soft: var(--color-tlb-orange-soft);
-  --color-positive: var(--color-tlb-positive);
-  --color-positive-dim: var(--color-tlb-positive-dim);
-  --color-negative: var(--color-tlb-negative);
-  --color-negative-dim: var(--color-tlb-negative-dim);
-  --color-warning: var(--color-tlb-warning);
-  --color-warning-dim: var(--color-tlb-warning-dim);
-  --color-info: var(--color-tlb-info);
-  --color-info-dim: var(--color-tlb-info-dim);
+  --color-bg-canvas: var(--color-tlb-bg-light-0);
+  --color-bg-surface: var(--color-tlb-bg-light-1);
+  --color-bg-raised: var(--color-tlb-bg-light-2);
+  --color-bg-overlay: var(--color-tlb-bg-light-1);
+  --color-border-soft: var(--color-tlb-border-light-soft);
+  --color-fg-faint: var(--color-tlb-faint-light);
+  --color-accent-wash: color-mix(in srgb, var(--accent) 14%, transparent);
+  --color-accent-soft: color-mix(in srgb, var(--accent) 74%, #ffffff);
+  --color-accent-ink: var(--accent-ink);
 
-  /* ===== Chart Series (4+ series only; do not use ad hoc) ===== */
-  --color-chart-1: var(--color-tlb-orange);
-  --color-chart-2: var(--color-tlb-charcoal);
-  --color-chart-3: var(--color-tlb-dark-orange);
-  --color-chart-4: #8C5A2E;
+  /* Data marks (chart bars, sparkline fills). --accent-ink is already the
+     theme-aware "accent as a mark" colour: applyFirmTheme() fills it from the
+     firm's ink track in dark and ink-light in light. The raw fill (--accent)
+     is tuned for a dark canvas and measures about 1.07:1 on white for the acid
+     firms, so light marks must use ink. Buttons keep the fill: their label
+     colour (--accent-foreground) is chosen to sit on it. */
+  --color-mark: var(--accent-ink);
+  --color-mark-hover: color-mix(in srgb, var(--accent-ink) 82%, #000000);
+
+  /* Blueprint's edge vignette. Dark needs black to sink the corners; on a
+     light canvas that same black smudges grey across the page. */
+  --color-vignette: rgba(140, 150, 165, 0.10);
+  /* Blueprint's grid lines: the dark muted grey at 4.5%, same on both tracks. */
+  --color-blueprint-line: color-mix(in srgb, var(--color-tlb-muted-dark) 4.5%, transparent);
+
+  /* Light track. .dark holds the dark one, matching --accent-ink and the
+     chart tracks. These used to resolve identically in both themes, which is
+     how a dark-tuned green ended up at 1.74:1 on the light card. The dims are
+     dark wells and stay shared until something in light actually renders one. */
+  --color-positive: var(--color-tlb-positive-light);
+  --color-positive-dim: var(--color-tlb-positive-dim);
+  --color-negative: var(--color-tlb-negative-light);
+  --color-negative-dim: var(--color-tlb-negative-dim);
+
+  /* Header bar, light: tinted toward the firm's ACCENT, not --firm-primary.
+     --firm-primary is each firm's dark base and every one of them is a deep
+     navy, so mixing it into white rendered the same grey for all seven firms
+     (TLB measured exactly 236,236,236). The accent is the brand hue, so this
+     is what makes a light header read as the firm's. Dark keeps --firm-primary:
+     on a dark canvas the navy is what reads. */
+  --color-bg-header: color-mix(in srgb, var(--accent) 10%, var(--color-tlb-white));
+
+  /* ===== Chart Series (follow the active firm; 4+ series only) ===== */
+  --color-chart-1: var(--firm-chart-1);
+  --color-chart-2: var(--firm-chart-2);
+  --color-chart-3: var(--firm-chart-3);
+  --color-chart-4: var(--firm-chart-4);
   --color-chart-5: #4A4A4A;
 
-  /* ===== Typography ===== */
-  --font-display: "Bebas Neue Pro", "Arial Black", Impact, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  /* ===== Typography (TLB brand: Bebas Neue headings, Inter body) ===== */
+  --font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-brand: "Bebas Neue Pro", "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, ui-monospace, monospace;
 
   /* ===== Radii ===== */
   --radius: 0.375rem;
@@ -117,31 +399,188 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
+}
 
-  /* ===== Motion (restrained, terminal-fast) =====
-   * Keep transitions short and ease-out. No springs, no bounces.
-   * Used by Tailwind v4 utilities like `duration-fast`, `ease-standard`.
-   */
-  --duration-fast: 120ms;
-  --duration-base: 180ms;
-  --duration-slow: 280ms;
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+/* ===== Chart Series ink (the series colour used as TEXT) =====
+ * The mark tokens live in the @theme block above, but these must be `static`.
+ * Tailwind v4 only emits theme variables it sees used, and nothing references
+ * text-chart-N-ink yet, so in a plain @theme these four would be tree-shaken out
+ * of the build and resolve to transparent at runtime. `static` pins them into
+ * the output regardless of use. Drop `static` once a utility consumes them and
+ * the tokens silently vanish again.
+ */
+@theme static {
+  --color-chart-1-ink: var(--firm-chart-1-ink);
+  --color-chart-2-ink: var(--firm-chart-2-ink);
+  --color-chart-3-ink: var(--firm-chart-3-ink);
+  --color-chart-4-ink: var(--firm-chart-4-ink);
+}
 
-  /* ===== Elevation (dark-first, hairline-led) ===== */
-  --shadow-focus-ring: 0 0 0 3px rgba(255, 102, 0, 0.30);
+/* ===== Tool palettes: the warning status + the categorical ramp =====
+ * `static` for the same reason as the chart inks above, and the reason bites
+ * harder here: the two tools that will consume these still hardcode their hex,
+ * so NOTHING references them yet. In a plain @theme every token below would be
+ * tree-shaken out of the build and resolve to transparent at runtime, which
+ * fails silently as a colour rather than loudly as an error.
+ * --color-tlb-orange-dim is already dropped from the build exactly this way.
+ *
+ * This block is the LIGHT track; .dark carries the dark one, matching
+ * --accent-ink and the chart tracks. Light is derived from dark by the same
+ * per-color OKLCH lightness clamp as those tracks (scripts/derive-chart-light-
+ * tracks.mjs): L drops only until the mark clears 3:1 against both the card
+ * (#FFFFFF) and the well (#EFF2F6), hue and chroma untouched, so a colour keeps
+ * its identity across themes. Derive rather than hand-pick.
+ */
+@theme static {
+  /* Cashflow's AR Aged series. Aging invoices are a warning, not a loss, so
+     this cannot reuse --color-negative. Status colours are never firm-tinted:
+     the colour IS the meaning, and firm-tinting would paint it in echelon's
+     acid yellow. */
+  --color-warning: #C27C18;
+  /* Warning as a soft fill behind warning text (pills, row tints). Light is
+     the warning ink at 14% so it reads as the same hue; .dark has a dark well. */
+  --color-warning-dim: color-mix(in srgb, var(--color-warning) 14%, transparent);
+
+  /* Info: neutral references, links, "in progress" states. The invoicing
+     "scheduled" blue, so it already sits in the status family: 5.5:1 on the
+     card, 4.9:1 on the well. Never firm-tinted, like the warning above.
+     Added so tlb-design-system composites (StatusBadge, SignalBadge, LiveSync,
+     the review-flow set) render here; static because nothing in the portal
+     uses them yet. */
+  --color-info: #2369B9;
+  --color-info-dim: color-mix(in srgb, #2369B9 12%, transparent);
+
+  /* A well one step below the surface: code blocks, raw payloads. */
+  --color-bg-sunken: var(--color-tlb-bg-light-2);
+
+  /* Invoicing's five statuses: drafted, scheduled, sent, unsent, cancelled.
+     Grey, blue, green, orange, red. Not firm-tinted, for the same reason as
+     --color-warning above: the colour IS the meaning.
+     This LIGHT track is derived from the dark one below by the same OKLab
+     lightness clamp as the chart tracks, but against a 4.5:1 gate rather than
+     3:1, because these are pill TEXT (WCAG 1.4.3) and not graphical marks.
+     Hue and chroma are untouched, so a status keeps its identity across
+     themes. Every ink clears 4.5:1 on the card, the well, and its own 15%
+     tint; worst pairwise separation is dE 7.0 (unsent vs cancelled). */
+  --color-inv-drafted: #616973;
+  --color-inv-scheduled: #2369B9;
+  --color-inv-sent: #00791E;
+  --color-inv-partial: #0F766E;
+  --color-inv-paid: #7C3AED;
+  --color-inv-unsent: #AC4A00;
+  --color-inv-cancelled: #BA383E;
+
+  /* Expense Tracker's 14 spend categories, in CATEGORY_COLORS declaration order
+     (Airfare, Business Meal, Software & Technology, Memberships &
+     Registrations, Ground Transit, Lodging, Entertainment, Miscellaneous,
+     Training, Postage/Shipping, Phone/Internet, Incidentals, Office Supplies,
+     Mileage).
+     THE ORDER IS THE CONTRACT: cat-N is category N, so reordering these
+     silently recolours every category rather than breaking anything.
+     Categories are not firm-tinted either: 14 distinguishable colours cannot be
+     derived from a firm's 4 slots, and a category that repainted when the user
+     switched entity would be worse than one that did not. Airfare stays
+     Airfare.
+     These do NOT separate cleanly as a categorical palette, in either theme:
+     all-pairs worst is ΔE 4.2 in dark, the mode they were designed for. That is
+     a pre-existing brand decision and is deliberately not fixed here. */
+  --color-cat-1: #0099B3;
+  --color-cat-2: #00A147;
+  /* Already clears the gate on the light card, so the clamp left it alone.
+     The one category whose colour is identical in both themes. */
+  --color-cat-3: #A855F7;
+  --color-cat-4: #CB7700;
+  --color-cat-5: #498DE0;
+  --color-cat-6: #D67102;
+  --color-cat-7: #CC5EDD;
+  --color-cat-8: #7E8DA1;
+  --color-cat-9: #00A069;
+  --color-cat-10: #BA8100;
+  --color-cat-11: #0095CE;
+  --color-cat-12: #DE5EA2;
+  --color-cat-13: #5E9C00;
+  --color-cat-14: #AC70E6;
+
+  /* People Ops breakdown slots (service line, country), light track: the
+     cat-1..5 values above. Mirrored in apps/people-ops/src/index.css. Assigned
+     in fixed order by the API so a filter never repaints a category. */
+  --color-po-slot-1: #0099B3;
+  --color-po-slot-2: #00A147;
+  --color-po-slot-3: #A855F7;
+  --color-po-slot-4: #CB7700;
+  --color-po-slot-5: #498DE0;
+  /* People Ops chart hover box, light: white, lifted off the white card by
+     border and shadow. Mirrored in apps/people-ops/src/index.css. */
+  --color-po-tooltip: var(--color-tlb-bg-light-1);
+
+  /* Rate Comparison series, light track: bill is the brand orange stepped
+     down to reach 3:1 on the white card, cost is the People Ops blue. Both
+     tracks pass the dataviz validator. Mirrored in
+     apps/rate-comparison/src/index.css. */
+  --color-rc-cost: #498DE0;
+  --color-rc-bill: #E05A00;
+  --color-rc-tooltip: var(--color-tlb-bg-light-1);
+  /* Rate Comparison bill ratio status: within / above / below the target.
+     Always shown with an icon and a label, never colour alone. */
+  --color-rc-within: #15803D;
+  --color-rc-above: #A16207;
+  --color-rc-below: #DC2626;
+  /* Capacity Planner utilization bands, light track: under / healthy / hot /
+     over 100%, the validated Rate Comparison steps. Always shown with the
+     percentage, an icon and a label, never colour alone. Mirrored in
+     apps/capacity-planner/src/index.css. */
+  --color-cp-under: #498DE0;
+  --color-cp-healthy: #15803D;
+  --color-cp-hot: #A16207;
+  --color-cp-over: #DC2626;
+  --color-cp-tooltip: var(--color-tlb-bg-light-1);
+  --color-cp-soft: #0099B3;
+  --color-cp-runrate: #A855F7;
+  --color-cp-pipeline: #CB7700;
+}
+
+/* People Ops: tooltips and hover details fade in place instead of sliding.
+   Used as motion-safe:animate-po-fade-in, so reduced-motion readers get none.
+   Mirrored in apps/people-ops/src/index.css and apps/web/src/index.css. */
+@theme {
+  --animate-po-fade-in: po-fade-in 160ms ease-out;
+  /* Rate Comparison uses the same fade. */
+  --animate-rc-fade-in: po-fade-in 160ms ease-out;
+
+  @keyframes po-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 /* ===== Dark Theme Override =====
- * Maps semantic shadcn tokens to the MVP dark surface palette.
- * TLB Orange stays as `primary` (replaces the original cyan accent);
- * positive deltas use --color-tlb-positive.
+ * Financial tools opt into the MVP dark look by adding `class="dark"`
+ * to <html>. Tokens here mirror tlb-design-system.
  */
 .dark {
+  /* TLB default accent-as-text for the dark canvas (bright). Active firms
+     override --accent-ink inline via applyFirmTheme(). */
+  --accent-ink: #FF6400;
+
+  /* The dark chart track. These are the values :root used to hold before the
+     tracks were split, so dark resolves exactly as it did before. */
+  --firm-chart-1: #FF6400;
+  --firm-chart-2: #FF3300;
+  --firm-chart-3: #33FFFF;
+  --firm-chart-4: #6C808B;
+  --firm-chart-1-ink: #FF6400;
+  --firm-chart-2-ink: #FF3300;
+  --firm-chart-3-ink: #33FFFF;
+  --firm-chart-4-ink: #6C808B;
+
   --color-background: var(--color-tlb-bg-0);
   --color-foreground: var(--color-tlb-text-dark);
 
-  --color-card: var(--color-tlb-bg-1);
+  --color-card: color-mix(in srgb, var(--firm-primary) 7%, var(--color-tlb-bg-1));
   --color-card-foreground: var(--color-tlb-text-dark);
 
   --color-popover: var(--color-tlb-bg-1);
@@ -158,335 +597,335 @@
 
   --color-border: var(--color-tlb-border-dark);
   --color-input: var(--color-tlb-bg-2);
-  --color-ring: var(--color-tlb-orange);
+  --color-ring: var(--accent);
 
   /* dark surface ladder + data signal */
-  --color-bg-canvas: var(--color-tlb-bg-0);
-  --color-bg-sunken: var(--color-tlb-bg-0);
-  --color-bg-surface: var(--color-tlb-bg-1);
+  --color-bg-canvas: color-mix(in srgb, var(--firm-primary) 5%, var(--color-tlb-bg-0));
+  --color-bg-surface: color-mix(in srgb, var(--firm-primary) 7%, var(--color-tlb-bg-1));
   --color-bg-raised: var(--color-tlb-bg-2);
   --color-bg-overlay: var(--color-tlb-bg-3);
   --color-border-soft: var(--color-tlb-border-muted);
   --color-fg-faint: var(--color-tlb-faint-dark);
-  --color-accent-wash: var(--color-tlb-orange-dim);
-  --color-accent-soft: var(--color-tlb-orange-soft);
+  --color-bg-header: color-mix(in srgb, var(--firm-primary) 32%, var(--color-tlb-bg-0));
+  --color-accent-wash: color-mix(in srgb, var(--accent) 15%, var(--color-tlb-bg-0));
+  --color-accent-soft: color-mix(in srgb, var(--accent) 74%, #ffffff);
+
+  /* Preserves the shipped dark look exactly: marks were bg-accent-soft at rest
+     and bg-primary on hover. On a dark canvas the bright fill is what reads,
+     so dark keeps it. Only light moves to the ink track. */
+  --color-mark: var(--color-accent-soft);
+  --color-mark-hover: var(--accent);
+
+  --color-vignette: rgba(0, 0, 0, 0.55);
+
   --color-positive: var(--color-tlb-positive);
   --color-positive-dim: var(--color-tlb-positive-dim);
   --color-negative: var(--color-tlb-negative);
   --color-negative-dim: var(--color-tlb-negative-dim);
-  --color-warning: var(--color-tlb-warning);
-  --color-warning-dim: var(--color-tlb-warning-dim);
-  --color-info: var(--color-tlb-info);
-  --color-info-dim: var(--color-tlb-info-dim);
+
+  /* The dark tool palette: the warning status and the categorical ramp whose
+     light track sits in the @theme static block above. Every value here is the
+     hex the tools hardcode TODAY (cashflow COLORS.arAged, expense-tracker
+     CATEGORY_COLORS), so tokenizing them cannot move dark. Same order as the
+     light track, which is CATEGORY_COLORS declaration order. */
+  --color-warning: #f6ad55;
+  --color-warning-dim: #3a3320;
+  /* Info, dark track: 6.9:1 on the card, 5.3:1 on its own dim well. */
+  --color-info: #58a6ff;
+  --color-info-dim: #16304d;
+  --color-bg-sunken: var(--color-tlb-bg-0);
+
+  /* Invoicing statuses, dark track. Worst pairwise separation dE 10.6. */
+  --color-inv-drafted: #8b949e;
+  --color-inv-scheduled: #60a5fa;
+  --color-inv-sent: #4ade80;
+  --color-inv-partial: #2dd4bf;
+  --color-inv-paid: #a78bfa;
+  --color-inv-unsent: #fb923c;
+  --color-inv-cancelled: #f87171;
+
+  --color-cat-1: #22d3ee;
+  --color-cat-2: #4ade80;
+  --color-cat-3: #a855f7;
+  --color-cat-4: #f59e0b;
+  --color-cat-5: #60a5fa;
+  --color-cat-6: #fb923c;
+  --color-cat-7: #e879f9;
+  --color-cat-8: #94a3b8;
+  --color-cat-9: #34d399;
+  --color-cat-10: #fbbf24;
+  --color-cat-11: #38bdf8;
+  --color-cat-12: #f472b6;
+  --color-cat-13: #a3e635;
+  --color-cat-14: #c084fc;
+
+  /* People Ops breakdown slots, dark track. Not the dark cat-1..5: those sit
+     above the 0.67 OKLCH lightness ceiling for categorical marks on the dark
+     card. Same hues with L clamped to 0.66, chroma trimmed only to stay in
+     sRGB. Both tracks pass the dataviz validator (CVD separation 14+,
+     normal-vision 15+, 3:1 against the card). */
+  --color-po-slot-1: #07A4BA;
+  --color-po-slot-2: #03AF58;
+  --color-po-slot-3: #B163FF;
+  --color-po-slot-4: #C98001;
+  --color-po-slot-5: #4F94E8;
+  /* People Ops chart hover box, dark: one surface step above the card. */
+  --color-po-tooltip: var(--color-tlb-bg-3);
+  /* Rate Comparison series, dark track. */
+  --color-rc-cost: #4F94E8;
+  --color-rc-bill: #F05E00;
+  --color-rc-tooltip: var(--color-tlb-bg-3);
+  --color-rc-within: #4ADE80;
+  --color-rc-above: #FACC15;
+  --color-rc-below: #F87171;
+  /* Capacity Planner bands, dark track. */
+  --color-cp-under: #4F94E8;
+  --color-cp-healthy: #4ADE80;
+  --color-cp-hot: #FACC15;
+  --color-cp-over: #F87171;
+  --color-cp-tooltip: var(--color-tlb-bg-3);
+  --color-cp-soft: #07A4BA;
+  --color-cp-runrate: #B163FF;
+  --color-cp-pipeline: #C98001;
 }
 
-/* =================================================================
- * Portco Themes
- *
- * Scoped via [data-portco="<name>"] applied by <PortcoTheme>.
- * Every shadcn primitive inside the scope picks up these tokens
- * automatically. Use only for portco-branded surfaces (client
- * facing pages, exports, branded data views). Never on the TLB
- * app shell. See docs/12-portco-themes.md.
- * ================================================================= */
-
-/* ===== Echelon Risk + Cyber ===== */
-[data-portco="echelon"] {
-  /* Brand */
-  --color-echelon-blue: #000066;
-  --color-echelon-blue-dark: #00004d;
-  --color-echelon-blue-light: #2a3da8;
-  --color-echelon-yellow: #E0FF00;
-  --color-echelon-red: #FF0033;
-  --color-echelon-off-white: #F2F2F2;
-
-  /* Semantic remap */
-  --color-background: var(--color-echelon-blue);
-  --color-foreground: var(--color-echelon-yellow);
-
-  --color-card: var(--color-echelon-blue-dark);
-  --color-card-foreground: var(--color-echelon-off-white);
-
-  --color-popover: var(--color-echelon-blue-dark);
-  --color-popover-foreground: var(--color-echelon-off-white);
-
-  --color-primary: var(--color-echelon-yellow);
-  --color-primary-foreground: var(--color-echelon-blue);
-
-  --color-secondary: var(--color-echelon-blue-light);
-  --color-secondary-foreground: var(--color-echelon-off-white);
-
-  --color-destructive: var(--color-echelon-red);
-  --color-destructive-foreground: var(--color-echelon-off-white);
-
-  --color-muted: var(--color-echelon-blue-dark);
-  --color-muted-foreground: var(--color-echelon-off-white);
-
-  --color-accent: var(--color-echelon-red);
-  --color-accent-foreground: var(--color-echelon-off-white);
-
-  --color-border: var(--color-echelon-blue-light);
-  --color-input: var(--color-echelon-blue-light);
-  --color-ring: var(--color-echelon-yellow);
-
-  /* Typography: condensed grotesk for display, clean grotesk for body.
-   * Barlow Condensed is self-hosted via @fontsource (see src/main.tsx).
-   * Fallbacks are intentionally non-condensed system grotesks: if the
-   * brand font is ever unavailable, headings stay readable rather than
-   * collapsing into the squished Arial Narrow substitute. */
-  --font-display: "Barlow Condensed", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  /* Sharp edges */
-  --radius: 0;
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-}
-
-/* ===== Improv (Improvizations, LLC) ===== */
-[data-portco="improv"] {
-  /* Brand (official guideline palette) */
-  --color-improv-obsidian: #090B0C;
-  --color-improv-surface: #11181B;
-  --color-improv-strategic-blue: #003B59;
-  --color-improv-noir-plum: #590341;
-  --color-improv-raspberry: #CC3366;
-  --color-improv-sienna: #D86A39;
-  --color-improv-aqua: #9CD0D8;
-  --color-improv-off-white: #F2F2F2;
-  --color-improv-paper: #FFFFFF;
-
-  --color-background: var(--color-improv-obsidian);
-  --color-foreground: var(--color-improv-off-white);
-  --color-card: var(--color-improv-surface);
-  --color-card-foreground: var(--color-improv-off-white);
-  --color-popover: var(--color-improv-surface);
-  --color-popover-foreground: var(--color-improv-off-white);
-  --color-primary: var(--color-improv-aqua);
-  --color-primary-foreground: var(--color-improv-obsidian);
-  --color-secondary: var(--color-improv-strategic-blue);
-  --color-secondary-foreground: var(--color-improv-off-white);
-  --color-destructive: var(--color-improv-raspberry);
-  --color-destructive-foreground: var(--color-improv-off-white);
-  --color-muted: var(--color-improv-strategic-blue);
-  --color-muted-foreground: var(--color-improv-off-white);
-  --color-accent: var(--color-improv-raspberry);
-  --color-accent-foreground: var(--color-improv-paper);
-  --color-border: var(--color-improv-strategic-blue);
-  --color-input: var(--color-improv-strategic-blue);
-  --color-ring: var(--color-improv-aqua);
-
-  --font-display: "Lustria", "Iowan Old Style", Georgia, "Times New Roman", serif;
-  --font-sans: "Work Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --radius: 0.125rem;
-  --radius-sm: 0.125rem;
-  --radius-md: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.375rem;
-}
-
-/* ===== Hyperscayle ===== */
-[data-portco="hyperscayle"] {
-  --color-hyper-foundation: #0B105B;
-  --color-hyper-foundation-dark: #070A3D;
-  --color-hyper-pink: #F2055C;
-  --color-hyper-blue: #11EAFB;
-  --color-hyper-green: #01F34F;
-  --color-hyper-red: #FF3300;
-  --color-hyper-off-white: #EAF0FF;
-  --color-hyper-ink: #07091F;
-
-  --color-background: var(--color-hyper-foundation);
-  --color-foreground: var(--color-hyper-off-white);
-  --color-card: var(--color-hyper-foundation-dark);
-  --color-card-foreground: var(--color-hyper-off-white);
-  --color-popover: var(--color-hyper-foundation-dark);
-  --color-popover-foreground: var(--color-hyper-off-white);
-  --color-primary: var(--color-hyper-pink);
-  --color-primary-foreground: var(--color-hyper-ink);
-  --color-secondary: var(--color-hyper-blue);
-  --color-secondary-foreground: var(--color-hyper-foundation);
-  --color-destructive: var(--color-hyper-red);
-  --color-destructive-foreground: var(--color-hyper-off-white);
-  --color-muted: var(--color-hyper-foundation-dark);
-  --color-muted-foreground: var(--color-hyper-blue);
-  --color-accent: var(--color-hyper-green);
-  --color-accent-foreground: var(--color-hyper-foundation);
-  --color-border: var(--color-hyper-blue);
-  --color-input: var(--color-hyper-foundation-dark);
-  --color-ring: var(--color-hyper-blue);
-
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  --radius: 0.25rem;
-  --radius-sm: 0.125rem;
-  --radius-md: 0.25rem;
-  --radius-lg: 0.375rem;
-  --radius-xl: 0.5rem;
-}
-
-/* ===== VEscape ===== */
-[data-portco="vescape"] {
-  --color-vescape-blue: #330066;
-  --color-vescape-blue-dark: #1A0033;
-  --color-vescape-magenta: #FF0066;
-  --color-vescape-yellow: #FFFF00;
-  --color-vescape-purple: #660099;
-  --color-vescape-gray: #E8E8E8;
-  --color-vescape-white: #FFFFFF;
-
-  --color-background: var(--color-vescape-blue);
-  --color-foreground: var(--color-vescape-white);
-  --color-card: var(--color-vescape-blue-dark);
-  --color-card-foreground: var(--color-vescape-white);
-  --color-popover: var(--color-vescape-blue-dark);
-  --color-popover-foreground: var(--color-vescape-white);
-  --color-primary: var(--color-vescape-magenta);
-  --color-primary-foreground: var(--color-vescape-blue-dark);
-  --color-secondary: var(--color-vescape-purple);
-  --color-secondary-foreground: var(--color-vescape-white);
-  --color-destructive: var(--color-vescape-magenta);
-  --color-destructive-foreground: var(--color-vescape-white);
-  --color-muted: var(--color-vescape-blue-dark);
-  --color-muted-foreground: var(--color-vescape-gray);
-  --color-accent: var(--color-vescape-yellow);
-  --color-accent-foreground: var(--color-vescape-blue);
-  --color-border: var(--color-vescape-purple);
-  --color-input: var(--color-vescape-blue-dark);
-  --color-ring: var(--color-vescape-yellow);
-
-  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --radius: 0;
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-}
-
-/* ===== Blue Trail (light brand) ===== */
-[data-portco="bluetrail"] {
-  --color-trail-blue: #074E75;
-  --color-blaze-magenta: #FF2E78;
-  --color-blaze-blue: #00DBFF;
-  --color-trail-dirt: #D9DDCA;
-  --color-trail-white: #F1F1EC;
-  --color-trail-black: #161615;
-
-  --color-background: var(--color-trail-white);
-  --color-foreground: var(--color-trail-black);
-  --color-card: #FFFFFF;
-  --color-card-foreground: var(--color-trail-black);
-  --color-popover: #FFFFFF;
-  --color-popover-foreground: var(--color-trail-black);
-  --color-primary: var(--color-trail-blue);
-  --color-primary-foreground: var(--color-trail-white);
-  --color-secondary: var(--color-blaze-blue);
-  --color-secondary-foreground: var(--color-trail-black);
-  --color-destructive: var(--color-blaze-magenta);
-  --color-destructive-foreground: var(--color-trail-white);
-  --color-muted: var(--color-trail-dirt);
-  --color-muted-foreground: var(--color-trail-black);
-  --color-accent: var(--color-blaze-magenta);
-  --color-accent-foreground: var(--color-trail-black);
-  --color-border: var(--color-trail-dirt);
-  --color-input: var(--color-trail-dirt);
-  --color-ring: var(--color-trail-blue);
-
-  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --radius: 0.5rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-}
-
-/* ===== DX Foundation ===== */
-[data-portco="dxfoundation"] {
-  --color-dxf-black: #05010B;
-  --color-dxf-horizon: #163259;
-  --color-dxf-nebula: #F02D57;
-  --color-dxf-violet: #8585CB;
-  --color-dxf-discovery: #F9DFCA;
-  --color-dxf-aero: #C0D4EA;
-  --color-dxf-nova: #E9C3CD;
-  --color-dxf-exploration: #C2C2E9;
-  --color-dxf-off-white: #FDF6F3;
-
-  --color-background: var(--color-dxf-black);
-  --color-foreground: var(--color-dxf-off-white);
-  --color-card: var(--color-dxf-horizon);
-  --color-card-foreground: var(--color-dxf-off-white);
-  --color-popover: var(--color-dxf-horizon);
-  --color-popover-foreground: var(--color-dxf-off-white);
-  --color-primary: var(--color-dxf-nebula);
-  --color-primary-foreground: var(--color-dxf-black);
-  --color-secondary: var(--color-dxf-violet);
-  --color-secondary-foreground: var(--color-dxf-black);
-  --color-destructive: var(--color-dxf-nebula);
-  --color-destructive-foreground: var(--color-dxf-off-white);
-  --color-muted: var(--color-dxf-horizon);
-  --color-muted-foreground: var(--color-dxf-aero);
-  --color-accent: var(--color-dxf-aero);
-  --color-accent-foreground: var(--color-dxf-black);
-  --color-border: var(--color-dxf-violet);
-  --color-input: var(--color-dxf-horizon);
-  --color-ring: var(--color-dxf-nebula);
-
-  --font-display: "Chivo", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  --radius: 0.5rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-}
-
-/* Portco scopes drop the default uppercase + tight tracking on headings.
-   Each portco controls its own type rules via the composites. */
-[data-portco] h1,
-[data-portco] h2,
-[data-portco] h3,
-[data-portco] h4 {
-  text-transform: none;
-  letter-spacing: normal;
-}
-
-/* ===== Base Layer ===== */
 @layer base {
   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     border-color: var(--color-border);
   }
 
-  html,
   body {
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Display headings: TLB convention is uppercase + tight tracking */
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
+  ::-webkit-scrollbar {
+    width: 6px;
+    background: var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
   }
 
-  /* Visible focus ring for keyboard users */
+  /* Opt-in wide, always-visible, grab-friendly scrollbar for scroll lists
+     (e.g. the PIW resource picker), overriding the thin 6px global bar. Only
+     the ::-webkit-scrollbar pseudo-elements are used: setting the standard
+     `scrollbar-width`/`scrollbar-color` here would switch Chrome to the
+     standard scrollbar model and ignore this custom (wider) styling. */
+  .scrollbar-visible::-webkit-scrollbar {
+    width: 14px;
+    background: var(--color-muted);
+  }
+  .scrollbar-visible::-webkit-scrollbar-track {
+    background: var(--color-muted);
+    border-radius: 7px;
+  }
+  .scrollbar-visible::-webkit-scrollbar-thumb {
+    background: var(--color-muted-foreground);
+    border-radius: 7px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  .scrollbar-visible::-webkit-scrollbar-thumb:hover {
+    background: var(--color-foreground);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+
+  select option {
+    background: var(--color-card);
+  }
+
+  input::placeholder {
+    color: color-mix(in srgb, var(--color-muted-foreground) 40%, transparent);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 2px;
   }
+}
+
+/*
+ * Split-flap firm board used in the dashboard hero. Hovering the H1
+ * spins each cell through random glyphs to the next portco's name and
+ * sets --accent so the whole page repaints in that portco's color.
+ * Implemented in src/components/TlbFlapboard.tsx; styles are scoped via
+ * .flapboard.
+ */
+.flapboard {
+  display: inline-flex;
+  align-items: flex-end;
+  vertical-align: baseline;
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1em;
+  line-height: 1;
+  letter-spacing: 0;
+  perspective: 700px;
+  color: var(--color-accent-ink);
+  /* Ease the firm-name recolor at the same 180ms as the tool-card viz
+   * surfaces (transition-colors duration-[180ms]) so the hero title and the
+   * cards repaint in lockstep instead of the title leading them. */
+  transition: color 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flap-cell {
+  position: relative;
+  flex: 0 0 auto;
+  /* Retuned from 0.64em (JetBrains Mono) for the condensed brand face, whose
+     caps are much narrower. Fixed-width cells are what keep the flip aligned. */
+  width: 0.5em;
+  height: 1em;
+  /* Not clipped. The brand face ships no true italic, so the browser
+     synthesizes the oblique as a skew and every glyph leans past the right
+     edge of its cell, furthest at the cap line. Clipping here shaved those
+     top-right corners off each letter. The 0.5em advance above is unchanged,
+     so spacing and flip alignment are untouched, and the ::after seam rather
+     than a clip box is what reads as the hinge. */
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 260ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.flap-cell.blank {
+  width: 0;
+  opacity: 0;
+}
+.flap-char {
+  display: block;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  /* One fold per half-flip (FOLD_MS in TlbFlapboard.tsx). Ease-in folds the
+     old glyph away; the unfold reuses it, which reads as a weighted flap. */
+  transition: transform 90ms cubic-bezier(0.4, 0, 1, 1);
+  will-change: transform;
+}
+.flapboard.live .flap-cell::after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 50%;
+  height: 1px;
+  /* Split-flap seam. Kept faint on the light canvas so it reads as a hinge
+     line, not a stroke through the letters; the dark canvas keeps the deeper
+     shadow it always had. */
+  background: rgba(10, 12, 16, 0.14);
+  transform: translateY(-0.5px);
+  pointer-events: none;
+}
+
+.dark .flapboard.live .flap-cell::after {
+  background: rgba(7, 10, 14, 0.7);
+}
+
+/*
+ * Dashboard tool-card hover. A card answers the pointer as one gesture: the
+ * sparkline redraws itself left to right and the bars rise in sequence, so the
+ * card reads as live rather than a static picture. Bars stagger through the
+ * --bar-i index set inline; the spark path uses pathLength="1".
+ */
+@keyframes spark-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes spark-fill {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.tool-card .spark-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.tool-card:hover .spark-line,
+.tool-card:focus-visible .spark-line {
+  animation: spark-draw 760ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+.tool-card:hover .spark-area,
+.tool-card:focus-visible .spark-area {
+  animation: spark-fill 760ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+.tool-card .motif-bar {
+  transform-origin: bottom;
+  transform: scaleY(0.82);
+  transition:
+    transform 420ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 180ms ease;
+  transition-delay: calc(var(--bar-i, 0) * 35ms);
+}
+.tool-card:hover .motif-bar,
+.tool-card:focus-visible .motif-bar {
+  transform: scaleY(1);
+}
+.tool-card .motif-run {
+  transition: transform 260ms cubic-bezier(0.2, 0, 0, 1);
+  transition-delay: calc(var(--bar-i, 0) * 12ms);
+}
+.tool-card:hover .motif-run,
+.tool-card:focus-visible .motif-run {
+  transform: scale(0.86);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
+  .flapboard,
+  .flap-char {
+    transition: none;
+  }
+  .tool-card .spark-line,
+  .tool-card .spark-area,
+  .tool-card .motif-bar,
+  .tool-card .motif-run {
+    animation: none !important;
+    transition: none;
+    transform: none;
+  }
+}
+
+/* =================================================================
+ * Design-system additions (NOT in tlb-financial-tools)
+ *
+ * Motion tokens and console utilities used only by composites this repo
+ * ships that the portal does not (ReviewItemCard, AuditTimeline, LiveSync,
+ * SignalBadge). The info, warning-dim and bg-sunken colours used to live
+ * here; the portal has carried them since tlb-financial-tools#366.
+ * A consumer that installs one of those composites must copy this block.
+ * ================================================================= */
+@theme {
+  /* Motion: the portal's own curves (html accent transition, tool cards). */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* =================================================================
@@ -540,61 +979,4 @@
   border-radius: 9999px;
   background-color: currentColor;
   box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 22%, transparent);
-}
-
-/* =================================================================
- * Flapboard (split-flap word board). Used by the Flapboard composite,
- * lifted from the tlb-financial-tools dashboard hero.
- * ================================================================= */
-.flapboard {
-  display: inline-flex;
-  align-items: flex-end;
-  vertical-align: baseline;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-style: italic;
-  line-height: 1;
-  letter-spacing: 0;
-  perspective: 700px;
-  color: var(--color-primary);
-  transition: color var(--duration-base) var(--ease-standard);
-}
-.flap-cell {
-  position: relative;
-  flex: 0 0 auto;
-  width: 0.5em;
-  height: 1em;
-  overflow: visible;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    width 260ms var(--ease-standard),
-    opacity 200ms var(--ease-standard);
-}
-.flap-cell.blank {
-  width: 0;
-  opacity: 0;
-}
-.flap-char {
-  display: block;
-  transform-origin: center center;
-  backface-visibility: hidden;
-  /* One fold per half-flip (FOLD_MS in flapboard.tsx). */
-  transition: transform 90ms cubic-bezier(0.4, 0, 1, 1);
-  will-change: transform;
-}
-.flapboard.live .flap-cell::after {
-  content: "";
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 50%;
-  height: 1px;
-  background: color-mix(in oklab, var(--color-foreground) 14%, transparent);
-  transform: translateY(-0.5px);
-  pointer-events: none;
-}
-.dark .flapboard.live .flap-cell::after {
-  background: color-mix(in oklab, var(--color-background) 70%, transparent);
 }

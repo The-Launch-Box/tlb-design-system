@@ -6,7 +6,6 @@ import {
   FileSpreadsheet,
   Inbox,
   Loader2,
-  Settings,
   ShieldHalf,
   Trash2,
   TrendingUp,
@@ -86,7 +85,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { AppShell } from "@/components/composites/app-shell";
-import { BrandMark } from "@/components/composites/brand-mark";
 import { DataTable } from "@/components/composites/data-table";
 import { Delta } from "@/components/composites/delta";
 import { EmptyState } from "@/components/composites/empty-state";
@@ -96,6 +94,7 @@ import { PageHeader } from "@/components/composites/page-header";
 import { SignalBadge } from "@/components/composites/signal-badge";
 import { Sparkline } from "@/components/composites/sparkline";
 import { StatusBadge } from "@/components/composites/status-badge";
+import { ThemeToggle } from "@/components/composites/theme-toggle";
 import { ToolLauncher } from "@/components/composites/tool-launcher";
 import { ToolAndReviewShowcase } from "@/pages/tool-and-review-showcase";
 
@@ -124,40 +123,11 @@ const COLUMNS: ColumnDef<Demo>[] = [
   },
 ];
 
-const SIDEBAR_LINKS = [
-  { label: "Dashboard", icon: TrendingUp },
-  { label: "Invoices", icon: CircleDollarSign },
-  { label: "Inbox", icon: Inbox },
-  { label: "Settings", icon: Settings },
-];
-
-function Sidebar() {
+function HeaderActions() {
   return (
-    <nav className="flex flex-col gap-1 p-4">
-      <div className="mb-4 flex items-center gap-3">
-        <BrandMark size="md" className="size-12" />
-        <p className="font-display text-xs uppercase tracking-wide text-tlb-orange">
-          TLB Internal
-        </p>
-      </div>
-      {SIDEBAR_LINKS.map(({ label, icon: Icon }) => (
-        <a
-          key={label}
-          href="#"
-          className="flex items-center gap-2 rounded-md px-3 py-2 font-sans text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
-        >
-          <Icon className="size-4" aria-hidden="true" />
-          <span>{label}</span>
-        </a>
-      ))}
-    </nav>
-  );
-}
-
-function TopBar() {
-  return (
-    <div className="flex items-center justify-between px-6 py-3">
+    <>
       <LiveSync>Live, synced 2m ago</LiveSync>
+      <ThemeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
@@ -172,7 +142,7 @@ function TopBar() {
           <DropdownMenuItem>Sign out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
+    </>
   );
 }
 
@@ -214,82 +184,18 @@ function BrandLogoShowcase() {
   return (
     <Card className="mt-8">
       <CardHeader>
-        <CardTitle>Brand and portco logos</CardTitle>
+        <CardTitle>Brand marks</CardTitle>
         <CardDescription>
-          Official brand assets served from <code>/brand/</code>. The Launch Box
-          is the house mark; Echelon and Improv are portco lockups. Reversed and
-          light variants sit on dark surfaces.
+          The Launch Box is the only brand that ships a logo. Firms are themed by
+          colour tokens alone (see Firm themes); they get no logo, font or
+          component of their own.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8">
-        <div>
-          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            The Launch Box
-          </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            <LogoSwatch
-              src={brandAsset("brand/tlb/tlb-square.png")}
-              label="Square"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/tlb/tlb-horizontal.png")}
-              label="Horizontal"
-            />
-          </div>
-        </div>
-
-        <div>
-          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Echelon Risk + Cyber
-          </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            <LogoSwatch
-              src={brandAsset("brand/echelon/echelon-logo-long.svg")}
-              label="Logo, long"
-              surface="dark"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/echelon/echelon-logo-stacked.svg")}
-              label="Logo, stacked"
-              surface="dark"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/echelon/echelon-wordmark-light.svg")}
-              label="Wordmark"
-              surface="dark"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/echelon/echelon-glitch-yellow.svg")}
-              label="Glitch mark"
-              surface="dark"
-            />
-          </div>
-        </div>
-
-        <div>
-          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Improv
-          </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            <LogoSwatch
-              src={brandAsset("brand/improv/improv-logo.png")}
-              label="Logo"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/improv/improv-icon.png")}
-              label="Icon"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/improv/improv-logo-reversed.png")}
-              label="Logo, reversed"
-              surface="dark"
-            />
-            <LogoSwatch
-              src={brandAsset("brand/improv/improv-icon-reversed.png")}
-              label="Icon, reversed"
-              surface="dark"
-            />
-          </div>
+      <CardContent>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <LogoSwatch src={brandAsset("brand/tlb/tlb-arrow.png")} label="Arrow (portal header)" />
+          <LogoSwatch src={brandAsset("brand/tlb/tlb-square.png")} label="Square" />
+          <LogoSwatch src={brandAsset("brand/tlb/tlb-horizontal.png")} label="Horizontal" />
         </div>
       </CardContent>
     </Card>
@@ -298,7 +204,9 @@ function BrandLogoShowcase() {
 
 export function ComponentsBoard() {
   return (
-    <AppShell sidebar={<Sidebar />} topBar={<TopBar />}>
+    <AppShell sectionLabel="Component board" actions={<HeaderActions />} footer="Every component on this page is the one tlb-financial-tools ships.">
+      {/* The page owns its vertical rhythm (py-6), as every portal page does. */}
+      <div className="py-6">
       <PageHeader
         title="Component Board"
         subtitle="Every TLB primitive and composite in one place."
@@ -330,12 +238,8 @@ export function ComponentsBoard() {
         <KpiCard
           label="Net P&amp;L (today)"
           value="+$104.3K"
-          sparkline={
-            <Sparkline
-              values={[0.3, 0.45, 0.4, 0.6, 0.55, 0.7, 0.85]}
-              trend="up"
-            />
-          }
+          delta={{ value: "-1.2% vs yesterday", positive: false }}
+          icon={TrendingUp}
         />
         <KpiCard label="Approvals pending" value="3" icon={CheckCircle} />
       </div>
@@ -674,6 +578,7 @@ export function ComponentsBoard() {
         />
       </div>
       <ToolAndReviewShowcase />
+      </div>
     </AppShell>
   );
 }

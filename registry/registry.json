@@ -8,7 +8,11 @@
       "type": "registry:ui",
       "description": "Primary action element. TLB orange default, charcoal secondary, dark-orange destructive.",
       "files": [
-        { "path": "components/ui/button.tsx", "type": "registry:ui", "target": "components/ui/button.tsx" }
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
       ]
     },
     {
@@ -16,7 +20,11 @@
       "type": "registry:ui",
       "description": "Single-line text input. Always paired with a Label.",
       "files": [
-        { "path": "components/ui/input.tsx", "type": "registry:ui", "target": "components/ui/input.tsx" }
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
       ]
     },
     {
@@ -24,7 +32,11 @@
       "type": "registry:ui",
       "description": "Multi-line text input. Minimum 3 rows.",
       "files": [
-        { "path": "components/ui/textarea.tsx", "type": "registry:ui", "target": "components/ui/textarea.tsx" }
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
       ]
     },
     {
@@ -32,7 +44,11 @@
       "type": "registry:ui",
       "description": "Form label. Required on every form field per TLB a11y rule.",
       "files": [
-        { "path": "components/ui/label.tsx", "type": "registry:ui", "target": "components/ui/label.tsx" }
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        }
       ]
     },
     {
@@ -40,7 +56,11 @@
       "type": "registry:ui",
       "description": "Single-choice selector for short option lists (under 12 items).",
       "files": [
-        { "path": "components/ui/select.tsx", "type": "registry:ui", "target": "components/ui/select.tsx" }
+        {
+          "path": "components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
       ]
     },
     {
@@ -48,7 +68,11 @@
       "type": "registry:ui",
       "description": "Boolean or multi-select checkbox. Checked state uses TLB orange.",
       "files": [
-        { "path": "components/ui/checkbox.tsx", "type": "registry:ui", "target": "components/ui/checkbox.tsx" }
+        {
+          "path": "components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
+        }
       ]
     },
     {
@@ -56,7 +80,11 @@
       "type": "registry:ui",
       "description": "Single choice from 2 to 5 visible options.",
       "files": [
-        { "path": "components/ui/radio-group.tsx", "type": "registry:ui", "target": "components/ui/radio-group.tsx" }
+        {
+          "path": "components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group.tsx"
+        }
       ]
     },
     {
@@ -64,7 +92,11 @@
       "type": "registry:ui",
       "description": "Boolean toggle with immediate effect. Prefer over checkbox when state changes instantly.",
       "files": [
-        { "path": "components/ui/switch.tsx", "type": "registry:ui", "target": "components/ui/switch.tsx" }
+        {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        }
       ]
     },
     {
@@ -72,7 +104,11 @@
       "type": "registry:ui",
       "description": "Default container block. CardTitle uses font-display uppercase per TLB convention.",
       "files": [
-        { "path": "components/ui/card.tsx", "type": "registry:ui", "target": "components/ui/card.tsx" }
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
+        }
       ]
     },
     {
@@ -80,25 +116,41 @@
       "type": "registry:ui",
       "description": "Non-destructive modal. Title is font-display uppercase.",
       "files": [
-        { "path": "components/ui/dialog.tsx", "type": "registry:ui", "target": "components/ui/dialog.tsx" }
+        {
+          "path": "components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
+        }
       ],
-      "registryDependencies": ["button"]
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "alert-dialog",
       "type": "registry:ui",
       "description": "Destructive confirmations. Confirm action defaults to destructive variant.",
       "files": [
-        { "path": "components/ui/alert-dialog.tsx", "type": "registry:ui", "target": "components/ui/alert-dialog.tsx" }
+        {
+          "path": "components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog.tsx"
+        }
       ],
-      "registryDependencies": ["button"]
+      "registryDependencies": [
+        "button"
+      ]
     },
     {
       "name": "sheet",
       "type": "registry:ui",
       "description": "Side panel for secondary detail or quick edit. Defaults to right side.",
       "files": [
-        { "path": "components/ui/sheet.tsx", "type": "registry:ui", "target": "components/ui/sheet.tsx" }
+        {
+          "path": "components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
       ]
     },
     {
@@ -106,7 +158,11 @@
       "type": "registry:ui",
       "description": "Short hover/focus label. Inverted: foreground bg, background text. Never for required info.",
       "files": [
-        { "path": "components/ui/tooltip.tsx", "type": "registry:ui", "target": "components/ui/tooltip.tsx" }
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
       ]
     },
     {
@@ -114,7 +170,11 @@
       "type": "registry:ui",
       "description": "Interactive floating panel: filter pickers, inline edit, date pickers.",
       "files": [
-        { "path": "components/ui/popover.tsx", "type": "registry:ui", "target": "components/ui/popover.tsx" }
+        {
+          "path": "components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
+        }
       ]
     },
     {
@@ -122,7 +182,11 @@
       "type": "registry:ui",
       "description": "Action menu attached to a button or row. Destructive items use text-destructive.",
       "files": [
-        { "path": "components/ui/dropdown-menu.tsx", "type": "registry:ui", "target": "components/ui/dropdown-menu.tsx" }
+        {
+          "path": "components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
       ]
     },
     {
@@ -130,7 +194,11 @@
       "type": "registry:ui",
       "description": "Basic table. Headers are font-display uppercase. For sort/paginate use the DataTable composite.",
       "files": [
-        { "path": "components/ui/table.tsx", "type": "registry:ui", "target": "components/ui/table.tsx" }
+        {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        }
       ]
     },
     {
@@ -138,7 +206,11 @@
       "type": "registry:ui",
       "description": "Top-level switching inside a page. Never nested inside a card.",
       "files": [
-        { "path": "components/ui/tabs.tsx", "type": "registry:ui", "target": "components/ui/tabs.tsx" }
+        {
+          "path": "components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
+        }
       ]
     },
     {
@@ -146,7 +218,11 @@
       "type": "registry:ui",
       "description": "Visual divider. Replaces native hr element.",
       "files": [
-        { "path": "components/ui/separator.tsx", "type": "registry:ui", "target": "components/ui/separator.tsx" }
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx"
+        }
       ]
     },
     {
@@ -154,7 +230,11 @@
       "type": "registry:ui",
       "description": "Status pill. Default uses orange-tint accent. rounded-sm not full.",
       "files": [
-        { "path": "components/ui/badge.tsx", "type": "registry:ui", "target": "components/ui/badge.tsx" }
+        {
+          "path": "components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        }
       ]
     },
     {
@@ -162,7 +242,11 @@
       "type": "registry:ui",
       "description": "Loading placeholder. Use one per visible block.",
       "files": [
-        { "path": "components/ui/skeleton.tsx", "type": "registry:ui", "target": "components/ui/skeleton.tsx" }
+        {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/skeleton.tsx"
+        }
       ]
     },
     {
@@ -170,25 +254,41 @@
       "type": "registry:ui",
       "description": "Toast notifications. Mount Toaster at app root. One toast per user action.",
       "files": [
-        { "path": "components/ui/sonner.tsx", "type": "registry:ui", "target": "components/ui/sonner.tsx" }
+        {
+          "path": "components/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
+        }
       ],
-      "dependencies": ["next-themes"]
+      "dependencies": [
+        "next-themes"
+      ]
     },
     {
       "name": "form",
       "type": "registry:ui",
       "description": "react-hook-form integration. Pairs with zod schema in src/schemas/.",
       "files": [
-        { "path": "components/ui/form.tsx", "type": "registry:ui", "target": "components/ui/form.tsx" }
+        {
+          "path": "components/ui/form.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/form.tsx"
+        }
       ],
-      "registryDependencies": ["label"]
+      "registryDependencies": [
+        "label"
+      ]
     },
     {
       "name": "app-shell",
       "type": "registry:ui",
-      "description": "Top-level layout: sidebar slot + topbar slot + scrollable main. Used at the root of every TLB internal app.",
+      "description": "The TLB portal frame from tlb-financial-tools: sticky header tinted to the active firm, TLB arrow and wordmark, section label, right-hand controls slot, 1280px main column (or full width), footer line.",
       "files": [
-        { "path": "components/composites/app-shell.tsx", "type": "registry:ui", "target": "components/composites/app-shell.tsx" }
+        {
+          "path": "components/composites/app-shell.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/app-shell.tsx"
+        }
       ]
     },
     {
@@ -196,33 +296,54 @@
       "type": "registry:ui",
       "description": "Standardized page header: uppercase TLB-orange title, subtitle, right-aligned actions.",
       "files": [
-        { "path": "components/composites/page-header.tsx", "type": "registry:ui", "target": "components/composites/page-header.tsx" }
+        {
+          "path": "components/composites/page-header.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/page-header.tsx"
+        }
       ]
     },
     {
       "name": "data-table",
       "type": "registry:ui",
-      "description": "Generic table with @tanstack/react-table headless + shadcn Table primitives. Sort + paginate built in.",
+      "description": "Generic table with @tanstack/react-table headless + shadcn Table primitives, as tlb-financial-tools ships it. Sort + paginate built in.",
       "files": [
-        { "path": "components/composites/data-table.tsx", "type": "registry:ui", "target": "components/composites/data-table.tsx" }
+        {
+          "path": "components/composites/data-table.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/data-table.tsx"
+        }
       ],
-      "registryDependencies": ["table", "button"]
+      "registryDependencies": [
+        "table",
+        "button"
+      ]
     },
     {
       "name": "kpi-card",
       "type": "registry:ui",
-      "description": "Headline dashboard metric: label, value, optional delta, sparkline, lucide icon, tone pip, and emphasis.",
+      "description": "THE tile, as tlb-financial-tools ships it: label (text-xs, never smaller), value, optional delta and lucide icon.",
       "files": [
-        { "path": "components/composites/kpi-card.tsx", "type": "registry:ui", "target": "components/composites/kpi-card.tsx" }
+        {
+          "path": "components/composites/kpi-card.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/kpi-card.tsx"
+        }
       ],
-      "registryDependencies": ["card"]
+      "registryDependencies": [
+        "card"
+      ]
     },
     {
       "name": "empty-state",
       "type": "registry:ui",
       "description": "Standardized empty placeholder: icon, headline, description, primary action.",
       "files": [
-        { "path": "components/composites/empty-state.tsx", "type": "registry:ui", "target": "components/composites/empty-state.tsx" }
+        {
+          "path": "components/composites/empty-state.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/empty-state.tsx"
+        }
       ]
     },
     {
@@ -230,16 +351,26 @@
       "type": "registry:ui",
       "description": "Status pill with paired lucide icon. Review statuses (draft, pending, approved, rejected) plus workflow statuses (received through expired) for propose-approve-execute automations.",
       "files": [
-        { "path": "components/composites/status-badge.tsx", "type": "registry:ui", "target": "components/composites/status-badge.tsx" }
+        {
+          "path": "components/composites/status-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/status-badge.tsx"
+        }
       ],
-      "registryDependencies": ["badge"]
+      "registryDependencies": [
+        "badge"
+      ]
     },
     {
       "name": "chart-tooltip",
       "type": "registry:ui",
       "description": "Themed recharts tooltip content: monospace card with one line per series. Accepts a format function for currency/percent rendering.",
       "files": [
-        { "path": "components/composites/chart-tooltip.tsx", "type": "registry:ui", "target": "components/composites/chart-tooltip.tsx" }
+        {
+          "path": "components/composites/chart-tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/chart-tooltip.tsx"
+        }
       ]
     },
     {
@@ -247,7 +378,11 @@
       "type": "registry:ui",
       "description": "Drag-and-drop file dropzone with click-to-browse fallback. Reads selected file as text and forwards via onFile. Suits CSV imports.",
       "files": [
-        { "path": "components/composites/file-upload.tsx", "type": "registry:ui", "target": "components/composites/file-upload.tsx" }
+        {
+          "path": "components/composites/file-upload.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/file-upload.tsx"
+        }
       ]
     },
     {
@@ -255,7 +390,11 @@
       "type": "registry:ui",
       "description": "Inline bar-chart sparkline for KPI cards and dense rows. Values normalized 0..1; trailing bar colored by trend direction.",
       "files": [
-        { "path": "components/composites/sparkline.tsx", "type": "registry:ui", "target": "components/composites/sparkline.tsx" }
+        {
+          "path": "components/composites/sparkline.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/sparkline.tsx"
+        }
       ]
     },
     {
@@ -263,7 +402,11 @@
       "type": "registry:ui",
       "description": "Formatted change indicator with directional marker, mono numerals, and pos/neg tokens. Derives sign from the numeric value.",
       "files": [
-        { "path": "components/composites/delta.tsx", "type": "registry:ui", "target": "components/composites/delta.tsx" }
+        {
+          "path": "components/composites/delta.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/delta.tsx"
+        }
       ]
     },
     {
@@ -271,7 +414,11 @@
       "type": "registry:ui",
       "description": "Data-signal pill for financial transaction state (settled/pending/failed/draft) with a dot prefix. Distinct from workflow StatusBadge.",
       "files": [
-        { "path": "components/composites/signal-badge.tsx", "type": "registry:ui", "target": "components/composites/signal-badge.tsx" }
+        {
+          "path": "components/composites/signal-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/signal-badge.tsx"
+        }
       ]
     },
     {
@@ -279,7 +426,11 @@
       "type": "registry:ui",
       "description": "Pulsing-dot status chip for live data freshness: ok (green), stale (amber), down (red), paired with a status label.",
       "files": [
-        { "path": "components/composites/live-sync.tsx", "type": "registry:ui", "target": "components/composites/live-sync.tsx" }
+        {
+          "path": "components/composites/live-sync.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/live-sync.tsx"
+        }
       ]
     },
     {
@@ -287,7 +438,11 @@
       "type": "registry:ui",
       "description": "Official TLB wordmark inside a black lozenge. Three pre-sized variants for sidebar tile, header chip, and large branded surface.",
       "files": [
-        { "path": "components/composites/brand-mark.tsx", "type": "registry:ui", "target": "components/composites/brand-mark.tsx" }
+        {
+          "path": "components/composites/brand-mark.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/brand-mark.tsx"
+        }
       ]
     },
     {
@@ -295,28 +450,306 @@
       "type": "registry:ui",
       "description": "Card-style launcher tile for a dashboard tools grid: icon chip, title, description, meta line, arrow indicator on hover.",
       "files": [
-        { "path": "components/composites/tool-launcher.tsx", "type": "registry:ui", "target": "components/composites/tool-launcher.tsx" }
+        {
+          "path": "components/composites/tool-launcher.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/tool-launcher.tsx"
+        }
       ]
     },
-    { "name": "hero", "type": "registry:ui", "description": "Token-driven marketing hero. Eyebrow, headline, optional highlight clause, body, actions.", "files": [ { "path": "components/marketing/hero.tsx", "type": "registry:ui", "target": "components/marketing/hero.tsx" } ] },
-    { "name": "section-header", "type": "registry:ui", "description": "Section opener: eyebrow, heading, optional intro.", "files": [ { "path": "components/marketing/section-header.tsx", "type": "registry:ui", "target": "components/marketing/section-header.tsx" } ] },
-    { "name": "stat-callout", "type": "registry:ui", "description": "Display figure plus label on a card surface.", "files": [ { "path": "components/marketing/stat-callout.tsx", "type": "registry:ui", "target": "components/marketing/stat-callout.tsx" } ] },
-    { "name": "quote-card", "type": "registry:ui", "description": "Testimonial card: quote, author, role.", "files": [ { "path": "components/marketing/quote-card.tsx", "type": "registry:ui", "target": "components/marketing/quote-card.tsx" } ] },
-    { "name": "process-step", "type": "registry:ui", "description": "Numbered or phase-labeled step: index, icon, title, description.", "files": [ { "path": "components/marketing/process-step.tsx", "type": "registry:ui", "target": "components/marketing/process-step.tsx" } ] },
-    { "name": "feature-card", "type": "registry:ui", "description": "Icon, title, description card for capability grids.", "files": [ { "path": "components/marketing/feature-card.tsx", "type": "registry:ui", "target": "components/marketing/feature-card.tsx" } ] },
-    { "name": "cta-banner", "type": "registry:ui", "description": "Closing call to action on an accent surface.", "files": [ { "path": "components/marketing/cta-banner.tsx", "type": "registry:ui", "target": "components/marketing/cta-banner.tsx" } ] },
-    { "name": "logo-cloud", "type": "registry:ui", "description": "Row of partner or client marks.", "files": [ { "path": "components/marketing/logo-cloud.tsx", "type": "registry:ui", "target": "components/marketing/logo-cloud.tsx" } ] },
-    { "name": "primitives-strip", "type": "registry:ui", "description": "Buttons plus badges row proving token cascade.", "registryDependencies": ["button", "badge"], "files": [ { "path": "components/marketing/primitives-strip.tsx", "type": "registry:ui", "target": "components/marketing/primitives-strip.tsx" } ] },
-    { "name": "notice", "type": "registry:ui", "description": "Inline tool-page message (info, error, sample) with icon and optional action, plus LoadingState spinner line. From tlb-financial-tools.", "files": [ { "path": "components/composites/notice.tsx", "type": "registry:ui", "target": "components/composites/notice.tsx" } ] },
-    { "name": "tool-page", "type": "registry:ui", "description": "Root of a tool page hosted in a portal: display title, description, actions slot, vertical rhythm. From tlb-financial-tools.", "files": [ { "path": "components/composites/tool-page.tsx", "type": "registry:ui", "target": "components/composites/tool-page.tsx" } ] },
-    { "name": "tool-tabs", "type": "registry:ui", "description": "Line-variant tab strip for tool pages with count pills and a right-hand slot; caller renders content. From tlb-financial-tools.", "registryDependencies": ["tabs"], "files": [ { "path": "components/composites/tool-tabs.tsx", "type": "registry:ui", "target": "components/composites/tool-tabs.tsx" } ] },
-    { "name": "filter-bar", "type": "registry:ui", "description": "Period segmented buttons plus an optional labelled select for a second dimension. From tlb-financial-tools.", "registryDependencies": ["button", "select"], "files": [ { "path": "components/composites/filter-bar.tsx", "type": "registry:ui", "target": "components/composites/filter-bar.tsx" } ] },
-    { "name": "app-switcher", "type": "registry:ui", "description": "Portal header Apps menu: grid of tools, external-link markers, All apps footer. Router-agnostic. From tlb-financial-tools.", "registryDependencies": ["dropdown-menu"], "files": [ { "path": "components/composites/app-switcher.tsx", "type": "registry:ui", "target": "components/composites/app-switcher.tsx" } ] },
-    { "name": "flapboard", "type": "registry:ui", "description": "Split-flap word board for a dashboard hero; cycles words on h1 hover, reduced-motion safe. Needs the Flapboard CSS from tailwind.css. From tlb-financial-tools.", "files": [ { "path": "components/composites/flapboard.tsx", "type": "registry:ui", "target": "components/composites/flapboard.tsx" } ] },
-    { "name": "actor-badge", "type": "registry:ui", "description": "Who did it: system component, AI model, or named human, distinct by icon, text and color. From Echelon Automation Hub.", "registryDependencies": ["badge"], "files": [ { "path": "components/composites/actor-badge.tsx", "type": "registry:ui", "target": "components/composites/actor-badge.tsx" } ] },
-    { "name": "payload-list", "type": "registry:ui", "description": "Definition-list view of an unknown record with RawJson disclosure for nested values. From Echelon Automation Hub.", "files": [ { "path": "components/composites/payload-list.tsx", "type": "registry:ui", "target": "components/composites/payload-list.tsx" } ] },
-    { "name": "field-diff", "type": "registry:ui", "description": "Field-level before/after diff of any two values, one line per changed path. From Echelon Automation Hub.", "files": [ { "path": "components/composites/field-diff.tsx", "type": "registry:ui", "target": "components/composites/field-diff.tsx" } ] },
-    { "name": "audit-timeline", "type": "registry:ui", "description": "Append-only event history: title, ActorBadge, timestamp, body, raw payload. From Echelon Automation Hub.", "registryDependencies": ["actor-badge", "payload-list"], "files": [ { "path": "components/composites/audit-timeline.tsx", "type": "registry:ui", "target": "components/composites/audit-timeline.tsx" } ] },
-    { "name": "review-item-card", "type": "registry:ui", "description": "Numbered approve-before-write line item: label, reference, status slot, Exclude control, result id, failure panel. From Echelon Automation Hub.", "registryDependencies": ["card", "badge", "checkbox", "label"], "files": [ { "path": "components/composites/review-item-card.tsx", "type": "registry:ui", "target": "components/composites/review-item-card.tsx" } ] }
+    {
+      "name": "hero",
+      "type": "registry:ui",
+      "description": "Token-driven marketing hero. Eyebrow, headline, optional highlight clause, body, actions.",
+      "files": [
+        {
+          "path": "components/marketing/hero.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/hero.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section-header",
+      "type": "registry:ui",
+      "description": "Section opener: eyebrow, heading, optional intro.",
+      "files": [
+        {
+          "path": "components/marketing/section-header.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/section-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat-callout",
+      "type": "registry:ui",
+      "description": "Display figure plus label on a card surface.",
+      "files": [
+        {
+          "path": "components/marketing/stat-callout.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/stat-callout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "quote-card",
+      "type": "registry:ui",
+      "description": "Testimonial card: quote, author, role.",
+      "files": [
+        {
+          "path": "components/marketing/quote-card.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/quote-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "process-step",
+      "type": "registry:ui",
+      "description": "Numbered or phase-labeled step: index, icon, title, description.",
+      "files": [
+        {
+          "path": "components/marketing/process-step.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/process-step.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-card",
+      "type": "registry:ui",
+      "description": "Icon, title, description card for capability grids.",
+      "files": [
+        {
+          "path": "components/marketing/feature-card.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/feature-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-banner",
+      "type": "registry:ui",
+      "description": "Closing call to action on an accent surface.",
+      "files": [
+        {
+          "path": "components/marketing/cta-banner.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/cta-banner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud",
+      "type": "registry:ui",
+      "description": "Row of partner or client marks.",
+      "files": [
+        {
+          "path": "components/marketing/logo-cloud.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/logo-cloud.tsx"
+        }
+      ]
+    },
+    {
+      "name": "primitives-strip",
+      "type": "registry:ui",
+      "description": "Buttons plus badges row proving token cascade.",
+      "registryDependencies": [
+        "button",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "components/marketing/primitives-strip.tsx",
+          "type": "registry:ui",
+          "target": "components/marketing/primitives-strip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "notice",
+      "type": "registry:ui",
+      "description": "Inline tool-page message (info, error, sample) with icon and optional action, plus LoadingState spinner line. From tlb-financial-tools.",
+      "files": [
+        {
+          "path": "components/composites/notice.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/notice.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-page",
+      "type": "registry:ui",
+      "description": "Root of a tool page hosted in a portal: display title, description, actions slot, vertical rhythm. From tlb-financial-tools.",
+      "files": [
+        {
+          "path": "components/composites/tool-page.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/tool-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-tabs",
+      "type": "registry:ui",
+      "description": "Line-variant tab strip for tool pages with count pills and a right-hand slot; caller renders content. From tlb-financial-tools.",
+      "registryDependencies": [
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "components/composites/tool-tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/tool-tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "filter-bar",
+      "type": "registry:ui",
+      "description": "Period segmented buttons plus an optional user select, as tlb-financial-tools ships it.",
+      "registryDependencies": [
+        "button",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "components/composites/filter-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/filter-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-switcher",
+      "type": "registry:ui",
+      "description": "Portal header Apps menu: grid of tools, external-link markers, All apps footer. Router-agnostic. From tlb-financial-tools.",
+      "registryDependencies": [
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "components/composites/app-switcher.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/app-switcher.tsx"
+        }
+      ]
+    },
+    {
+      "name": "theme-toggle",
+      "type": "registry:ui",
+      "description": "The portal's light/dark switch (next-themes, storageKey \"theme\", dark by default). Pair with the pre-paint script in starter-kit/index.html.",
+      "files": [
+        {
+          "path": "components/composites/theme-toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/theme-toggle.tsx"
+        }
+      ],
+      "dependencies": [
+        "next-themes"
+      ]
+    },
+    {
+      "name": "firm-themes",
+      "type": "registry:lib",
+      "description": "Colours-only firm theming from tlb-financial-tools: the firm list and applyFirmTheme(), which copies a firm's --firm-<key>-* token set into the runtime slots for the active light or dark track. Needs the --firm-* tokens from src/styles/tailwind.css.",
+      "files": [
+        {
+          "path": "lib/firm-themes.ts",
+          "type": "registry:lib",
+          "target": "lib/firm-themes.ts"
+        }
+      ]
+    },
+    {
+      "name": "flapboard",
+      "type": "registry:ui",
+      "description": "Split-flap word board for a dashboard hero; cycles words on h1 hover, reduced-motion safe. Needs the Flapboard CSS from tailwind.css. From tlb-financial-tools.",
+      "files": [
+        {
+          "path": "components/composites/flapboard.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/flapboard.tsx"
+        }
+      ]
+    },
+    {
+      "name": "actor-badge",
+      "type": "registry:ui",
+      "description": "Who did it: system component, AI model, or named human, distinct by icon, text and color. From Echelon Automation Hub.",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "components/composites/actor-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/actor-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "payload-list",
+      "type": "registry:ui",
+      "description": "Definition-list view of an unknown record with RawJson disclosure for nested values. From Echelon Automation Hub.",
+      "files": [
+        {
+          "path": "components/composites/payload-list.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/payload-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field-diff",
+      "type": "registry:ui",
+      "description": "Field-level before/after diff of any two values, one line per changed path. From Echelon Automation Hub.",
+      "files": [
+        {
+          "path": "components/composites/field-diff.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/field-diff.tsx"
+        }
+      ]
+    },
+    {
+      "name": "audit-timeline",
+      "type": "registry:ui",
+      "description": "Append-only event history: title, ActorBadge, timestamp, body, raw payload. From Echelon Automation Hub.",
+      "registryDependencies": [
+        "actor-badge",
+        "payload-list"
+      ],
+      "files": [
+        {
+          "path": "components/composites/audit-timeline.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/audit-timeline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "review-item-card",
+      "type": "registry:ui",
+      "description": "Numbered approve-before-write line item: label, reference, status slot, Exclude control, result id, failure panel. From Echelon Automation Hub.",
+      "registryDependencies": [
+        "card",
+        "badge",
+        "checkbox",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "components/composites/review-item-card.tsx",
+          "type": "registry:ui",
+          "target": "components/composites/review-item-card.tsx"
+        }
+      ]
+    }
   ]
 }

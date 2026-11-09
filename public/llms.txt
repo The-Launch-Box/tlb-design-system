@@ -24,7 +24,8 @@ Claude Code users: install the plugin instead of reading this file (see docs/13-
 - [Patterns](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/05-patterns.md): page layout, forms, tables, empty states, destructive actions, toasts.
 - [Accessibility](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/06-accessibility.md)
 - [Icons and charts](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/07-icons-and-charts.md)
-- [Portco themes](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/12-portco-themes.md)
+- [Firm themes, colours only](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/12-firm-themes.md)
+- [Blueprint: rebuilding tlb-financial-tools](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/14-tlb-financial-tools-blueprint.md)
 - [Brand and voice](https://raw.githubusercontent.com/The-Launch-Box/tlb-design-system/main/docs/00-brand-and-voice.md)
 
 ## Optional

@@ -6,7 +6,9 @@ Claude Code reads this file at session start. Treat it as the operating contract
 
 The full TLB UI standards live in `./AGENTS.md` and `./docs/`. Read `AGENTS.md` first. Read the relevant `docs/` file before generating non-trivial UI.
 
-For installation, `docs/02-installation.md`. For tokens, `docs/03-tokens-and-theme.md`. For component picks, `docs/04-component-catalog.md`. For patterns, `docs/05-patterns.md`.
+For installation, `docs/02-installation.md`. For tokens, `docs/03-tokens-and-theme.md`. For component picks, `docs/04-component-catalog.md`. For patterns, `docs/05-patterns.md`. For firm theming, `docs/12-firm-themes.md`. For how the tlb-financial-tools portal is assembled, `docs/14-tlb-financial-tools-blueprint.md`.
+
+tlb-financial-tools is the source of truth: `src/styles/tailwind.css` copies its `apps/web/src/index.css`, and the shared components copy its `packages/ui`. Change the portal first, then copy here.
 
 ## Quick Constraints
 

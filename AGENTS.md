@@ -4,6 +4,12 @@ This file is the primary contract between TLB and any AI coding assistant workin
 
 If you are an AI agent and this file is present in the workspace, treat it as authoritative. Where this file conflicts with general best practices, this file wins.
 
+## Source of Truth
+
+The TLB look is defined by the **tlb-financial-tools** portal. This repo is its published copy: the token file, fonts, primitives and composites here are the portal's, and [docs/14-tlb-financial-tools-blueprint.md](./docs/14-tlb-financial-tools-blueprint.md) describes how the portal is assembled. When the two differ, the portal is right and this repo is out of date.
+
+**Firms are colours only.** Every firm (TLB and each portfolio company) uses the same components, fonts and TLB logo. A firm changes the accent, the header tint and the chart series through its `--firm-<key>-*` token set and `applyFirmTheme()`. Never build a per-firm component, page, font or logo. See [docs/12-firm-themes.md](./docs/12-firm-themes.md).
+
 ## Stack You Are Allowed to Use
 
 | Layer | Choice | Notes |
@@ -55,7 +61,6 @@ src/
 │   ├── layout/        AppShell, Sidebar, TopBar, PageHeader.
 │   ├── forms/         Field wrappers built on react-hook-form.
 │   ├── data/          DataTable, EmptyState, ChartCard, KpiTile.
-│   ├── portco/<name>/ Portco-scoped composites (Improv, Echelon). See docs/12-portco-themes.md.
 │   └── feature/<name>/  Feature-specific composites.
 ├── lib/
 │   ├── utils.ts       The cn() helper. Do not delete.
@@ -80,7 +85,9 @@ Never duplicate a component that already exists. Search `src/components/` first.
 
 ## Standard Patterns (Cheat Sheet)
 
-- **Page layout:** `AppShell` > `PageHeader` > one or more `Card` blocks.
+- **Page layout:** `AppShell` > `ToolPage` (title, one description line, actions) > `ToolTabs` > content. `ToolPage` owns `py-6`; never put vertical padding on the app wrapper. A standalone app outside the portal may use `PageHeader` instead.
+- **Messages:** `Notice` (info, error, sample) for inline messages; `LoadingState` for the first load.
+- **Tiles:** `KpiCard`, labels `text-xs`, never smaller.
 - **Form:** `react-hook-form` + zod resolver, `Form` and `FormField` from shadcn, `Button type="submit"` with loading state via `disabled` and a `Loader2` icon from lucide.
 - **Table:** `@tanstack/react-table` headless instance + shadcn `Table`, `TableHeader`, `TableRow`, `TableCell`. Paginated by default. Sortable columns expose a header button with `ArrowUpDown` icon.
 - **Empty state:** Use `EmptyState` composite from `src/components/data/`. Always includes an icon, a one-sentence explanation, and a primary action.
@@ -90,12 +97,16 @@ Never duplicate a component that already exists. Search `src/components/` first.
 
 ## Color and Typography (Quick Reference)
 
-- Primary action: `bg-tlb-orange text-white` (token: `--color-tlb-orange` = `#FF6600`).
-- Destructive: `bg-destructive text-destructive-foreground` (mapped to TLB dark orange `#FF3300`).
-- Body text on light: `text-foreground` resolves to `#000000`.
-- Body text on dark: `text-foreground` resolves to `#FFFFFF` under the `.dark` class.
-- Display / heading fonts: `font-display` resolves to Bebas Neue Pro, with Arial Black as fallback. Headers use uppercase.
-- Body: `font-sans` resolves to Helvetica, Arial, sans-serif.
+- Primary action: `bg-primary text-primary-foreground`. Resolves to the active firm's accent; for TLB, orange `#FF6400` with a **black** label. Never `bg-tlb-orange` in JSX: it would ignore the firm theme.
+- Accent as text: `text-accent-ink` (tuned per theme). Selected or active control: `border-primary bg-accent-wash text-accent-ink`.
+- Destructive: `bg-destructive text-destructive-foreground` (`#FF3300`).
+- Surfaces: `bg-bg-canvas` (page), `bg-card`, `bg-bg-raised` (hover, wells), `bg-bg-overlay` (menus). Text: `text-foreground`, `text-muted-foreground`, `text-fg-faint`.
+- Data signal only: `text-positive`, `text-negative`, `text-warning`. Charts: `var(--color-chart-1)` to `var(--color-chart-5)`.
+- Both themes are real. Dark is the default (`<html class="dark">`); light is a full track. Check every screen in both.
+- Display: `font-display` is **Bebas Neue**, always uppercase (page titles `font-display text-2xl uppercase`).
+- Body: `font-sans` is **Inter**, 14px. Figures, identifiers and header controls: `font-mono`, **JetBrains Mono**.
+- Wordmark only: `font-brand`, Bebas Neue Pro Bold Italic (licensed, self-hosted).
+- No other faces. Older docs named Manrope, Helvetica and Arial Black; they are wrong.
 
 Full token map is in [docs/03-tokens-and-theme.md](./docs/03-tokens-and-theme.md).
 
@@ -122,4 +133,3 @@ Full token map is in [docs/03-tokens-and-theme.md](./docs/03-tokens-and-theme.md
 Stop and ask the human. Do not invent a component pattern. Do not add a library to bridge a gap. Do not silently violate any rule in this file to make the task easier.
 
 The point of these standards is repeatability. Diverging silently costs the firm more than asking costs you.
-   
