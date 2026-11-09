@@ -125,8 +125,8 @@ import { Button } from "@/components/ui/button";
 export default function Smoke() {
   return (
     <div className="p-8 space-y-4">
-      <h1 className="text-3xl font-display uppercase text-tlb-orange">TLB UI Smoke Test</h1>
-      <p className="text-foreground">Body text in Helvetica.</p>
+      <h1 className="text-3xl font-display uppercase text-accent-ink">TLB UI Smoke Test</h1>
+      <p className="text-foreground">Body text in Inter.</p>
       <Button>Primary action</Button>
       <Button variant="secondary">Secondary action</Button>
       <Button variant="destructive">Destructive action</Button>
@@ -137,7 +137,7 @@ export default function Smoke() {
 }
 ```
 
-Run `npm run dev`. The "TLB UI Smoke Test" header must render orange (`#FF6600`). Buttons must use the TLB palette. Delete the smoke route once verified.
+Run `npm run dev`. The "TLB UI Smoke Test" header must render in Bebas Neue, orange (`#FF6400` on dark, `#E35C00` on light), and the body in Inter. Buttons must use the TLB palette. Delete the smoke route once verified.
 
 ## 7. Configure Linting
 

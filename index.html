@@ -1,16 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23FF6600'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='Arial Black' font-size='14' fill='white'%3ET%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="./brand/tlb/tlb-arrow.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Fonts: the same three Google Fonts faces as the tlb-financial-tools portal
+      (apps/web/index.html), loaded without blocking first paint. The header
+      wordmark face, Bebas Neue Pro Bold Italic, is a licensed file the portal
+      self-hosts at /fonts/BebasNeuePro-BoldItalic.otf; it is not published here,
+      so this site falls back to Bebas Neue for --font-brand.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,900&family=Chivo:wght@400;700;900&family=Inter:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Lustria&family=Sora:wght@400;600;800&family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <title>TLB Design System</title>
+    <script>
+      // Apply the saved theme before first paint, as the portal does, so a
+      // light-mode reader never sees a flash of the default dark canvas.
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var root = document.documentElement.classList;
+          if (saved === "light") {
+            root.remove("dark");
+            root.add("light");
+          } else {
+            root.add("dark");
+          }
+        } catch (err) {
+          /* localStorage blocked: keep the default dark class. */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

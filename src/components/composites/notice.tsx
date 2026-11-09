@@ -1,19 +1,3 @@
-/**
- * Notice and LoadingState
- *
- * The one inline message for tool pages: a muted band with an icon, the text,
- * and an optional action. The icon changes with the tone so the meaning never
- * rides on colour alone. LoadingState is a spinner plus one line of text,
- * announced politely as a status.
- *
- * Source: tlb-financial-tools `packages/ui/src/tool/notice.tsx`.
- *
- * @example
- *   <Notice tone="error" action={<Button size="sm" onClick={retry}>Retry</Button>}>
- *     Could not load firms.
- *   </Notice>
- *   <LoadingState label="Loading firms..." />
- */
 import type { ReactNode } from "react";
 import { FlaskConical, Info, Loader2, ShieldAlert } from "lucide-react";
 
@@ -28,6 +12,11 @@ interface NoticeProps {
   className?: string;
 }
 
+/**
+ * The one inline message for tool pages: a muted band with an icon, the text,
+ * and an optional action. The icon changes with the tone so the meaning never
+ * rides on colour alone.
+ */
 function Notice({ tone, children, action, className }: NoticeProps) {
   const Icon = tone === "error" ? ShieldAlert : tone === "sample" ? FlaskConical : Info;
   return (
@@ -53,6 +42,7 @@ interface LoadingStateProps {
   className?: string;
 }
 
+/** A spinner and a line of text, announced politely as a status. */
 function LoadingState({ label, className }: LoadingStateProps) {
   return (
     <p

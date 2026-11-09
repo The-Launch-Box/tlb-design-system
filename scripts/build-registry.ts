@@ -97,7 +97,9 @@ function main(): void {
           : manifestUrl(dep)
       ),
       files: filesWithContent.map(({ file, content }) => ({
-        path: `components/ui/${file.path.split("/").pop()}`,
+        path: file.path.startsWith("lib/")
+          ? file.path
+          : `components/ui/${file.path.split("/").pop()}`,
         content,
         type: file.type,
         target: file.target ?? `components/ui/${file.path.split("/").pop()}`,

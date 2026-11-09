@@ -1,29 +1,7 @@
-/**
- * ToolTabs
- *
- * The one tab strip for tool pages: Radix Tabs in the `line` variant, with an
- * optional count pill per tab and a right-hand slot on the same row. The
- * caller keeps the active value in its own state and renders the matching
- * content below (no TabsContent here), so an existing `switch (activeTab)`
- * keeps working.
- *
- * A `value` that matches no item leaves every tab unselected, for a view that
- * lives outside the strip (e.g. settings opened from the page heading).
- *
- * Source: tlb-financial-tools `packages/ui/src/tool/tool-tabs.tsx`.
- *
- * @example
- *   <ToolTabs
- *     aria-label="Cashflow view"
- *     value={tab}
- *     onValueChange={setTab}
- *     items={[{ value: "weekly", label: "Weekly" }, { value: "alerts", label: "Alerts", count: 3 }]}
- *   />
- */
 import type { ReactNode } from "react";
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface ToolTabItem<T extends string> {
   value: T;
@@ -45,6 +23,15 @@ interface ToolTabsProps<T extends string> {
   className?: string;
 }
 
+/**
+ * The one tab strip for tool pages: Radix Tabs in the `line` variant, with an
+ * optional count pill per tab. The caller keeps the active value in its own
+ * state and renders the matching content below (no `TabsContent` here), so an
+ * existing `switch (activeTab)` keeps working.
+ *
+ * A `value` that matches no item leaves every tab unselected, for a view that
+ * lives outside the strip (e.g. settings opened from the page heading).
+ */
 function ToolTabs<T extends string>({
   value,
   onValueChange,

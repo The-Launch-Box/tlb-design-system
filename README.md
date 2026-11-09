@@ -1,29 +1,26 @@
 # TLB Design System
 
-The single source of truth for user-interface decisions across all internal applications at The Launch Box (TLB), and the home of the production component library that ships those decisions as code.
+The published UI of The Launch Box (TLB): the tokens, fonts, components and patterns of the **tlb-financial-tools** portal, packaged so any TLB app can install them and any agent can rebuild the portal from them. tlb-financial-tools is the source of truth; this repo is its copy. See [docs/14-tlb-financial-tools-blueprint.md](./docs/14-tlb-financial-tools-blueprint.md).
 
 ## What This Is
 
 - **Standards** — what UI library we use, how it is configured, the tokens, the patterns, the do's and don'ts. Authored in `docs/`.
-- **Components** — 22 shadcn primitives + 6 TLB composites, re-styled with the TLB token system. Source lives in `src/components/`.
+- **Components**: the shadcn primitives and TLB composites the portal ships, plus the firm-theme helper. Source lives in `src/components/` and `src/lib/`.
 - **Registry** — a shadcn custom registry hosted on GitHub Pages. Consumer repos install components via the shadcn CLI.
 
 ## Live Demo and Brand Pages
 
 The design system ships a live demo board on GitHub Pages: **https://the-launch-box.github.io/tlb-design-system/**
 
-The board uses hash routing, so every surface has a stable deep link. Each portfolio company page is themed to its own brand palette and typography, composed from the shared marketing composites in `src/components/marketing/`.
+The board uses hash routing, so every surface has a stable deep link.
 
 | Surface | Link |
 |---|---|
 | Board home | https://the-launch-box.github.io/tlb-design-system/#/ |
 | Component catalog | https://the-launch-box.github.io/tlb-design-system/#/components |
-| Echelon Risk + Cyber | https://the-launch-box.github.io/tlb-design-system/#/echelon |
-| Improv | https://the-launch-box.github.io/tlb-design-system/#/improv |
-| Hyperscayle | https://the-launch-box.github.io/tlb-design-system/#/hyperscayle |
-| VEscape | https://the-launch-box.github.io/tlb-design-system/#/vescape |
-| Blue Trail Digital | https://the-launch-box.github.io/tlb-design-system/#/bluetrail |
-| DX Foundation | https://the-launch-box.github.io/tlb-design-system/#/dxfoundation |
+| Firm themes | https://the-launch-box.github.io/tlb-design-system/#/firm-themes |
+
+Firms are themed by colour tokens only: every firm gets the same components, fonts and TLB logo. The per-portco brand pages, fonts and logos this repo used to carry were removed on 2026-11-09 (see [docs/12-firm-themes.md](./docs/12-firm-themes.md)).
 
 ## Stack
 

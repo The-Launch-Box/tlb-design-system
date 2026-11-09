@@ -1,18 +1,3 @@
-/**
- * DataTable
- *
- * Generic data table built on @tanstack/react-table headless instance + the
- * shadcn Table primitives. Supports column sorting and pagination out of the
- * box. Columns are passed in by the caller using the @tanstack/react-table
- * ColumnDef type.
- *
- * @example
- *   const columns: ColumnDef<Invoice>[] = [
- *     { accessorKey: "id", header: "Invoice" },
- *     { accessorKey: "amount", header: "Amount" },
- *   ];
- *   <DataTable columns={columns} data={invoices} pageSize={20} />
- */
 import * as React from "react";
 import {
   type ColumnDef,

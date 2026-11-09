@@ -7,6 +7,21 @@ Versioning uses a calendar scheme: `YYYY.Q.PATCH`.
 
 ## [Unreleased]
 
+### Changed (2026-11-09: tlb-financial-tools is the source of truth)
+- `src/styles/tailwind.css` is now the portal's `apps/web/src/index.css`: orange `#FF6400`, light and dark tracks, firm token sets, tool palettes, flapboard and card motion. A marked "Design-system additions" block keeps `info`, `warning-dim`, `bg-sunken`, motion and the console utilities for composites the portal does not use.
+- Fonts match the portal: Bebas Neue, Inter, JetBrains Mono from Google Fonts; Bebas Neue Pro only for the wordmark. Manrope, Helvetica, Arial Black and Barlow are gone.
+- Primitives `badge`, `button`, `card`, `dialog`, `input`, `select`, `table`, `tabs`, `tooltip` and composites `chart-tooltip`, `data-table`, `empty-state`, `file-upload`, `filter-bar`, `kpi-card`, `notice`, `tool-page`, `tool-tabs` replaced with the `@tlb/ui` copies; `dropdown-menu`, `label`, `separator`, `textarea` with the portal's.
+- `AppShell` rebuilt as the portal header and column (auth-free props).
+- Docs 00, 02, 03, 04, 06, AGENTS.md, both SKILL.md files, README, llms.txt and the starter kit rewritten to match.
+
+### Added (2026-11-09)
+- `firm-themes` registry lib item (`applyFirmTheme`), `theme-toggle` composite, Firm themes page.
+- `docs/12-firm-themes.md` and `docs/14-tlb-financial-tools-blueprint.md`; `starter-kit/index.html`.
+
+### Removed (2026-11-09)
+- Portco components, pages, token blocks and the Echelon and Improv logos; `docs/12-portco-themes.md`; `@fontsource/barlow-condensed`.
+- `KpiCard` `sparkline`, `tone`, `emphasis` props and `FilterBar` `options` props (the portal's versions do not have them).
+
 ### Added
 - Claude Code plugin marketplace (`.claude-plugin/`, `skills/tlb-design-system/SKILL.md`) so any TLB repo's agents load the design system; `docs/13-agent-access.md`, `starter-kit/claude-settings.json`, `public/llms.txt`.
 - Tool-page composites from tlb-financial-tools: `ToolPage`, `ToolTabs`, `FilterBar`, `Notice`/`LoadingState`, `AppSwitcher`, `Flapboard`.

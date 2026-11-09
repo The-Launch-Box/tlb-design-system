@@ -25,7 +25,8 @@ interface FileUploadProps {
   label: string;
   sublabel?: string;
   hint?: string;
-  onFile: (content: string) => void;
+  /** The file's text; the File too, for callers that want its name. */
+  onFile: (content: string, file: File) => void;
   className?: string;
 }
 
@@ -44,7 +45,7 @@ function FileUpload({
     (file: File | undefined) => {
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (e) => onFile(e.target?.result as string);
+      reader.onload = (e) => onFile(e.target?.result as string, file);
       reader.readAsText(file);
     },
     [onFile]

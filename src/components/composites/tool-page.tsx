@@ -1,27 +1,9 @@
-/**
- * ToolPage
- *
- * The root of every tool page hosted in the TLB portal. Owns the vertical
- * rhythm (`py-6`) and the header row: display title, one-line description,
- * and a right-hand actions slot. A tool embedded in the portal clears the
- * portal header without needing its own standalone wrapper.
- *
- * Use PageHeader for full apps with breadcrumbs; use ToolPage for a tool
- * rendered inside a host shell.
- *
- * Source: tlb-financial-tools `packages/ui/src/tool/tool-page.tsx`.
- *
- * @example
- *   <ToolPage title="Cashflow" description="13-week view by entity" actions={<Button>Export</Button>}>
- *     ...
- *   </ToolPage>
- */
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
 interface ToolPageProps {
-  /** The tool's name, as the tool registry shows it. */
+  /** The tool's name, as the registry shows it. */
   title: ReactNode;
   /** One line under the title. Keep the tool's own wording. */
   description?: ReactNode;
@@ -31,6 +13,12 @@ interface ToolPageProps {
   className?: string;
 }
 
+/**
+ * The root of every tool page. Owns the vertical rhythm (`py-6`), so a tool
+ * embedded in the portal clears the portal header without the standalone
+ * `App.tsx` wrapper, which the portal never renders. See docs/ui-structure.md,
+ * "Page layout".
+ */
 function ToolPage({ title, description, actions, children, className }: ToolPageProps) {
   return (
     <div data-slot="tool-page" className={cn("flex flex-col gap-5 py-6", className)}>

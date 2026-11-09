@@ -93,9 +93,9 @@ export function ToolAndReviewShowcase() {
               periods={["MTD", "QTD", "YTD"]}
               selectedPeriod={period}
               onPeriodChange={setPeriod}
-              options={["All", "A. Rivera", "J. Chen"]}
-              selectedOption={owner}
-              onOptionChange={setOwner}
+              users={["All", "A. Rivera", "J. Chen"]}
+              selectedUser={owner}
+              onUserChange={setOwner}
             />
             <Notice tone="sample">Sample data. Connect an entity to see real figures.</Notice>
             <Notice
@@ -126,9 +126,9 @@ export function ToolAndReviewShowcase() {
       </Card>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <KpiCard label="Awaiting review" value={4} icon={Hourglass} tone="warning" emphasis />
-        <KpiCard label="In progress" value={2} icon={Play} tone="info" />
-        <KpiCard label="Needs attention" value={1} tone="negative" />
+        <KpiCard label="Awaiting review" value={4} icon={Hourglass} />
+        <KpiCard label="In progress" value={2} icon={Play} />
+        <KpiCard label="Needs attention" value={1} delta={{ value: "+1 today", positive: false }} />
       </div>
 
       <Card>

@@ -1,18 +1,3 @@
-/**
- * EmptyState
- *
- * Standardized "no results" or "nothing here yet" block. Always pairs an icon,
- * a one-sentence headline, optional description, and a primary action. Used
- * in lists, tables, and dashboards.
- *
- * @example
- *   <EmptyState
- *     icon={Inbox}
- *     title="No requests yet"
- *     description="When a teammate submits a request, it shows up here."
- *     action={<Button>New request</Button>}
- *   />
- */
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 

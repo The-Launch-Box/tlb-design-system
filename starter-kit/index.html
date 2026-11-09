@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/tlb-arrow.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Fonts: Bebas Neue (display), Inter (body), JetBrains Mono (figures), from
+      Google Fonts without blocking first paint. The header wordmark face,
+      Bebas Neue Pro Bold Italic, is a licensed file: copy it from the
+      tlb-financial-tools repo to public/fonts/ and keep the preload below.
+    -->
+    <link rel="preload" href="/fonts/BebasNeuePro-BoldItalic.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <title>TLB Operating System</title>
+    <script>
+      // Apply the saved theme before first paint, as the portal does, so a
+      // light-mode reader never sees a flash of the default dark canvas.
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var root = document.documentElement.classList;
+          if (saved === "light") {
+            root.remove("dark");
+            root.add("light");
+          } else {
+            root.add("dark");
+          }
+        } catch (err) {
+          /* localStorage blocked: keep the default dark class. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

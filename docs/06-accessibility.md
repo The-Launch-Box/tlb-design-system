@@ -9,7 +9,7 @@ TLB internal apps target WCAG 2.2 AA. The bar applies to every TLB-built interna
 3. **Tab order is logical and complete.** Test with the keyboard alone. Every focusable element receives focus in document order.
 4. **Focus rings are visible.** Do not remove the shadcn focus styles. Custom buttons retain `focus-visible:ring`.
 5. **Color is never the sole carrier of meaning.** Status badges include text. Form errors include text under the field, not just a red border.
-6. **Contrast meets AA.** 4.5:1 for body text, 3:1 for large text and UI components. TLB orange (`#FF6600`) on white is only AA at 24px and up. Body copy stays black.
+6. **Contrast meets AA.** 4.5:1 for body text, 3:1 for large text and UI components. TLB orange (`#FF6400`) on white is 3.0:1, so it only passes as large text or a UI mark. Body copy stays black.
 7. **Motion respects `prefers-reduced-motion`.** Tailwind v4 supports this via `motion-safe:` and `motion-reduce:` variants.
 8. **Trapped focus inside modals.** Dialog and AlertDialog handle this automatically. Do not add custom modal containers that defeat this.
 
@@ -41,17 +41,22 @@ Toasts via Sonner use an `aria-live="polite"` region. Errors that block submissi
 
 ## Color Contrast Quick Reference
 
+Measured on the tlb-financial-tools tokens (WCAG 2.1 relative luminance).
+
 | Pair | Ratio | Verdict |
 |---|---|---|
-| `#000` on `#FFF` | 21.0:1 | AA + AAA, always |
-| `#000` on `#F5F5F5` | 19.3:1 | AA + AAA |
-| `#FF6600` on `#FFF` | 3.1:1 | AA at 18pt or 14pt bold only; never body |
-| `#FF6600` on `#000` | 6.8:1 | AA, OK for body |
-| `#FF3300` on `#FFF` | 4.5:1 | Exactly AA, OK for body |
-| `#FFF` on `#1A1A1A` | 17.4:1 | AA + AAA |
-| `#F5F5F5` on `#1A1A1A` | 15.3:1 | AA + AAA |
+| `foreground #1F2328` on card `#FFFFFF` | 15.8:1 | AA + AAA |
+| `foreground #1F2328` on canvas `#F6F8FA` | 14.8:1 | AA + AAA |
+| `muted-foreground #57606A` on `#FFFFFF` | 6.4:1 | AA, body OK |
+| dark `foreground #f0f6fc` on `#0d1117` | 17.4:1 | AA + AAA |
+| dark `muted-foreground #8b949e` on card `#161b22` | 5.6:1 | AA, body OK |
+| black label on TLB orange `#FF6400` (the primary button) | 7.1:1 | AA, body OK |
+| TLB orange `#FF6400` on dark canvas `#0d1117` | 6.4:1 | AA, body OK |
+| TLB orange `#FF6400` on `#FFFFFF` | 3.0:1 | Large text and UI marks only. Never body. |
+| TLB accent ink `#E35C00` on `#FFFFFF` | 3.6:1 | Large text only (the display-font headings it is used for). |
+| destructive `#FF3300` on `#FFFFFF`, or white on it | 3.7:1 | Large text and UI marks only. Pair with an icon and words. |
 
-The TLB Orange on white edge case is the most common failure. The fix is always: use orange for headers, accents, and primary buttons (the button text is white on orange, which is fine because the button background is orange and the text is white at 4.5:1 against orange... actually that combination is closer to 2.9:1 which fails AA, so the button uses Charcoal foreground at minimum size or relies on bold and the button shape for legibility).
+The rule that follows: on the light canvas, orange and red never carry body-size text. The primary button is legible because its label is **black** on orange (`--accent-foreground`), not white. Light-theme accent text uses `text-accent-ink`, reserved for headings at `text-2xl` and up and for figures in the display face.
 
 Important: the primary Button variant renders `--color-primary-foreground` (white) on `--color-primary` (orange). This passes AA only above 18pt or 14pt bold per WCAG large-text rules. We accept this because shadcn buttons render at `text-sm font-medium` (14px medium) which falls into the failing zone for small text. Mitigation: keep button labels short and use the `lg` size for primary CTAs where the screen design allows. For body-sized actions, prefer `outline` or `secondary` variants which keep dark text on light fills.
 
