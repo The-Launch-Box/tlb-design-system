@@ -133,4 +133,3 @@ Full token map is in [docs/03-tokens-and-theme.md](./docs/03-tokens-and-theme.md
 Stop and ask the human. Do not invent a component pattern. Do not add a library to bridge a gap. Do not silently violate any rule in this file to make the task easier.
 
 The point of these standards is repeatability. Diverging silently costs the firm more than asking costs you.
-   

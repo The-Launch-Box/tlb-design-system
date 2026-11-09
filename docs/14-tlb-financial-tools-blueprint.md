@@ -245,7 +245,7 @@ Card hover is one gesture: the sparkline redraws left to right and the bars rise
 
 ```bash
 grep -rn "#[0-9a-fA-F]\{3,8\}\b\|rgb(\|hsl(" apps/<tool>/src --include="*.tsx"   # 1. no inline colour
-grep -rn "$(printf 'â')" apps/<tool>/src                                # 2. no em dashes (U+2014)
+grep -rn "$(printf '\342\200\224')" apps/<tool>/src                                # 2. no em dashes (U+2014)
 grep -rn ": any\b\|as any" apps/<tool>/src --include="*.ts*"                     # 3. no any
 grep -rnE 'className=\{(`|[^}]*\?)' apps/<tool>/src --include="*.tsx" | grep -v "cn("   # 4. cn() for conditionals
 grep -rn "<Input\|<input\|<Textarea" apps/<tool>/src --include="*.tsx"           # 5. every input labelled
