@@ -8,7 +8,7 @@ Versioning uses a calendar scheme: `YYYY.Q.PATCH`.
 ## [Unreleased]
 
 ### Changed (2026-11-09: tlb-financial-tools is the source of truth)
-- `src/styles/tailwind.css` is now the portal's `apps/web/src/index.css`: orange `#FF6400`, light and dark tracks, firm token sets, tool palettes, flapboard and card motion. A marked "Design-system additions" block keeps `info`, `warning-dim`, `bg-sunken`, motion and the console utilities for composites the portal does not use.
+- `src/styles/tailwind.css` is now the portal's `apps/web/src/index.css`: orange `#FF6400`, light and dark tracks, firm token sets, tool palettes, flapboard and card motion. `info`, `info-dim`, `warning-dim` and `bg-sunken` now come from the portal (tlb-financial-tools#366); a marked "Design-system additions" block keeps only motion tokens and the console utilities. `--ease-out` is no longer redefined.
 - Fonts match the portal: Bebas Neue, Inter, JetBrains Mono from Google Fonts; Bebas Neue Pro only for the wordmark. Manrope, Helvetica, Arial Black and Barlow are gone.
 - Primitives `badge`, `button`, `card`, `dialog`, `input`, `select`, `table`, `tabs`, `tooltip` and composites `chart-tooltip`, `data-table`, `empty-state`, `file-upload`, `filter-bar`, `kpi-card`, `notice`, `tool-page`, `tool-tabs` replaced with the `@tlb/ui` copies; `dropdown-menu`, `label`, `separator`, `textarea` with the portal's.
 - `AppShell` rebuilt as the portal header and column (auth-free props).

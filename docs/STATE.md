@@ -12,7 +12,7 @@ Last updated: 2026-11-09 · branch `feat/fintools-source-of-truth`
 
 ## Blocked / not started
 - Copying from the portal is manual. Generating `src/styles/tailwind.css` from the portal in CI would stop drift.
-- tlb-financial-tools still lacks the design-system additions block (`info`, `warning-dim`, `bg-sunken`); a portal tool that installs `StatusBadge`, `SignalBadge`, `LiveSync` or the review composites must add it.
+- tlb-financial-tools#366 adds `info`, `info-dim`, `warning-dim` and `bg-sunken` to the portal; this branch already carries them. If #366 changes in review, re-copy the portal's `index.css`. The remaining additions block is motion tokens and console utilities only.
 - The portal's `apps/web/src/components/ui` keeps an older button, badge, dialog, tabs and input; several tools' standalone `index.css` still carry `#FF6600` and Helvetica. Portal-side cleanup.
 - `npm run lint` has no working eslint config (pre-existing).
 

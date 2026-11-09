@@ -105,6 +105,10 @@ Both themes are real products, gated by tests in the portal (contrast for light,
 | `text-negative` | `#E56062` | `#f87171` | Loss, fail, down. |
 | `bg-positive-dim` / `bg-negative-dim` | `#1c3829` / `#3a2122` | same | Dark wells for tinted cells. |
 | `text-warning` | `#C27C18` | `#f6ad55` | Aging, caution. Not a loss. |
+| `bg-warning-dim` | warning at 14% | `#3a3320` | Fill behind warning text. |
+| `text-info` | `#2369B9` | `#58a6ff` | Neutral references, in-progress states. 5.5:1 on the light card, 6.9:1 on the dark. |
+| `bg-info-dim` | info at 12% | `#16304d` | Fill behind info text. |
+| `bg-bg-sunken` | `#EFF2F6` | `#0d1117` | A well below the surface: code, raw payloads. |
 
 Status colours are **never firm-tinted**: the colour is the meaning, and firm tinting would paint a warning in Echelon's acid yellow. Colour is never the only carrier of meaning: every status pairs colour with an icon and its written name.
 
@@ -140,13 +144,12 @@ Tailwind v4 only emits theme variables it sees used. A token nothing references 
 
 ## Design-system additions
 
-Not in the portal. They support composites only this repo ships (`StatusBadge`, `SignalBadge`, `LiveSync`, `ReviewItemCard`, `AuditTimeline`, `Delta`, `Sparkline`) and the console utilities:
+Not in the portal. They support composites only this repo ships (`ReviewItemCard`, `AuditTimeline`, `LiveSync`, `SignalBadge`):
 
-- `--color-info` (light `#2369B9`, dark `#58a6ff`), `--color-info-dim`, `--color-warning-dim`, `--color-bg-sunken`.
-- Motion: `--duration-fast|base|slow` (120 / 180 / 280ms), `--ease-standard` `cubic-bezier(0.2, 0, 0, 1)`, `--ease-out`.
+- Motion: `--duration-fast|base|slow` (120 / 180 / 280ms), `--ease-standard` `cubic-bezier(0.2, 0, 0, 1)`. (`--ease-out` is deliberately not redefined: it would change Tailwind's `ease-out` utility across the portal.)
 - Utilities: `eyebrow` (uppercase mono label), `figures` (tabular mono numerals), `lift` (2px hover lift), `pip` (status dot).
 
-**A consumer that installs one of those composites must copy this block into its own token file.** Without it, `text-info` and `bg-warning-dim` render with no colour and nothing warns you. The portal has no such composites today.
+**A consumer that installs one of those composites must copy this block into its own token file.** The info, warning-dim and bg-sunken colours they also use are in the portal's token file itself since tlb-financial-tools#366.
 
 ## Color rules to enforce
 

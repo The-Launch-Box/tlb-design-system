@@ -437,6 +437,21 @@ html {
      the colour IS the meaning, and firm-tinting would paint it in echelon's
      acid yellow. */
   --color-warning: #C27C18;
+  /* Warning as a soft fill behind warning text (pills, row tints). Light is
+     the warning ink at 14% so it reads as the same hue; .dark has a dark well. */
+  --color-warning-dim: color-mix(in srgb, var(--color-warning) 14%, transparent);
+
+  /* Info: neutral references, links, "in progress" states. The invoicing
+     "scheduled" blue, so it already sits in the status family: 5.5:1 on the
+     card, 4.9:1 on the well. Never firm-tinted, like the warning above.
+     Added so tlb-design-system composites (StatusBadge, SignalBadge, LiveSync,
+     the review-flow set) render here; static because nothing in the portal
+     uses them yet. */
+  --color-info: #2369B9;
+  --color-info-dim: color-mix(in srgb, #2369B9 12%, transparent);
+
+  /* A well one step below the surface: code blocks, raw payloads. */
+  --color-bg-sunken: var(--color-tlb-bg-light-2);
 
   /* Invoicing's five statuses: drafted, scheduled, sent, unsent, cancelled.
      Grey, blue, green, orange, red. Not firm-tinted, for the same reason as
@@ -614,6 +629,11 @@ html {
      CATEGORY_COLORS), so tokenizing them cannot move dark. Same order as the
      light track, which is CATEGORY_COLORS declaration order. */
   --color-warning: #f6ad55;
+  --color-warning-dim: #3a3320;
+  /* Info, dark track: 6.9:1 on the card, 5.3:1 on its own dim well. */
+  --color-info: #58a6ff;
+  --color-info-dim: #16304d;
+  --color-bg-sunken: var(--color-tlb-bg-0);
 
   /* Invoicing statuses, dark track. Worst pairwise separation dE 10.6. */
   --color-inv-drafted: #8b949e;
@@ -892,38 +912,20 @@ html {
 }
 
 /* =================================================================
- * Design-system additions (NOT in tlb-financial-tools yet)
+ * Design-system additions (NOT in tlb-financial-tools)
  *
- * Used only by composites this repo ships that the portal does not:
- * StatusBadge, SignalBadge, LiveSync, ReviewItemCard, AuditTimeline and the
- * console utilities below. Values are derived from the portal palette (the
- * warning track is the portal's --color-warning), so adding this block to
- * apps/web/src/index.css changes nothing that already renders there.
+ * Motion tokens and console utilities used only by composites this repo
+ * ships that the portal does not (ReviewItemCard, AuditTimeline, LiveSync,
+ * SignalBadge). The info, warning-dim and bg-sunken colours used to live
+ * here; the portal has carried them since tlb-financial-tools#366.
+ * A consumer that installs one of those composites must copy this block.
  * ================================================================= */
 @theme {
-  --color-tlb-info: #2369B9;        /* light track: the invoicing "scheduled" blue, 4.5:1 on white */
-  --color-tlb-info-dark: #58a6ff;
-  --color-tlb-info-dim: #16304d;
-  --color-tlb-warning-dim: #3a3320;
-
-  --color-info: var(--color-tlb-info);
-  --color-info-dim: color-mix(in srgb, var(--color-tlb-info) 12%, transparent);
-  --color-warning-dim: color-mix(in srgb, var(--color-warning) 14%, transparent);
-  --color-bg-sunken: var(--color-tlb-bg-light-2);
-
   /* Motion: the portal's own curves (html accent transition, tool cards). */
   --duration-fast: 120ms;
   --duration-base: 180ms;
   --duration-slow: 280ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.dark {
-  --color-info: var(--color-tlb-info-dark);
-  --color-info-dim: var(--color-tlb-info-dim);
-  --color-warning-dim: var(--color-tlb-warning-dim);
-  --color-bg-sunken: var(--color-tlb-bg-0);
 }
 
 /* =================================================================

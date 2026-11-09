@@ -33,7 +33,7 @@ The TLB look is the tlb-financial-tools portal's. Tokens, fonts and components h
    ```bash
    npx shadcn@latest add https://the-launch-box.github.io/tlb-design-system/r/<name>.json
    ```
-   Then fix the import aliases if the repo's differ from `@/components` and `@/lib/utils`. A composite that uses the design-system additions (`text-info`, `bg-warning-dim`, `bg-bg-sunken`, `eyebrow`, `figures`, `pip`, `lift`) also needs that block from `${CLAUDE_PLUGIN_ROOT}/src/styles/tailwind.css` in the repo's own CSS.
+   Then fix the import aliases if the repo's differ from `@/components` and `@/lib/utils`. A composite that uses the design-system additions (motion tokens, `eyebrow`, `figures`, `pip`, `lift`) also needs that block from `${CLAUDE_PLUGIN_ROOT}/src/styles/tailwind.css` in the repo's own CSS.
 4. **Tokens.** `${CLAUDE_PLUGIN_ROOT}/docs/03-tokens-and-theme.md` and `src/styles/tailwind.css` are the source of truth. Use semantic utilities only (`bg-primary`, `bg-card`, `text-muted-foreground`, `text-accent-ink`, `text-positive`, ...). Fonts: Bebas Neue (display), Inter (body), JetBrains Mono (figures). No raw hex/rgb/hsl outside `@theme`.
 5. **Patterns.** Page layout, forms, tables, empty states, destructive actions: `docs/05-patterns.md`. Accessibility: `docs/06-accessibility.md`. Icons and charts: `docs/07-icons-and-charts.md`. Firm theming: `docs/12-firm-themes.md`. Rebuilding the portal: `docs/14-tlb-financial-tools-blueprint.md`. Voice and copy: `docs/00-brand-and-voice.md`.
 
