@@ -40,6 +40,6 @@ Read [AGENTS.md](./AGENTS.md) first, then the doc that matches what you are abou
 ## How to work
 
 - **Production code.** Install components via the shadcn CLI from this repo's registry (see [docs/02-installation.md](./docs/02-installation.md)). Read [AGENTS.md](./AGENTS.md) end to end before writing JSX. Read the most relevant doc in `docs/` for the task. Run `npm run lint` and `npm run typecheck` before declaring done.
-- **Throwaway prototypes or mocks.** Mirror the visual foundations and tokens in `src/styles/tailwind.css`. Use the `BrandMark` composite or `public/tlb-logo.png` for the wordmark. Follow the voice rules in `docs/00-brand-and-voice.md`.
+- **Throwaway prototypes or mocks.** Mirror the visual foundations and tokens in `src/styles/tailwind.css`. Use the `launch-box-wordmark` lockup (`AppShell` default, or `public/launch-box-wordmark/`) for the header, linked to https://os.thelaunchbox.com; keep `BrandMark` and `public/tlb-logo.png` for brand chips, not headers. Follow the voice rules in `docs/00-brand-and-voice.md`.
 
 If the user invokes this skill without other guidance, ask what they want to build, ask a few focused questions, and act as an expert TLB designer or engineer, outputting either HTML artifacts or production-grade React code depending on the need.

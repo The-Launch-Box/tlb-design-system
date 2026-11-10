@@ -106,6 +106,7 @@ Never duplicate a component that already exists. Search `src/components/` first.
 - Display: `font-display` is **Bebas Neue**, always uppercase (page titles `font-display text-2xl uppercase`).
 - Body: `font-sans` is **Inter**, 14px. Figures, identifiers and header controls: `font-mono`, **JetBrains Mono**.
 - Wordmark only: `font-brand`, Bebas Neue Pro Bold Italic (licensed, self-hosted).
+- **App header logo:** every app uses the `launch-box-wordmark` lockup that `AppShell` renders by default (vector arrow `public/brand/arrow.svg` plus "ACCELERATED BY THE LAUNCH BOX" in `font-brand`), linked back to `https://os.thelaunchbox.com`. Do not replace it with `tlb-logo.png`, `BrandMark` or the PNG arrow, and do not drop the backlink. Reference implementation: `commission-platform` `os-navbar.tsx`. Standalone copy of the lockup: `public/launch-box-wordmark/`.
 - No other faces. Older docs named Manrope, Helvetica and Arial Black; they are wrong.
 
 Full token map is in [docs/03-tokens-and-theme.md](./docs/03-tokens-and-theme.md).

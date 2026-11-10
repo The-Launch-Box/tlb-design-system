@@ -7,6 +7,9 @@ Versioning uses a calendar scheme: `YYYY.Q.PATCH`.
 
 ## [Unreleased]
 
+### Changed (header lockup)
+- `AppShell` now renders the launch-box-wordmark lockup (vector `brand/arrow.svg`, Bebas Neue Pro from `public/fonts/`) and links home to https://os.thelaunchbox.com. Docs and agent instructions tell new apps to use it instead of `tlb-logo.png` or the PNG arrow.
+
 ### Changed (2026-11-09: tlb-financial-tools is the source of truth)
 - `src/styles/tailwind.css` is now the portal's `apps/web/src/index.css`: orange `#FF6400`, light and dark tracks, firm token sets, tool palettes, flapboard and card motion. `info`, `info-dim`, `warning-dim` and `bg-sunken` now come from the portal (tlb-financial-tools#366); a marked "Design-system additions" block keeps only motion tokens and the console utilities. `--ease-out` is no longer redefined.
 - Fonts match the portal: Bebas Neue, Inter, JetBrains Mono from Google Fonts; Bebas Neue Pro only for the wordmark. Manrope, Helvetica, Arial Black and Barlow are gone.

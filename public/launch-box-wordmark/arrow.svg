@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" fill="none" role="img" aria-label="The Launch Box">
+  <!--
+    Vector of apps/web/public/tlb-arrow.png (90x90).
+    One silhouette, split on the diagonal x + y = 90:
+    lit face #FF6600, shaded face #FF3300.
+    Coordinates are the straight edges measured off that PNG.
+  -->
+  <defs>
+    <clipPath id="tlb-arrow">
+      <path d="M23 0H90V66L66 90V53.5L5 84L35 24H-1L23 0Z" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#tlb-arrow)">
+    <rect width="90" height="90" fill="#FF6600" />
+    <polygon points="90,0 90,90 0,90" fill="#FF3300" />
+  </g>
+</svg>

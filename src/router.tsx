@@ -2,6 +2,7 @@ import { createHashRouter, RouterProvider } from "react-router";
 import { Home } from "@/pages/home";
 import { ComponentsBoard } from "@/pages/components-board";
 import { FirmThemesPage } from "@/pages/firm-themes";
+import { RunwayPage } from "@/pages/runway";
 import { NotFound } from "@/pages/not-found";
 import { AppShell } from "@/components/composites/app-shell";
 import { ThemeToggle } from "@/components/composites/theme-toggle";
@@ -18,6 +19,7 @@ const router = createHashRouter([
   { path: "/", element: <Home /> },
   { path: "/components", element: <ComponentsBoard /> },
   { path: "/firm-themes", element: <FirmThemesRoute /> },
+  { path: "/runway", element: <RunwayPage /> },
   { path: "*", element: <NotFound /> },
 ]);
 

@@ -12,5 +12,5 @@ The design system and the tlb-financial-tools portal had drifted apart. The docs
 ## Consequences
 - An agent can rebuild the portal's UI from this repo: tokens, fonts, components, the shell and its contracts.
 - Consumers that used the dropped props lose them: `KpiCard` `sparkline`, `tone`, `emphasis`; `FilterBar` generic `options` (now `users`). The Echelon Automation Hub should check before updating.
-- The licensed Bebas Neue Pro file is not published; the wordmark falls back to Bebas Neue here.
+- The header lockup is the launch-box-wordmark (vector arrow, Bebas Neue Pro, backlink to os.thelaunchbox.com). Its font file is copied to `public/fonts/`.
 - Copying is manual. A later step could generate `tailwind.css` from the portal in CI.

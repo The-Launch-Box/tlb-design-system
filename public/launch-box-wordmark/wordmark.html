@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accelerated by the Launch Box</title>
+    <link rel="stylesheet" href="wordmark.css" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        align-content: start;
+        gap: 24px;
+        padding: 32px;
+        background: #0d1117;
+        color: #f0f6fc;
+        font-family: sans-serif;
+      }
+      .on-light {
+        color: #1f2328;
+        background: #f6f8fa;
+        padding: 16px 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Drop this folder into the other app.
+      Keep fonts/ next to wordmark.css (the @font-face url is relative).
+      The arrow is arrow.svg. Recolor the words by setting color on .lb-lockup.
+    -->
+    <a class="lb-lockup" href="#">
+      <img class="lb-lockup__mark" src="arrow.svg" alt="" />
+      <span class="lb-lockup__word">ACCELERATED BY THE LAUNCH BOX</span>
+    </a>
+    <div class="on-light">
+      <a class="lb-lockup" href="#">
+        <img class="lb-lockup__mark" src="arrow.svg" alt="" />
+        <span class="lb-lockup__word">ACCELERATED BY THE LAUNCH BOX</span>
+      </a>
+    </div>
+  </body>
+</html>

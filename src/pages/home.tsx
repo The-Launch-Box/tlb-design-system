@@ -7,6 +7,11 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 
 const DESTINATIONS = [
   {
+    to: "/runway",
+    title: "Runway",
+    description: "A cash runway planner built from the portal tool-page pattern.",
+  },
+  {
     to: "/components",
     title: "Component board",
     description: "Every primitive and composite, as tlb-financial-tools ships them.",

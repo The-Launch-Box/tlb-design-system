@@ -18,6 +18,7 @@ tlb-financial-tools is the source of truth: `src/styles/tailwind.css` copies its
 - Charts: recharts only.
 - Forms: react-hook-form plus zod.
 - Tables: @tanstack/react-table plus shadcn table primitives.
+- App header: the launch-box-wordmark lockup (the `AppShell` default) linking to os.thelaunchbox.com. Never `tlb-logo.png` there.
 - No inline hex colors. No `any`. No em dashes. No competing UI libraries.
 
 ## What to Do First

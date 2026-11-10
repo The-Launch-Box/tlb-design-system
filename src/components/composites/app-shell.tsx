@@ -3,7 +3,7 @@
  *
  * The TLB portal frame: a sticky 56px header tinted toward the active firm
  * (`bg-bg-header`), the TLB arrow and the "ACCELERATED BY THE LAUNCH BOX"
- * wordmark on the left, an optional section label, a right-hand slot for
+ * wordmark (linking back to os.thelaunchbox.com) on the left, an optional section label, a right-hand slot for
  * controls (app switcher, theme toggle, firm and department pickers, account
  * menu), then a centred 1280px main column and a footer line.
  *
@@ -31,7 +31,7 @@ interface AppShellProps {
   children: ReactNode;
   /** Left-hand brand link content. Defaults to the TLB arrow and wordmark. */
   brand?: ReactNode;
-  /** Wraps the brand, e.g. `(b) => <Link to="/">{b}</Link>`. Defaults to `<a href="/">`. */
+  /** Wraps the brand. Defaults to a link back to os.thelaunchbox.com; keep that backlink. */
   renderHomeLink?: (brand: ReactNode) => ReactNode;
   /** The current tool or page name, shown after a hairline from `md` up. */
   sectionLabel?: string;
@@ -44,11 +44,19 @@ interface AppShellProps {
   className?: string;
 }
 
-/** The portal's brand lockup. The arrow ships at `public/brand/tlb/tlb-arrow.png`. */
-function TlbWordmark({ arrowSrc = `${import.meta.env.BASE_URL}brand/tlb/tlb-arrow.png` }: { arrowSrc?: string }) {
+/** Where the wordmark links. Every TLB app's header leads back to the portal. */
+const OS_HOME = "https://os.thelaunchbox.com";
+
+/**
+ * The launch-box-wordmark lockup: the vector arrow (`public/brand/arrow.svg`,
+ * 22px) and "ACCELERATED BY THE LAUNCH BOX" in `font-brand` (Bebas Neue Pro
+ * Bold Italic, `public/fonts/BebasNeuePro-BoldItalic.otf`). Same lockup as
+ * os.thelaunchbox.com. Do not substitute `tlb-logo.png` or the PNG arrow.
+ */
+function TlbWordmark({ arrowSrc = `${import.meta.env.BASE_URL}brand/arrow.svg` }: { arrowSrc?: string }) {
   return (
     <>
-      <img src={arrowSrc} alt="The Launch Box" className="block size-[22px] flex-none" />
+      <img src={arrowSrc} alt="" className="block size-[22px] flex-none" />
       <span className="truncate font-brand text-xl font-bold italic leading-none tracking-[0.03em] text-foreground">
         ACCELERATED BY THE LAUNCH BOX
       </span>
@@ -58,7 +66,7 @@ function TlbWordmark({ arrowSrc = `${import.meta.env.BASE_URL}brand/tlb/tlb-arro
 
 function defaultHomeLink(brand: ReactNode) {
   return (
-    <a href="/" className="flex min-w-0 items-center gap-3">
+    <a href={OS_HOME} className="flex min-w-0 items-center gap-3 text-foreground">
       {brand}
     </a>
   );
@@ -109,5 +117,5 @@ function AppShell({
   );
 }
 
-export { AppShell, TlbWordmark };
+export { AppShell, TlbWordmark, OS_HOME };
 export type { AppShellProps };

@@ -51,7 +51,7 @@ The pieces every tool is built from. See [14-tlb-financial-tools-blueprint.md](.
 
 | Composite | Purpose |
 |---|---|
-| `AppShell` | Sticky 56px header tinted to the firm, TLB arrow + "ACCELERATED BY THE LAUNCH BOX" wordmark, section label, controls slot; 1280px main column or `fullWidth`; footer line. Auth-free: the portal passes its pickers and account menu as `actions`. |
+| `AppShell` | Sticky 56px header tinted to the firm, launch-box-wordmark lockup (arrow + "ACCELERATED BY THE LAUNCH BOX", linked to os.thelaunchbox.com), section label, controls slot; 1280px main column or `fullWidth`; footer line. Auth-free: the portal passes its pickers and account menu as `actions`. |
 | `AppSwitcher` | The header "Apps" menu: two-column tool grid, external-link marker, "All apps" link. Router-agnostic via `renderLink`. |
 | `ThemeToggle` | Light/dark switch (next-themes). |
 | `Flapboard` | Split-flap word board from the dashboard hero. Needs the flapboard CSS in the token file. |
@@ -67,7 +67,7 @@ Built on the same tokens; some need the [design-system additions](./03-tokens-an
 | `StatusBadge` | Status pill with paired icon: review and workflow statuses. |
 | `Sparkline`, `Delta` | Inline spark bars; signed directional change in mono. |
 | `SignalBadge`, `LiveSync` | Data-signal pill; data-freshness chip. |
-| `BrandMark` | The TLB logo in a black lozenge. |
+| `BrandMark` | The TLB logo in a black lozenge. For brand chips and tiles, not the app header: the header uses the `AppShell` wordmark lockup. |
 | `ToolLauncher` | Launcher tile for a tools grid. The portal dashboard uses its own pinned-tool cards; see the blueprint. |
 | `ReviewItemCard`, `PayloadList`, `FieldDiff`, `AuditTimeline`, `ActorBadge` | Human-in-the-loop review flows (from the Echelon Automation Hub). |
 | Marketing set (`Hero`, `SectionHeader`, `StatCallout`, `QuoteCard`, `ProcessStep`, `FeatureCard`, `CTABanner`, `LogoCloud`, `PrimitivesStrip`) | Token-driven sections for TLB-branded pages. Never per-firm. |
