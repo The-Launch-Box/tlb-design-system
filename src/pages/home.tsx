@@ -7,6 +7,11 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 
 const DESTINATIONS = [
   {
+    to: "/shelter",
+    title: "Whisker Haven",
+    description: "A cat shelter adoption app built from the tool-page pattern.",
+  },
+  {
     to: "/runway",
     title: "Runway",
     description: "A cash runway planner built from the portal tool-page pattern.",
